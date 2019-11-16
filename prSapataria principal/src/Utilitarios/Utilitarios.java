@@ -23,13 +23,6 @@ public class Utilitarios {
              return padrao;
          }
     }
-    
-    public String formatCPF(String a){
-        String cpfSemFormat = a;
-        
-        cpfSemFormat = cpfSemFormat.substring(0,3)  + cpfSemFormat.substring(4,7) + cpfSemFormat.substring(8,11) + cpfSemFormat.substring(12,14);
-        return a;
-    }
      
      
      

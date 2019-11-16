@@ -1465,8 +1465,18 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/1672233.png"))); // NOI18N
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/214362.png"))); // NOI18N
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/oie_transparent.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1588,21 +1598,21 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        //frmServico servico = new frmServico();
-
-        //servico.setVisible(true);
+        frmServico TelaServico = new frmServico();
+        
+        TelaServico.setVisible(true);
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        //frmCarteira carteira = new frmCarteira();
+        frmCarteira TelaCarteira = new frmCarteira();
 
-        //carteira.setVisible(true);
+        TelaCarteira.setVisible(true);
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        //frmRelatorio relatorio = new frmRelatorio();
+        frmRelatorio TelaRelatorio = new frmRelatorio();
 
-        //relatorio.setVisible(true);
+        TelaRelatorio.setVisible(true);
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
@@ -1612,10 +1622,22 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel1MouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
-        frmLogin login = new frmLogin();
+        frmServico TelaServico = new frmServico();
         
-        login.setVisible(true);
+        TelaServico.setVisible(true);
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        frmCarteira TelaCarteira = new frmCarteira();
+
+        TelaCarteira.setVisible(true);
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        frmRelatorio TelaRelatorio = new frmRelatorio();
+
+        TelaRelatorio.setVisible(true);
+    }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
      * @param args the command line arguments

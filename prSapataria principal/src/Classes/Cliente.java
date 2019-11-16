@@ -47,6 +47,13 @@ public class Cliente {
     public Cliente(){
        this.codigo = 0; 
     }
+    
+    
+ //agregação
+ // private ArrayList<Sapatos> lista =
+   //       new ArrayList<>();
+     
+    
  
     
      public String getNum() {

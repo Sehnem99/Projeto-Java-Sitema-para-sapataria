@@ -5,6 +5,9 @@
  */
 package Interface;
 
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fz474
@@ -27,37 +30,60 @@ public class frmServico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Serviço");
+        setFocusableWindowState(false);
+        setType(java.awt.Window.Type.UTILITY);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
 
-        btnVoltar.setText("Voltar");
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setAlignmentX(0.0F);
+
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnVoltar.setText("VOLTAR PARA TELA INICIAL");
+        btnVoltar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnVoltar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVoltarMouseClicked(evt);
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(183, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(329, Short.MAX_VALUE)
-                .addComponent(btnVoltar)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(266, Short.MAX_VALUE)
-                .addComponent(btnVoltar)
-                .addContainerGap())
+                .addGap(0, 226, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -68,11 +94,23 @@ public class frmServico extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
-        frmPrincipal inicio = new frmPrincipal();
- 
-        inicio.setVisible(true);
-    }//GEN-LAST:event_btnVoltarMouseClicked
+        
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja Realmente Fechar Esta Tela?", "Atenção", JOptionPane.YES_NO_OPTION);
 
+            if (opcao == JOptionPane.YES_OPTION) {
+               fecharTelaServico();
+               this.dispose();
+            } else if (opcao == JOptionPane.NO_OPTION) {
+               this.setExtendedState(MAXIMIZED_BOTH);
+            }
+    }//GEN-LAST:event_btnVoltarMouseClicked
+    
+    public void fecharTelaServico() {
+        frmServico servico = new frmServico();
+        
+        servico.dispose();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -110,5 +148,6 @@ public class frmServico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

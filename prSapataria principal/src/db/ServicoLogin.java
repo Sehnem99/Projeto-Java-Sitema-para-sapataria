@@ -14,7 +14,19 @@ public class ServicoLogin {
     private ServicoConexao conexao = new ServicoConexao();
     private Login login = new Login();
 
-
+    public void setUsuario (Login login) throws SQLException{
+        PreparedStatement pst = 
+        conexao.getConexao().prepareStatement(
+        "SELECT * FROM USUARIO WHERE (LOGIN = ?) AND (SENHA = ?);");
+        pst.setString(1, login.getLogin());
+        pst.setString(2, login.getSenha());
+        ResultSet rs = pst.executeQuery();
+        rs.first();
+        rs.next();
+        rs.close();
+        pst.close();
+        conexao.close();
+    }
     
     public boolean consultaUser(String logon,String senha) throws SQLException{
         
