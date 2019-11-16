@@ -148,7 +148,6 @@ public class frmCadCliente extends javax.swing.JFrame {
         lbDataNasc.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbDataNasc.setText("Data Nascimento:");
         jPanel4.add(lbDataNasc);
-        lbDataNasc.getAccessibleContext().setAccessibleName("Data Nascimento:");
 
         txtDataNasc.setPreferredSize(new java.awt.Dimension(150, 30));
         jPanel4.add(txtDataNasc);
@@ -158,7 +157,6 @@ public class frmCadCliente extends javax.swing.JFrame {
         lbContato.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbContato.setText("Contato:");
         jPanel5.add(lbContato);
-        lbContato.getAccessibleContext().setAccessibleName("Contato:");
 
         txtContato.setPreferredSize(new java.awt.Dimension(265, 30));
         jPanel5.add(txtContato);
@@ -238,6 +236,11 @@ public class frmCadCliente extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Inserir");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Atualizar");
@@ -431,7 +434,90 @@ public class frmCadCliente extends javax.swing.JFrame {
             buscarCep(txtCep.getText());
         }
     }//GEN-LAST:event_txtCepKeyReleased
-    
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       
+        if (txtNome.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com o nome do cliente!");
+            txtNome.requestFocus();
+            return;
+        }
+        if (txtCpf.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com o CPF do cliente!");
+            txtCpf.requestFocus();
+            return;
+        }
+        if (isCPF(txtCpf.getText()) != true ) {
+            JOptionPane.showMessageDialog(null, "Entre com o CPF valido!");
+            txtCpf.requestFocus();
+            return; 
+        }
+        if(txtDataNasc.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com a data de nascimento do cliente!");
+            txtDataNasc.requestFocus();
+            return;
+        }
+         if(txtContato.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com o contato cliente!");
+            txtContato.requestFocus();
+            return;
+        }      
+        if(txtCep.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com algum CEP!");
+            txtCep.requestFocus();
+            return;
+        }
+        if(txtLogradouro.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com a rua !");
+            txtLogradouro.requestFocus();
+            return;
+        }
+        if(txtNum.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com o numero do endereço!");
+            txtNum.requestFocus();
+            return;
+        }
+        if(txtBairro.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com o bairro!");
+            txtBairro.requestFocus();
+            return;
+        }
+        if(txtCidade.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com a cidade!");
+            txtCidade.requestFocus();
+            return;
+        }
+        
+        if(cbAtivo.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "Selecione o codigo Ativo ou Inativo do Cliente");
+            cbAtivo.requestFocus();
+            return;  
+        } else
+
+            cliente.setNome(txtNome.getText());
+            cliente.setCpf((txtCpf.getText()));
+            cliente.setData_nasc(txtDataNasc.getText());
+            cliente.setContato(txtContato.getText());
+            cliente.setCep(utilitario.strToInt(txtCep.getText(),1));
+            cliente.setLogradouro(txtLogradouro.getText());
+            cliente.setNum(txtNum.getText());
+            cliente.setBairro(txtBairro.getText());
+            cliente.setCidade(txtCidade.getText());
+            cliente.setUf(txtEstado.getText());
+            cliente.setAtivo(cbAtivo.getSelectedIndex());
+            
+            try {
+                vServCadCliente.insert(cliente);
+                JOptionPane.showMessageDialog(null, "Cliente inserido com sucessso!");
+                limpaTela();
+            }
+
+        catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Houve um erro inesperado no cadastro!");
+            Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+   
     public void fecharTelaInicial() {
         frmPrincipal principal = new frmPrincipal();
         

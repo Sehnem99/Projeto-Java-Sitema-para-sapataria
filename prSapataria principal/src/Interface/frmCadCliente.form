@@ -218,9 +218,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Data Nascimento:"/>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Data Nascimento:"/>
-              </AccessibilityProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtDataNasc">
               <Properties>
@@ -247,9 +244,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Contato:"/>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Contato:"/>
-              </AccessibilityProperties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtContato">
               <Properties>
@@ -489,6 +483,9 @@
               <AccessibilityProperties>
                 <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="btnInserir"/>
               </AccessibilityProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButton2">
               <Properties>
