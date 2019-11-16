@@ -52,8 +52,8 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtCodCliente = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lbCpf = new javax.swing.JLabel();
-        txtCpf = new javax.swing.JTextField();
         lbValidaCPF = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         lbNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -81,6 +81,8 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtEstado = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         lbAtivo = new javax.swing.JLabel();
         cbAtivo = new javax.swing.JComboBox<>();
@@ -90,6 +92,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setType(java.awt.Window.Type.UTILITY);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -100,6 +103,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
+        lbCodCliente.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbCodCliente.setText("Código: ");
         jPanel1.add(lbCodCliente);
 
@@ -115,22 +119,22 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
+        lbCpf.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbCpf.setText("CPF: ");
         jPanel2.add(lbCpf);
-
-        txtCpf.setMaximumSize(new java.awt.Dimension(10000, 30));
-        txtCpf.setMinimumSize(new java.awt.Dimension(300, 30));
-        txtCpf.setPreferredSize(new java.awt.Dimension(370, 30));
-        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtCpfKeyReleased(evt);
-            }
-        });
-        jPanel2.add(txtCpf);
         jPanel2.add(lbValidaCPF);
+
+        try {
+            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCpf.setPreferredSize(new java.awt.Dimension(380, 30));
+        jPanel2.add(txtCpf);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
+        lbNome.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbNome.setText("Nome Completo: ");
         jPanel3.add(lbNome);
 
@@ -141,23 +145,27 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbDataNasc.setText("Data Nascimento");
+        lbDataNasc.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbDataNasc.setText("Data Nascimento:");
         jPanel4.add(lbDataNasc);
+        lbDataNasc.getAccessibleContext().setAccessibleName("Data Nascimento:");
 
         txtDataNasc.setPreferredSize(new java.awt.Dimension(150, 30));
-        txtDataNasc.setRequestFocusEnabled(false);
         jPanel4.add(txtDataNasc);
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbContato.setText("Contato");
+        lbContato.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        lbContato.setText("Contato:");
         jPanel5.add(lbContato);
+        lbContato.getAccessibleContext().setAccessibleName("Contato:");
 
         txtContato.setPreferredSize(new java.awt.Dimension(265, 30));
         jPanel5.add(txtContato);
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
 
+        lbCep.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbCep.setText("CEP: ");
         jPanel6.add(lbCep);
 
@@ -173,6 +181,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(204, 204, 204));
 
+        lbEndereco.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbEndereco.setText("Endereço: ");
         jPanel7.add(lbEndereco);
 
@@ -182,6 +191,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtLogradouro.setPreferredSize(new java.awt.Dimension(250, 30));
         jPanel7.add(txtLogradouro);
 
+        lbNumero.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbNumero.setText("Nº: ");
         jPanel7.add(lbNumero);
 
@@ -192,6 +202,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel12.setBackground(new java.awt.Color(204, 204, 204));
 
+        lbBairro.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbBairro.setText("Bairro: ");
         jPanel12.add(lbBairro);
 
@@ -202,6 +213,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(204, 204, 204));
 
+        lbCidade.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbCidade.setText("Cidade: ");
         jPanel9.add(lbCidade);
 
@@ -210,6 +222,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtCidade.setPreferredSize(new java.awt.Dimension(265, 30));
         jPanel9.add(txtCidade);
 
+        lbEstado.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbEstado.setText("UF: ");
         jPanel9.add(lbEstado);
 
@@ -222,28 +235,49 @@ public class frmCadCliente extends javax.swing.JFrame {
         jPanel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
 
-        jButton1.setText("jButton1");
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton1.setText("Inserir");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton2.setText("Atualizar");
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton3.setText("Excluir");
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(477, 477, 477)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(419, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(451, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(432, 432, 432))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(19, 19, 19))
         );
+
+        jButton1.getAccessibleContext().setAccessibleName("btnInserir");
+        jButton2.getAccessibleContext().setAccessibleName("btnAtualizar");
+        jButton3.getAccessibleContext().setAccessibleName("btnExcluir");
 
         jPanel8.setBackground(new java.awt.Color(204, 204, 204));
 
+        lbAtivo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbAtivo.setText("Ativo");
         jPanel8.add(lbAtivo);
 
@@ -294,10 +328,9 @@ public class frmCadCliente extends javax.swing.JFrame {
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+            .addGroup(jPanel11Layout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -317,9 +350,9 @@ public class frmCadCliente extends javax.swing.JFrame {
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
+                .addGap(47, 47, 47)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         jPanel13.setBackground(new java.awt.Color(153, 153, 153));
@@ -364,8 +397,8 @@ public class frmCadCliente extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -398,17 +431,6 @@ public class frmCadCliente extends javax.swing.JFrame {
             buscarCep(txtCep.getText());
         }
     }//GEN-LAST:event_txtCepKeyReleased
-
-    private void txtCpfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyReleased
-        if (isCPF(txtCpf.getText()) == true){
-           lbValidaCPF.setText("CPF Valido");
-           lbValidaCPF.setForeground(Color.GREEN);
-        }
-        else {
-           lbValidaCPF.setText("Erro, CPF invalido !!!");
-           lbValidaCPF.setForeground(Color.RED);
-        }
-    }//GEN-LAST:event_txtCpfKeyReleased
     
     public void fecharTelaInicial() {
         frmPrincipal principal = new frmPrincipal();
@@ -464,12 +486,12 @@ public class frmCadCliente extends javax.swing.JFrame {
     
     public static boolean isCPF(String CPF) {
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
-        if (CPF.equals("00000000000") ||
-            CPF.equals("11111111111") ||
-            CPF.equals("22222222222") || CPF.equals("33333333333") ||
-            CPF.equals("44444444444") || CPF.equals("55555555555") ||
-            CPF.equals("66666666666") || CPF.equals("77777777777") ||
-            CPF.equals("88888888888") || CPF.equals("99999999999") ||
+        if (CPF.equals("000.000.000-00") ||
+            CPF.equals("111.111.111-11") ||
+            CPF.equals("222.222.222-22") || CPF.equals("333.333.333-33") ||
+            CPF.equals("444.444.444-44") || CPF.equals("555.555.555-55") ||
+            CPF.equals("666.666.666-66") || CPF.equals("777.777.777-77") ||
+            CPF.equals("888.888.888-88") || CPF.equals("999.999.999-99") ||
             (CPF.length() != 11))
             return(false);
           
@@ -575,6 +597,8 @@ public class frmCadCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbAtivo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
@@ -608,7 +632,7 @@ public class frmCadCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCodCliente;
     private javax.swing.JTextField txtContato;
-    private javax.swing.JTextField txtCpf;
+    private javax.swing.JFormattedTextField txtCpf;
     private javax.swing.JTextField txtDataNasc;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtLogradouro;
