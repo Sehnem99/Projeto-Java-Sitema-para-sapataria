@@ -13,6 +13,7 @@ import db.ServicoCadCliente;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -130,6 +131,11 @@ public class frmCadCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCpf.setPreferredSize(new java.awt.Dimension(380, 30));
+        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCpfKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtCpf);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
@@ -517,6 +523,12 @@ public class frmCadCliente extends javax.swing.JFrame {
             Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
+        if(evt.KEY_PRESSED == KeyEvent.VK_ENTER) {
+            
+        }
+    }//GEN-LAST:event_txtCpfKeyPressed
    
     public void fecharTelaInicial() {
         frmPrincipal principal = new frmPrincipal();
