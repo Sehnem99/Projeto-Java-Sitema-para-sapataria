@@ -10,6 +10,7 @@ import Classes.Cliente;
 import Utilitarios.SrvCadCliente;
 import Utilitarios.Utilitarios;
 import db.ServicoCadCliente;
+import db.ServicoConexao;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagLayout;
@@ -29,17 +30,16 @@ import javax.swing.JOptionPane;
  * @author fz474
  */
 public class frmCadCliente extends javax.swing.JFrame {
-    public ServicoCadCliente vServCadCliente = new ServicoCadCliente();
-
+    private ServicoCadCliente vServCadCliente = new ServicoCadCliente();
+    private Cliente cliente = new Cliente();
+    private Utilitarios utilitario = new Utilitarios();
+    private ServicoConexao conexao = new ServicoConexao();
     /**
      * Creates new form frmCadastro
      */
     public frmCadCliente() {
         initComponents();
     }
-    
-    public Cliente cliente;
-    public Utilitarios utilitario;
 
   
     @SuppressWarnings("unchecked")
@@ -437,7 +437,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
-        if (txtNome.getText().equalsIgnoreCase("")){
+       /* if (txtNome.getText().equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Entre com o nome do cliente!");
             txtNome.requestFocus();
             return;
@@ -492,7 +492,7 @@ public class frmCadCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Selecione o codigo Ativo ou Inativo do Cliente");
             cbAtivo.requestFocus();
             return;  
-        } else
+        }*/
 
             cliente.setNome(txtNome.getText());
             cliente.setCpf((txtCpf.getText()));
@@ -507,13 +507,13 @@ public class frmCadCliente extends javax.swing.JFrame {
             cliente.setAtivo(cbAtivo.getSelectedIndex());
             
             try {
-                vServCadCliente.insert(cliente);
+            if (vServCadCliente.insert(cliente)) {
                 JOptionPane.showMessageDialog(null, "Cliente inserido com sucessso!");
                 limpaTela();
-            }
+            }else
+                JOptionPane.showMessageDialog(null, "Houve um erro inesperado no cadastro!");
 
-        catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Houve um erro inesperado no cadastro!");
+        } catch (SQLException ex) {
             Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
