@@ -10,9 +10,11 @@ import Classes.Cliente;
 import Utilitarios.SrvCadCliente;
 import Utilitarios.Utilitarios;
 import db.ServicoCadCliente;
+import db.ServicoConexao;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagLayout;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,17 +31,16 @@ import javax.swing.JOptionPane;
  * @author fz474
  */
 public class frmCadCliente extends javax.swing.JFrame {
-    public ServicoCadCliente vServCadCliente = new ServicoCadCliente();
-
+    private ServicoCadCliente vServCadCliente = new ServicoCadCliente();
+    private Cliente cliente = new Cliente();
+    private Utilitarios utilitario = new Utilitarios();
+    private ServicoConexao conexao = new ServicoConexao();
     /**
      * Creates new form frmCadastro
      */
     public frmCadCliente() {
         initComponents();
     }
-
-    public Cliente cliente;
-    public Utilitarios utilitario;
 
 
     @SuppressWarnings("unchecked")
@@ -130,6 +131,11 @@ public class frmCadCliente extends javax.swing.JFrame {
             ex.printStackTrace();
         }
         txtCpf.setPreferredSize(new java.awt.Dimension(380, 30));
+        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCpfKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtCpf);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
@@ -437,7 +443,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        if (txtNome.getText().equalsIgnoreCase("")){
+       /* if (txtNome.getText().equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Entre com o nome do cliente!");
             txtNome.requestFocus();
             return;
@@ -492,7 +498,7 @@ public class frmCadCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Selecione o codigo Ativo ou Inativo do Cliente");
             cbAtivo.requestFocus();
             return;
-        } else
+        }*/
 
             cliente.setNome(txtNome.getText());
             cliente.setCpf((txtCpf.getText()));
@@ -507,16 +513,41 @@ public class frmCadCliente extends javax.swing.JFrame {
             cliente.setAtivo(cbAtivo.getSelectedIndex());
 
             try {
-                vServCadCliente.insert(cliente);
+            if (vServCadCliente.insert(cliente)) {
                 JOptionPane.showMessageDialog(null, "Cliente inserido com sucessso!");
                 limpaTela();
-            }
+            }else
+                JOptionPane.showMessageDialog(null, "Houve um erro inesperado no cadastro!");
 
-        catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Houve um erro inesperado no cadastro!");
+        } catch (SQLException ex) {
             Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+       cliente.setCpf(txtCpf.getText());
+        try {
+                if (vServCadCliente.consultaCliente(cliente)){
+                txtNome.setText(cliente.getNome());
+                txtCpf.setText(cliente.getCpf());
+                txtDataNasc.setText(cliente.getData_nasc());
+                txtContato.setText(cliente.getContato());
+                //txtCep.setText(Integer.parseInt(cliente.getCep()));
+                txtLogradouro.setText(cliente.getLogradouro());
+                txtNum.setText(cliente.getNum());
+                txtBairro.setText(cliente.getBairro());
+                txtCidade.setText(cliente.getCidade());
+                txtEstado.setText(cliente.getUf());
+                cliente.setAtivo(cbAtivo.getSelectedIndex());
+                }else
+                    JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
+                    txtCpf.setText(null);
+            } catch (SQLException ex) {
+                Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_txtCpfKeyPressed
 
     public void fecharTelaInicial() {
         frmPrincipal principal = new frmPrincipal();
