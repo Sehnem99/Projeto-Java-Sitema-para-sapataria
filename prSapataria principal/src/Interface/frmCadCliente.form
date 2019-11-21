@@ -167,6 +167,9 @@
                   <Dimension value="[380, 30]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCpfKeyPressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -630,7 +633,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component cslass="javax.swing.JButton" name="btnVoltar">
+        <Component class="javax.swing.JButton" name="btnVoltar">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Verdana" size="14" style="0"/>

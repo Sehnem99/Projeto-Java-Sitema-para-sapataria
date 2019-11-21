@@ -42,7 +42,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         initComponents();
     }
 
-
+  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -416,12 +416,12 @@ public class frmCadCliente extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setExtendedState(MAXIMIZED_BOTH);
-
+        
         jPanel10.setLayout(new GridBagLayout());
     }//GEN-LAST:event_formWindowOpened
 
     private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
-
+        
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja Realmente Fechar Esta Tela?", "Atenção", JOptionPane.YES_NO_OPTION);
 
             if (opcao == JOptionPane.YES_OPTION) {
@@ -431,9 +431,9 @@ public class frmCadCliente extends javax.swing.JFrame {
                this.setExtendedState(MAXIMIZED_BOTH);
             }
     }//GEN-LAST:event_btnVoltarMouseClicked
-
-    public SrvCadCliente srvCadCliente;
-
+    
+    public SrvCadCliente srvCadCliente; 
+    
     private void txtCepKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepKeyReleased
         txtLogradouro.setText("Aguarde...");
         if (txtCep.getText().length() == 8){
@@ -442,7 +442,7 @@ public class frmCadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCepKeyReleased
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+       
        /* if (txtNome.getText().equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Entre com o nome do cliente!");
             txtNome.requestFocus();
@@ -456,7 +456,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         if (isCPF(txtCpf.getText()) != true ) {
             JOptionPane.showMessageDialog(null, "Entre com o CPF valido!");
             txtCpf.requestFocus();
-            return;
+            return; 
         }
         if(txtDataNasc.getText().equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Entre com a data de nascimento do cliente!");
@@ -467,7 +467,7 @@ public class frmCadCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Entre com o contato cliente!");
             txtContato.requestFocus();
             return;
-        }
+        }      
         if(txtCep.getText().equalsIgnoreCase("")){
             JOptionPane.showMessageDialog(null, "Entre com algum CEP!");
             txtCep.requestFocus();
@@ -493,11 +493,11 @@ public class frmCadCliente extends javax.swing.JFrame {
             txtCidade.requestFocus();
             return;
         }
-
+        
         if(cbAtivo.getSelectedIndex() == -1){
             JOptionPane.showMessageDialog(null, "Selecione o codigo Ativo ou Inativo do Cliente");
             cbAtivo.requestFocus();
-            return;
+            return;  
         }*/
 
             cliente.setNome(txtNome.getText());
@@ -511,7 +511,7 @@ public class frmCadCliente extends javax.swing.JFrame {
             cliente.setCidade(txtCidade.getText());
             cliente.setUf(txtEstado.getText());
             cliente.setAtivo(cbAtivo.getSelectedIndex());
-
+            
             try {
             if (vServCadCliente.insert(cliente)) {
                 JOptionPane.showMessageDialog(null, "Cliente inserido com sucessso!");
@@ -540,30 +540,30 @@ public class frmCadCliente extends javax.swing.JFrame {
                 txtCidade.setText(cliente.getCidade());
                 txtEstado.setText(cliente.getUf());
                 cliente.setAtivo(cbAtivo.getSelectedIndex());
-                }else
+                }else{
                     JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
-                    txtCpf.setText(null);
+                    limpaTela();}
             } catch (SQLException ex) {
                 Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_txtCpfKeyPressed
-
+   
     public void fecharTelaInicial() {
         frmPrincipal principal = new frmPrincipal();
-
+        
         principal.dispose();
     }
-
-    public void buscarCep(String cep)
+    
+    public void buscarCep(String cep) 
     {
-        String json;
+        String json;        
 
         try {
             String logradouro;
             String bairro;
             String cidade;
-            String uf;
+            String uf;       
             URL url = new URL("http://viacep.com.br/ws/"+ cep +"/json");
             URLConnection urlConnection = url.openConnection();
             InputStream is = urlConnection.getInputStream();
@@ -573,34 +573,34 @@ public class frmCadCliente extends javax.swing.JFrame {
 
             br.lines().forEach(l -> jsonSb.append(l.trim()));
             json = jsonSb.toString();
-
+            
             // JOptionPane.showMessageDialog(null, json);
-
+            
             json = json.replaceAll("[{},:]", "");
-            json = json.replaceAll("\"", "\n");
+            json = json.replaceAll("\"", "\n");                       
             String array[] = new String[30];
             array = json.split("\n");
-
+            
             // JOptionPane.showMessageDialog(null, array);
-
-
-
-            logradouro = array[7];
+            
+            
+                             
+            logradouro = array[7];            
             bairro = array[15];
-            cidade = array[19];
+            cidade = array[19]; 
             uf = array[23];
-
+            
             txtLogradouro.setText(logradouro);
             txtBairro.setText(bairro);
             txtCidade.setText(cidade);
             txtEstado.setText(uf);
             //JOptionPane.showMessageDialog(null, logradouro + " " + bairro + " " + cidade + " " + uf);
-
+            
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
-
+    
     public static boolean isCPF(String CPF) {
         // considera-se erro CPF's formados por uma sequencia de numeros iguais
         if (CPF.equals("000.000.000-00") ||
@@ -611,29 +611,29 @@ public class frmCadCliente extends javax.swing.JFrame {
             CPF.equals("888.888.888-88") || CPF.equals("999.999.999-99") ||
             (CPF.length() != 11))
             return(false);
-
+          
         char dig10, dig11;
         int sm, i, r, num, peso;
-
+          
         // "try" - protege o codigo para eventuais erros de conversao de tipo (int)
         try {
         // Calculo do 1o. Digito Verificador
             sm = 0;
             peso = 10;
-            for (i=0; i<9; i++) {
+            for (i=0; i<9; i++) {              
         // converte o i-esimo caractere do CPF em um numero:
-        // por exemplo, transforma o caractere '0' no inteiro 0
-        // (48 eh a posicao de '0' na tabela ASCII)
-            num = (int)(CPF.charAt(i) - 48);
+        // por exemplo, transforma o caractere '0' no inteiro 0         
+        // (48 eh a posicao de '0' na tabela ASCII)         
+            num = (int)(CPF.charAt(i) - 48); 
             sm = sm + (num * peso);
             peso = peso - 1;
             }
-
+          
             r = 11 - (sm % 11);
             if ((r == 10) || (r == 11))
                 dig10 = '0';
             else dig10 = (char)(r + 48); // converte no respectivo caractere numerico
-
+          
         // Calculo do 2o. Digito Verificador
             sm = 0;
             peso = 11;
@@ -642,12 +642,12 @@ public class frmCadCliente extends javax.swing.JFrame {
             sm = sm + (num * peso);
             peso = peso - 1;
             }
-
+          
             r = 11 - (sm % 11);
             if ((r == 10) || (r == 11))
                  dig11 = '0';
             else dig11 = (char)(r + 48);
-
+          
         // Verifica se os digitos calculados conferem com os digitos informados.
             if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
                  return(true);
@@ -677,7 +677,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

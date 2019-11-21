@@ -67,10 +67,17 @@ public class frmServico extends javax.swing.JFrame {
         jTextArea1 = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
         abaConsulta = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         pnInferior = new javax.swing.JPanel();
         btnVoltar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jTextField6 = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -183,6 +190,7 @@ public class frmServico extends javax.swing.JFrame {
         jLabel11.setText("Código: ");
         pnCodigo.add(jLabel11);
 
+        jTextField4.setEnabled(false);
         jTextField4.setPreferredSize(new java.awt.Dimension(357, 30));
         pnCodigo.add(jTextField4);
 
@@ -241,15 +249,31 @@ public class frmServico extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton3.setText("jButton3");
-        jButton3.setPreferredSize(new java.awt.Dimension(300, 35));
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jButton3.setText("Adicionar Produto");
+        jButton3.setPreferredSize(new java.awt.Dimension(230, 40));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton3);
+
+        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+        jLabel12.setText("Valor do Conserto: ");
+        jPanel2.add(jLabel12);
+
+        jTextField5.setPreferredSize(new java.awt.Dimension(280, 30));
+        jPanel2.add(jTextField5);
 
         javax.swing.GroupLayout abaCadastroLayout = new javax.swing.GroupLayout(abaCadastro);
         abaCadastro.setLayout(abaCadastroLayout);
         abaCadastroLayout.setHorizontalGroup(
             abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(abaCadastroLayout.createSequentialGroup()
                     .addContainerGap()
@@ -265,7 +289,9 @@ public class frmServico extends javax.swing.JFrame {
         abaCadastroLayout.setVerticalGroup(
             abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaCadastroLayout.createSequentialGroup()
-                .addGap(0, 386, Short.MAX_VALUE)
+                .addGap(0, 384, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(abaCadastroLayout.createSequentialGroup()
@@ -288,15 +314,67 @@ public class frmServico extends javax.swing.JFrame {
 
         abaConsulta.setBackground(new java.awt.Color(204, 204, 204));
 
+        jTable2.setAutoCreateRowSorter(true);
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Código", "Tipo Calçado", "Número", "Cor", "Marca", "Conserto(s)", "Valor do Conserto"
+            }
+        ));
+        jTable2.setToolTipText("");
+        jTable2.setGridColor(new java.awt.Color(0, 0, 0));
+        jTable2.setSelectionForeground(new java.awt.Color(153, 153, 153));
+        jTable2.setUpdateSelectionOnSort(false);
+        jScrollPane3.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setHeaderValue("Código");
+            jTable2.getColumnModel().getColumn(1).setHeaderValue("Tipo Calçado");
+            jTable2.getColumnModel().getColumn(2).setHeaderValue("Número");
+            jTable2.getColumnModel().getColumn(3).setHeaderValue("Cor");
+            jTable2.getColumnModel().getColumn(4).setHeaderValue("Marca");
+            jTable2.getColumnModel().getColumn(5).setHeaderValue("Conserto(s)");
+            jTable2.getColumnModel().getColumn(6).setHeaderValue("Valor do Conserto");
+        }
+
         javax.swing.GroupLayout abaConsultaLayout = new javax.swing.GroupLayout(abaConsulta);
         abaConsulta.setLayout(abaConsultaLayout);
         abaConsultaLayout.setHorizontalGroup(
             abaConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 859, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE)
         );
         abaConsultaLayout.setVerticalGroup(
             abaConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 439, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Consulta", abaConsulta);
@@ -316,8 +394,8 @@ public class frmServico extends javax.swing.JFrame {
         });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("NOVO SERVIÇO");
-        jButton1.setPreferredSize(new java.awt.Dimension(90, 25));
+        jButton1.setText("CADASTRAR SERVIÇO");
+        jButton1.setPreferredSize(new java.awt.Dimension(130, 25));
 
         javax.swing.GroupLayout pnInferiorLayout = new javax.swing.GroupLayout(pnInferior);
         pnInferior.setLayout(pnInferiorLayout);
@@ -325,9 +403,9 @@ public class frmServico extends javax.swing.JFrame {
             pnInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnInferiorLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVoltar)
+                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnInferiorLayout.setVerticalGroup(
@@ -340,6 +418,12 @@ public class frmServico extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTextField6.setEditable(false);
+        jTextField6.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel13.setText("Valor Total: R$");
+
         javax.swing.GroupLayout pnPrincipalLayout = new javax.swing.GroupLayout(pnPrincipal);
         pnPrincipal.setLayout(pnPrincipalLayout);
         pnPrincipalLayout.setHorizontalGroup(
@@ -351,7 +435,13 @@ public class frmServico extends javax.swing.JFrame {
             .addComponent(pnInferior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1)
+                    .addGroup(pnPrincipalLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         pnPrincipalLayout.setVerticalGroup(
@@ -365,8 +455,12 @@ public class frmServico extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(pnInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -398,14 +492,22 @@ public class frmServico extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setExtendedState(MAXIMIZED_BOTH);
+        jLabel13.setVisible(false);
+        jTextField6.setVisible(false);
     }//GEN-LAST:event_formWindowOpened
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        jLabel13.setVisible(true);
+        jTextField6.setVisible(true);
+        jTextField6.setText(jTextField5.getText());
+    }//GEN-LAST:event_jButton3ActionPerformed
+    
     public void fecharTelaServico() {
         frmServico servico = new frmServico();
-
+        
         servico.dispose();
     }
-
+    
     /**
      * @param args the command line arguments
      */
@@ -413,7 +515,7 @@ public class frmServico extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -456,6 +558,8 @@ public class frmServico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -465,13 +569,18 @@ public class frmServico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lbCpf;
     private javax.swing.JPanel pnCodigo;
     private javax.swing.JPanel pnCpf;
