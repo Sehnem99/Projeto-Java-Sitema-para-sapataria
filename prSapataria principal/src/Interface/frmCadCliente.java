@@ -52,8 +52,15 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtCodCliente = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lbCpf = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JTextField();
+        try{
+
+            javax.swing.text.MaskFormatter format_textField4 = new javax.swing.text.MaskFormatter("###.###.###-##");
+
+            txtCpf = new javax.swing.JFormattedTextField(format_textField4);
+
+        }catch (Exception e){}
         lbValidaCPF = new javax.swing.JLabel();
-        txtCpf = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         lbNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
@@ -122,15 +129,16 @@ public class frmCadCliente extends javax.swing.JFrame {
         lbCpf.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbCpf.setText("CPF: ");
         jPanel2.add(lbCpf);
-        jPanel2.add(lbValidaCPF);
 
-        try {
-            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtCpf.setPreferredSize(new java.awt.Dimension(380, 30));
+        txtCpf.setName("txtCpf"); // NOI18N
+        txtCpf.setPreferredSize(new java.awt.Dimension(350, 30));
+        txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCpfKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtCpf);
+        jPanel2.add(lbValidaCPF);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -517,6 +525,22 @@ public class frmCadCliente extends javax.swing.JFrame {
             Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
+        String cpfSemFormat="";
+        //Não esta validando o CPF -- Precisa debugar
+        cpfSemFormat = cpfSemFormat.substring(0,3)  + cpfSemFormat.substring(4,7) + cpfSemFormat.substring(8,11) + cpfSemFormat.substring(12,14);
+        
+        JOptionPane.showMessageDialog(null,cpfSemFormat);
+        if (isCPF(cpfSemFormat) == true){
+           lbValidaCPF.setText("CPF Valido");
+           lbValidaCPF.setForeground(Color.GREEN);
+        }
+        else {
+           lbValidaCPF.setText("Erro, CPF invalido !!!");
+           lbValidaCPF.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_txtCpfKeyPressed
    
     public void fecharTelaInicial() {
         frmPrincipal principal = new frmPrincipal();
@@ -718,7 +742,7 @@ public class frmCadCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCodCliente;
     private javax.swing.JTextField txtContato;
-    private javax.swing.JFormattedTextField txtCpf;
+    private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtDataNasc;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtLogradouro;
