@@ -82,7 +82,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtEstado = new javax.swing.JTextField();
         jPanel10 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btAtualizar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         lbAtivo = new javax.swing.JLabel();
@@ -248,9 +248,14 @@ public class frmCadCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton2.setText("Atualizar");
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btAtualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btAtualizar.setText("Atualizar");
+        btAtualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btAtualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btAtualizarMouseClicked(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton3.setText("Excluir");
@@ -264,8 +269,8 @@ public class frmCadCliente extends javax.swing.JFrame {
                 .addContainerGap(451, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(432, 432, 432))
         );
@@ -275,13 +280,13 @@ public class frmCadCliente extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(btAtualizar)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(19, 19, 19))
+                .addGap(20, 20, 20))
         );
 
         jButton1.getAccessibleContext().setAccessibleName("btnInserir");
-        jButton2.getAccessibleContext().setAccessibleName("btnAtualizar");
+        btAtualizar.getAccessibleContext().setAccessibleName("btnAtualizar");
         jButton3.getAccessibleContext().setAccessibleName("btnExcluir");
 
         jPanel8.setBackground(new java.awt.Color(204, 204, 204));
@@ -361,7 +366,7 @@ public class frmCadCliente extends javax.swing.JFrame {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
 
         jPanel13.setBackground(new java.awt.Color(153, 153, 153));
@@ -533,21 +538,31 @@ public class frmCadCliente extends javax.swing.JFrame {
                 txtCpf.setText(cliente.getCpf());
                 txtDataNasc.setText(cliente.getData_nasc());
                 txtContato.setText(cliente.getContato());
-                //txtCep.setText(Integer.parseInt(cliente.getCep()));
+                txtCep.setText(Integer.toString(cliente.getCep()));
                 txtLogradouro.setText(cliente.getLogradouro());
                 txtNum.setText(cliente.getNum());
                 txtBairro.setText(cliente.getBairro());
                 txtCidade.setText(cliente.getCidade());
                 txtEstado.setText(cliente.getUf());
                 cliente.setAtivo(cbAtivo.getSelectedIndex());
-                }else{
+                }else {
                     JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
-                    limpaTela();}
+                    limpaTela();
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_txtCpfKeyPressed
+
+    private void btAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAtualizarMouseClicked
+        cliente.setCodigo(Integer.parseInt(txtCodCliente.getText()));
+        try {
+            vServCadCliente.update(cliente);
+        } catch (SQLException ex) {
+            Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btAtualizarMouseClicked
    
     public void fecharTelaInicial() {
         frmPrincipal principal = new frmPrincipal();
@@ -711,10 +726,10 @@ public class frmCadCliente extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAtualizar;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbAtivo;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

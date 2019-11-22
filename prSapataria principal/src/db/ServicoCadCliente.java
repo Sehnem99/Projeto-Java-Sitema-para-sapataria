@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class ServicoCadCliente {
         private ServicoConexao conexao = new ServicoConexao();
-
+        
         public boolean insert(Cliente cliente)throws SQLException{
 
             String sql = "insert into clientes(COD_CLIENTE, NOME_CLIENTE, CONTATO, CPF, DATA_NASC, CEP, LOGRADOURO, BAIRRO, CIDADE, UF, ATIVO,NUM)" +
@@ -45,19 +45,20 @@ public class ServicoCadCliente {
                 return false;
             }
         }
-
+        
         public boolean consultaCliente(Cliente cliente) throws SQLException{
             String sql;
-
+            
             sql = "SELECT * FROM CLIENTES WHERE CPF = ?";
             PreparedStatement ps;
-
+            
             ps = conexao.getConexao().prepareStatement(sql);
             ps.setString(1, cliente.getCpf());
-
+            
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 cliente.setNome(rs.getString("NOME_CLIENTE"));
+                cliente.setCpf(rs.getString("CPF"));
                 cliente.setCodigo(rs.getInt("COD_CLIENTE"));
                 cliente.setAtivo(rs.getInt("ATIVO"));
                 cliente.setBairro(rs.getString("BAIRRO"));
@@ -68,16 +69,18 @@ public class ServicoCadCliente {
                 cliente.setNum(rs.getString("NUM"));
                 cliente.setUf(rs.getString("UF"));
                 cliente.setContato(rs.getString("CONTATO"));
+                cliente.setCodigo(rs.getInt("COD_CLIENTE"));
                 return true;
             }
                 return false;
         }
-
+        
         public void update(Cliente cliente)throws SQLException{
-        PreparedStatement pst = conexao.getConexao().prepareStatement(
-        "update clientes "
-         + "set COD_CLIENTE = ?,"
-            + " NOME_CLIENTE = ?,"
+            
+        String sql;
+            
+        sql = "UPDATE CLIENTES "
+            + "SET NOME_CLIENTE = ?,"
             + " CONTATO = ?,"
             + " CPF = ?,"
             + " CEP = ?"
@@ -85,42 +88,46 @@ public class ServicoCadCliente {
             + " BAIRRO = ?,"
             + " CIDADE = ?,"
             + " UF = ?,"
-            + " ATIVO = ?,"
-            + " where (codigo = ?)");
-
-        pst.setString(1, cliente.getNome());
-        pst.setString(2, cliente.getContato());
-        pst.setString(3, cliente.getCpf());
-        pst.setString(4, cliente.getData_nasc());
-        pst.setInt(5, cliente.getCep());
-        pst.setString(6, cliente.getLogradouro());
-        pst.setString(7, cliente.getBairro());
-        pst.setString(8, cliente.getCidade());
-        pst.setString(9, cliente.getUf());
-        pst.setInt(10, cliente.getAtivo());
-        pst.setInt(11, cliente.getCodigo());
-        pst.executeUpdate();
-        pst.close();
+            + " ATIVO = ?,"  
+            + " NUM = ?"
+            + " WHERE (COD_CLIENTE = ?)";
+        
+        PreparedStatement ps;
+            
+        ps = conexao.getConexao().prepareStatement(sql);
+        ps.setString(1, cliente.getNome());
+        ps.setString(2, cliente.getContato());
+        ps.setString(3, cliente.getCpf());
+        ps.setString(4, cliente.getData_nasc());
+        ps.setInt(5, cliente.getCep());
+        ps.setString(6, cliente.getLogradouro());
+        ps.setString(7, cliente.getBairro());
+        ps.setString(8, cliente.getCidade());
+        ps.setString(9, cliente.getUf());
+        ps.setInt(10, cliente.getAtivo());
+        ps.setInt(11, cliente.getCodigo());
+        ps.executeUpdate();
+        ps.close();
         conexao.close();
         }
-
-
-
+        
+        
+        
         public void setCodigoCliente(Cliente cliente)throws SQLException{
         PreparedStatement pst =
         conexao.getConexao().prepareStatement(
            "select codigo from cliente where (CPF = ?)"
         );
         pst.setString(1, cliente.getCpf());
-
+     
         ResultSet rs = pst.executeQuery();
         rs.first();
         cliente.setCodigo(rs.getInt("codigo"));
-
+        
         rs.close();
         pst.close();
         conexao.close();
         }
-
-
+        
+    
 }
