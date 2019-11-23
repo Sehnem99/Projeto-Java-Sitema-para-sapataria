@@ -7,7 +7,6 @@ package Interface;
 
 
 import Classes.Cliente;
-import Utilitarios.SrvCadCliente;
 import Utilitarios.Utilitarios;
 import db.ServicoCadCliente;
 import db.ServicoConexao;
@@ -437,7 +436,6 @@ public class frmCadCliente extends javax.swing.JFrame {
             }
     }//GEN-LAST:event_btnVoltarMouseClicked
     
-    public SrvCadCliente srvCadCliente; 
     
     private void txtCepKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepKeyReleased
         txtLogradouro.setText("Aguarde...");

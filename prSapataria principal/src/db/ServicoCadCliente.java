@@ -111,23 +111,5 @@ public class ServicoCadCliente {
         conexao.close();
         }
         
-        
-        
-        public void setCodigoCliente(Cliente cliente)throws SQLException{
-        PreparedStatement pst =
-        conexao.getConexao().prepareStatement(
-           "select codigo from cliente where (CPF = ?)"
-        );
-        pst.setString(1, cliente.getCpf());
-     
-        ResultSet rs = pst.executeQuery();
-        rs.first();
-        cliente.setCodigo(rs.getInt("codigo"));
-        
-        rs.close();
-        pst.close();
-        conexao.close();
-        }
-        
-    
+ 
 }

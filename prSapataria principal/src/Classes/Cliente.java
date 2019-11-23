@@ -1,6 +1,7 @@
 
 package Classes;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Cliente {
@@ -16,7 +17,7 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente" + "nome=" + nome+
+        String s = "Cliente" + "nome=" + nome+
                 "\nCPF" + cpf + 
                 "\nData de Nasciemtno " + data_nasc +
                 "\nContato" + contato +
@@ -25,6 +26,10 @@ public class Cliente {
                 "\nCEP " + cep +" -  UF " + uf +
                 "\nCliente Ativo: " + ativo +
                 "\n------------------------------------------------------------";
+                for(Sapato p: lista){
+                    s += p.toString() + "\n";
+                }
+                return s;
     }
 //Construtor
     public Cliente(String nome, String cpf, String data_nasc, String contato,
@@ -50,11 +55,8 @@ public class Cliente {
     
     
  //agregação
- // private ArrayList<Sapatos> lista =
-   //       new ArrayList<>();
-     
-    
- 
+ private ArrayList<Sapato> lista =
+          new ArrayList<>(); 
     
      public String getNum() {
         return num;
