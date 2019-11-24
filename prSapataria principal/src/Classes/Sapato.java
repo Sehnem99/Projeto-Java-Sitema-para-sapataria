@@ -3,17 +3,19 @@ package Classes;
 
 
 public class Sapato {
-    private Integer codigo;
-    private Integer tipoSapato;
+    private Integer codSapato;
+    private Integer codCliente;
+    private Integer codTipoSapato;
     private Integer numSapato;       
     private String cor;       
     private String marca;
     private String conserto;
     private Float valor;        
 
-    public Sapato(Integer codigo, Integer TipoSapato, Integer NumSapato, String Cor, String Marca, String Conserto, Float Valor) {
-        this.codigo = codigo;
-        this.tipoSapato = TipoSapato;
+    public Sapato(Integer codigo,Integer codCliente ,Integer TipoSapato, Integer NumSapato, String Cor, String Marca, String Conserto, Float Valor) {
+        this.codSapato = codigo;
+        this.codCliente = codCliente;
+        this.codTipoSapato = TipoSapato;
         this.numSapato = NumSapato;
         this.cor = Cor;
         this.marca = Marca;
@@ -22,16 +24,21 @@ public class Sapato {
     }
 
     public Sapato() {
-        this.codigo = 0;
+        this.codSapato = 0;
+        this.codCliente = 0;
     }
- 
-
-    public Integer getCodigo() {
-        return codigo;
+    
+    
+    public Integer getCodCliente() {
+        return codCliente;
     }
 
-    public Integer getTipoSapato() {
-        return tipoSapato;
+    public Integer getCodSapato() {
+        return codSapato;
+    }
+
+    public Integer getCodTipoSapato() {
+        return codTipoSapato;
     }
 
     public Integer getNumSapato() {
@@ -54,12 +61,16 @@ public class Sapato {
         return valor;
     }
 
-    public void setCodigo(Integer codigo) {
-        this.codigo = codigo;
+    public void setCodSapato(Integer codSapato) {
+        this.codSapato = codSapato;
     }
 
-    public void setTipoSapato(Integer tipoSapato) {
-        this.tipoSapato = tipoSapato;
+    public void setCodCliente(Integer codCliente) {
+        this.codCliente = codCliente;
+    }
+    
+    public void setCodTipoSapato(Integer codTipoSapato) {
+        this.codTipoSapato = codTipoSapato;
     }
 
     public void setNumSapato(Integer numSapato) {

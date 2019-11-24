@@ -7,148 +7,125 @@ package db;
  * and open the template in the editor.
  */
 
-import connection.ConnectionFactory;
-import java.sql.Connection;
+
+import Classes.Sapato;
+import Classes.TipoSapato;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import model.bean.Produto;
 
 /**
  *
  * @author Samuelson
  */
 public class ServicoDAO {
-
-    public void create(Produto p) {
+    private ServicoConexao conexao = new ServicoConexao();
+    
+    public boolean insert(Sapato p) {
         
-        Connection con = ConnectionFactory.getConnection();
+        String sql = "insert into clientes(COD_SAPATO, COD_CLIENTE, COD_TIPO_SAPATO, NUMERO, MARCA, COR, CONSERTO, VALOR)" +
+            "values (0,?,?,?,?,?,?,?)";
         
-        PreparedStatement stmt = null;
-
         try {
-            stmt = con.prepareStatement("INSERT INTO produto (descricao,qtd,preco)VALUES(?,?,?)");
-            stmt.setString(1, p.getDescricao());
-            stmt.setInt(2, p.getQtd());
-            stmt.setDouble(3, p.getPreco());
-
-            stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Salvo com sucesso!");
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt);
-        }
+                PreparedStatement ps;
+                ps = conexao.getConexao().prepareStatement(sql);
+                ps.setInt(1, p.getCodCliente());
+                ps.setInt(2, p.getCodTipoSapato());
+                ps.setInt(3, p.getNumSapato());
+                ps.setString(4, p.getMarca());
+                ps.setString(5, p.getCor());
+                ps.setString(6, p.getConserto());
+                ps.setFloat(7, p.getValor());
+                //usar sempre pra inserir ou modificar dado na tabela
+                ps.execute();
+                ps.close();
+                conexao.close();
+                return true;
+            } catch (SQLException e) {
+                return false;
+            }
 
     }
 
-    public List<Produto> read() {
+    public Vector<TipoSapato> readTipoSapato() {
 
-        Connection con = ConnectionFactory.getConnection();
+        ServicoConexao con = (ServicoConexao) conexao.getConexao();
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        List<Produto> produtos = new ArrayList<>();
+        Vector<TipoSapato> tipoSapatos = new Vector<>();
 
         try {
-            stmt = con.prepareStatement("SELECT * FROM produto");
+            stmt = con.getConexao().prepareStatement("SELECT * FROM produto");
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
-                Produto produto = new Produto();
+                TipoSapato tipoSapato = new TipoSapato();
 
-                produto.setId(rs.getInt("id"));
-                produto.setDescricao(rs.getString("descricao"));
-                produto.setQtd(rs.getInt("qtd"));
-                produto.setPreco(rs.getDouble("preco"));
-                produtos.add(produto);
+                tipoSapato.setCodTipoSapato(rs.getInt("COD_TIPO_SAPATO"));
+                tipoSapato.setNomeTipoSapato(rs.getString("NOME_TIPO_SAPATO"));
+                tipoSapatos.add(tipoSapato);
             }
-
+            return tipoSapatos;
         } catch (SQLException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
+           conexao.close();
         }
 
-        return produtos;
-
+        return tipoSapatos;
     }
-    public List<Produto> readForDesc(String desc) {
+    
+    public void update(Sapato p) {
 
-        Connection con = ConnectionFactory.getConnection();
-        
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        List<Produto> produtos = new ArrayList<>();
-
-        try {
-            stmt = con.prepareStatement("SELECT * FROM produto WHERE descricao LIKE ?");
-            stmt.setString(1, "%"+desc+"%");
-            
-            rs = stmt.executeQuery();
-
-            while (rs.next()) {
-
-                Produto produto = new Produto();
-
-                produto.setId(rs.getInt("id"));
-                produto.setDescricao(rs.getString("descricao"));
-                produto.setQtd(rs.getInt("qtd"));
-                produto.setPreco(rs.getDouble("preco"));
-                produtos.add(produto);
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            ConnectionFactory.closeConnection(con, stmt, rs);
-        }
-
-        return produtos;
-
-    }
-
-    public void update(Produto p) {
-
-        Connection con = ConnectionFactory.getConnection();
+        ServicoConexao con = (ServicoConexao) conexao.getConexao();
         
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("UPDATE produto SET descricao = ? ,qtd = ?,preco = ? WHERE id = ?");
-            stmt.setString(1, p.getDescricao());
-            stmt.setInt(2, p.getQtd());
-            stmt.setDouble(3, p.getPreco());
-            stmt.setInt(4, p.getId());
-
+            stmt = con.getConexao().prepareStatement(
+                    "UPDATE sapato SET "
+                   + "COD_TIPO_SAPATO = ? ,"
+                   + "NUMERO = ?,"
+                   + "MARCA = ? "
+                   + "COR = ? "
+                   + "CONSERTO = ? "
+                   + "VALOR = ? "            
+                   + "WHERE COD_SAPATO = ?");
+            stmt.setInt(1, p.getCodTipoSapato());    
+            stmt.setInt(2, p.getNumSapato());
+            stmt.setString(3, p.getMarca());
+            stmt.setString(4, p.getCor());
+            stmt.setString(5, p.getConserto());
+            stmt.setFloat(6, p.getValor());
+            stmt.setInt(7, p.getCodSapato());
             stmt.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
         } finally {
-            ConnectionFactory.closeConnection(con, stmt);
+            conexao.close();
         }
 
     }
-    public void delete(Produto p) {
+    public void delete(Sapato p) {
 
-        Connection con = ConnectionFactory.getConnection();
+        ServicoConexao con = (ServicoConexao) conexao.getConexao();
         
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("DELETE FROM produto WHERE id = ?");
-            stmt.setInt(1, p.getId());
+            stmt = con.getConexao().prepareStatement("DELETE sapato produto WHERE COD_SAPATO = ?");
+            stmt.setInt(1, p.getCodSapato());
 
             stmt.executeUpdate();
 
@@ -156,21 +133,9 @@ public class ServicoDAO {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex);
         } finally {
-            ConnectionFactory.closeConnection(con, stmt);
+            conexao.getConexao();
         }
 
     }
 
 }
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About

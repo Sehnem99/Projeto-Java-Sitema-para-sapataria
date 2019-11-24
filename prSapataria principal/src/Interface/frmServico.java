@@ -7,11 +7,15 @@ package Interface;
 
 import Classes.Cliente;
 import Classes.Sapato;
+import Classes.TipoSapato;
 import db.ServicoCadCliente;
+import db.ServicoDAO;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,12 +26,17 @@ public class frmServico extends javax.swing.JFrame {
     private ServicoCadCliente vServCadCliente = new ServicoCadCliente();
     private Cliente cliente = new Cliente();
     private Sapato sapato = new Sapato();
-    private Integer cadCliente=0;
+   
+    Vector<TipoSapato> tipoSapatos;
     
     
     public frmServico() {
         initComponents();
+        ServicoDAO servicoDAO = new ServicoDAO();
         
+        
+        
+            
         
     }
 
@@ -218,12 +227,11 @@ public class frmServico extends javax.swing.JFrame {
         jLabel6.setText("Tipo do Calçado: ");
         pnTipoCalcado.add(jLabel6);
 
-        cbTipoSapato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alpargata", "Bota Feminina", "Bota Masculina", "Chinelo", "Chuteira", "Coturno", "Galocha", "Mocassim", "Sandália Feminina", "Sandália Masculina", "Sapatênis", "Sapato Feminino", "Sapato Masculino", "Sapatilha", "Tamanco", "Tênis Feminino", "Tênis Masculino" }));
         cbTipoSapato.setToolTipText("");
         cbTipoSapato.setPreferredSize(new java.awt.Dimension(290, 30));
-        cbTipoSapato.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                cbTipoSapatoKeyPressed(evt);
+        cbTipoSapato.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoSapatoActionPerformed(evt);
             }
         });
         pnTipoCalcado.add(cbTipoSapato);
@@ -518,6 +526,7 @@ public class frmServico extends javax.swing.JFrame {
         this.setExtendedState(MAXIMIZED_BOTH);
         jLabel13.setVisible(false);
         txtValoTotalServico.setVisible(false);
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void txtAdcProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdcProdutoActionPerformed
@@ -535,17 +544,13 @@ public class frmServico extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtAdcProdutoActionPerformed
 
-    private void cbTipoSapatoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbTipoSapatoKeyPressed
-        
-    }//GEN-LAST:event_cbTipoSapatoKeyPressed
-
     private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
         cliente.setCpf(txtCpf.getText());
         try {
                 if (vServCadCliente.consultaCliente(cliente)){
                 txtNomeCliente.setText(cliente.getNome());
-                cadCliente = cliente.getCodigo();
+                sapato.setCodCliente(cliente.getCodigo());
                 }else {
                     JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
                   
@@ -555,6 +560,12 @@ public class frmServico extends javax.swing.JFrame {
             }
         } 
     }//GEN-LAST:event_txtCpfKeyPressed
+
+    private void cbTipoSapatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoSapatoActionPerformed
+        // TODO add your handling code here:
+        
+      
+    }//GEN-LAST:event_cbTipoSapatoActionPerformed
     
     public void fecharTelaServico() {
         frmServico servico = new frmServico();
@@ -591,10 +602,8 @@ public class frmServico extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new frmServico().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new frmServico().setVisible(true);
         });
     }
 
@@ -603,7 +612,7 @@ public class frmServico extends javax.swing.JFrame {
     private javax.swing.JPanel abaConsulta;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbCorSapato;
-    private javax.swing.JComboBox<Object> cbTipoSapato;
+    private javax.swing.JComboBox<String> cbTipoSapato;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
