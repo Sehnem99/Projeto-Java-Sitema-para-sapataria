@@ -12,7 +12,7 @@ import db.ServicoCadCliente;
 import db.ServicoDAO;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
-import java.util.Vector;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -27,12 +27,16 @@ public class frmServico extends javax.swing.JFrame {
     private Cliente cliente = new Cliente();
     private Sapato sapato = new Sapato();
    
-    Vector<TipoSapato> tipoSapatos;
+    List<TipoSapato> tipoSapatos;
     
     
     public frmServico() {
         initComponents();
         ServicoDAO servicoDAO = new ServicoDAO();
+        for(TipoSapato tp:servicoDAO.readTipoSapato()){
+             cbTipoSapato.addItem(tp);
+        }
+            
         
         
         
@@ -612,7 +616,7 @@ public class frmServico extends javax.swing.JFrame {
     private javax.swing.JPanel abaConsulta;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbCorSapato;
-    private javax.swing.JComboBox<String> cbTipoSapato;
+    private javax.swing.JComboBox<Object> cbTipoSapato;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

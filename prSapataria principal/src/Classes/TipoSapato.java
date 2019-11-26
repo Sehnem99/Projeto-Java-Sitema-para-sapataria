@@ -28,4 +28,11 @@ public class TipoSapato {
     public void setNomeTipoSapato(String nomeTipoSapato) {
         this.nomeTipoSapato = nomeTipoSapato;
     } 
+
+    @Override
+    public String toString() {
+        return getNomeTipoSapato(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
 }

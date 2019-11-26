@@ -53,17 +53,16 @@ public class ServicoDAO {
 
     }
 
-    public Vector<TipoSapato> readTipoSapato() {
+    public List<TipoSapato> readTipoSapato() {
 
-        ServicoConexao con = (ServicoConexao) conexao.getConexao();
         
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-        Vector<TipoSapato> tipoSapatos = new Vector<>();
-
+        List<TipoSapato> tipoSapatos = new ArrayList<>();
+        String sql = "select * from tipos_sapato";
         try {
-            stmt = con.getConexao().prepareStatement("SELECT * FROM produto");
+            stmt = conexao.getConexao().prepareStatement(sql);;
             rs = stmt.executeQuery();
 
             while (rs.next()) {
