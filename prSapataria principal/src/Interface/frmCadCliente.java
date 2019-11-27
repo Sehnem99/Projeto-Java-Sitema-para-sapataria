@@ -682,6 +682,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtCidade.setText(null);
         txtEstado.setText(null);
         lbValidaCPF.setText(null);
+        cbAtivo.setSelectedIndex(-1);
     }
     /**
      * @param args the command line arguments

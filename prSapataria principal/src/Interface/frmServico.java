@@ -26,22 +26,15 @@ public class frmServico extends javax.swing.JFrame {
     private ServicoCadCliente vServCadCliente = new ServicoCadCliente();
     private Cliente cliente = new Cliente();
     private Sapato sapato = new Sapato();
-   
+    private float vValorToal =0;
     List<TipoSapato> tipoSapatos;
-    
+    ServicoDAO servicoDAO = new ServicoDAO();
     
     public frmServico() {
         initComponents();
-        ServicoDAO servicoDAO = new ServicoDAO();
         for(TipoSapato tp:servicoDAO.readTipoSapato()){
              cbTipoSapato.addItem(tp);
-        }
-            
-        
-        
-        
-            
-        
+        }       
     }
 
  
@@ -95,7 +88,7 @@ public class frmServico extends javax.swing.JFrame {
         jTable2 = new javax.swing.JTable();
         pnInferior = new javax.swing.JPanel();
         btnVoltar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btCadServico = new javax.swing.JButton();
         txtValoTotalServico = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
 
@@ -233,11 +226,6 @@ public class frmServico extends javax.swing.JFrame {
 
         cbTipoSapato.setToolTipText("");
         cbTipoSapato.setPreferredSize(new java.awt.Dimension(290, 30));
-        cbTipoSapato.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoSapatoActionPerformed(evt);
-            }
-        });
         pnTipoCalcado.add(cbTipoSapato);
 
         pnNumeroCor.setBackground(new java.awt.Color(204, 204, 204));
@@ -254,6 +242,7 @@ public class frmServico extends javax.swing.JFrame {
         pnNumeroCor.add(jLabel8);
 
         cbCorSapato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amarelo", "Azul", "Bege", "Branco", "Cinza", "Laranja", "Marrom", "Preto", "Rosa", "Roxo", "Verde", "Vermelho" }));
+        cbCorSapato.setSelectedIndex(-1);
         cbCorSapato.setPreferredSize(new java.awt.Dimension(160, 30));
         pnNumeroCor.add(cbCorSapato);
 
@@ -429,9 +418,14 @@ public class frmServico extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jButton1.setText("CADASTRAR SERVIÇO");
-        jButton1.setPreferredSize(new java.awt.Dimension(130, 25));
+        btCadServico.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btCadServico.setText("CADASTRAR SERVIÇO");
+        btCadServico.setPreferredSize(new java.awt.Dimension(130, 25));
+        btCadServico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadServicoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnInferiorLayout = new javax.swing.GroupLayout(pnInferior);
         pnInferior.setLayout(pnInferiorLayout);
@@ -439,7 +433,7 @@ public class frmServico extends javax.swing.JFrame {
             pnInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnInferiorLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btCadServico, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -449,7 +443,7 @@ public class frmServico extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnInferiorLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(pnInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
+                    .addComponent(btCadServico, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -534,18 +528,54 @@ public class frmServico extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void txtAdcProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdcProdutoActionPerformed
+        
+        
+       /* if(cbTipoSapato.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "Selecione o tipo do calsado");
+            cbTipoSapato.requestFocus();
+            return;
+        }
+        if(txtNumSapato.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com algum numero para o calsado");
+            txtNumSapato.requestFocus();
+            return; 
+        }
+        if(cbCorSapato.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "Selecione a cor do calsado");
+            cbCorSapato.requestFocus();
+            return;
+        }
+        if(txtConserto.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com algum serviço");
+            txtConserto.requestFocus();
+            return;
+        }
+        if(txtValorSapato.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com algum valor do serviço");
+            txtValorSapato.requestFocus();
+            return;
+        }*/
+        
         jLabel13.setVisible(true);
         txtValoTotalServico.setVisible(true);
-        txtValoTotalServico.setText(txtValorSapato.getText());
+        vValorToal += txtValorSapato.getAlignmentX();
+        txtValoTotalServico.setText(String.valueOf(vValorToal));
+        
+        TipoSapato tipoSapato = (TipoSapato) cbTipoSapato.getSelectedItem();
+        
+        sapato.setCodTipoSapato(tipoSapato.getCodTipoSapato());
+        sapato.setConserto(txtConserto.getText());
+        sapato.setCor(cbCorSapato.getItemAt(cbCorSapato.getSelectedIndex()));
+        sapato.setMarca(txtMarca.getText());
+        sapato.setNumSapato(Integer.getInteger(txtMarca.getText()));
+        sapato.setValor(Float.parseFloat(txtValorSapato.getText()));
         
         
-   
-        
-        
-        
-        
-        
-        
+        if(servicoDAO.insertSapato(sapato)){
+            JOptionPane.showMessageDialog(null, "Sapato inserido com sucessso!");
+        }else{
+            JOptionPane.showMessageDialog(null, "Houve um erro inesperado no cadastro!");
+        }
     }//GEN-LAST:event_txtAdcProdutoActionPerformed
 
     private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
@@ -565,11 +595,15 @@ public class frmServico extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_txtCpfKeyPressed
 
-    private void cbTipoSapatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoSapatoActionPerformed
-        // TODO add your handling code here:
+    private void btCadServicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadServicoActionPerformed
         
-      
-    }//GEN-LAST:event_cbTipoSapatoActionPerformed
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btCadServicoActionPerformed
     
     public void fecharTelaServico() {
         frmServico servico = new frmServico();
@@ -614,10 +648,10 @@ public class frmServico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel abaCadastro;
     private javax.swing.JPanel abaConsulta;
+    private javax.swing.JButton btCadServico;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JComboBox<String> cbCorSapato;
     private javax.swing.JComboBox<Object> cbTipoSapato;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
