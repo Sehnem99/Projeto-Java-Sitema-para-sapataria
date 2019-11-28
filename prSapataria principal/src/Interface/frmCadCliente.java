@@ -85,7 +85,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         lbAtivo = new javax.swing.JLabel();
-        cbAtivo = new javax.swing.JComboBox<>();
+        cbAtivo = new javax.swing.JComboBox<String>();
         jPanel14 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
@@ -103,7 +103,6 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbCodCliente.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbCodCliente.setText("Código: ");
         jPanel1.add(lbCodCliente);
 
@@ -119,7 +118,6 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbCpf.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbCpf.setText("CPF: ");
         jPanel2.add(lbCpf);
         jPanel2.add(lbValidaCPF);
@@ -139,7 +137,6 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbNome.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbNome.setText("Nome Completo: ");
         jPanel3.add(lbNome);
 
@@ -150,7 +147,6 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbDataNasc.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbDataNasc.setText("Data Nascimento:");
         jPanel4.add(lbDataNasc);
 
@@ -159,7 +155,6 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbContato.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbContato.setText("Contato:");
         jPanel5.add(lbContato);
 
@@ -168,7 +163,6 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbCep.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbCep.setText("CEP: ");
         jPanel6.add(lbCep);
 
@@ -184,7 +178,6 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel7.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbEndereco.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbEndereco.setText("Endereço: ");
         jPanel7.add(lbEndereco);
 
@@ -194,7 +187,6 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtLogradouro.setPreferredSize(new java.awt.Dimension(250, 30));
         jPanel7.add(txtLogradouro);
 
-        lbNumero.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbNumero.setText("Nº: ");
         jPanel7.add(lbNumero);
 
@@ -205,7 +197,6 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel12.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbBairro.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbBairro.setText("Bairro: ");
         jPanel12.add(lbBairro);
 
@@ -216,7 +207,6 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel9.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbCidade.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbCidade.setText("Cidade: ");
         jPanel9.add(lbCidade);
 
@@ -225,7 +215,6 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtCidade.setPreferredSize(new java.awt.Dimension(265, 30));
         jPanel9.add(txtCidade);
 
-        lbEstado.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbEstado.setText("UF: ");
         jPanel9.add(lbEstado);
 
@@ -250,9 +239,9 @@ public class frmCadCliente extends javax.swing.JFrame {
         btAtualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btAtualizar.setText("Atualizar");
         btAtualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btAtualizar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btAtualizarMouseClicked(evt);
+        btAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAtualizarActionPerformed(evt);
             }
         });
 
@@ -290,11 +279,10 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         jPanel8.setBackground(new java.awt.Color(204, 204, 204));
 
-        lbAtivo.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         lbAtivo.setText("Ativo");
         jPanel8.add(lbAtivo);
 
-        cbAtivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 - Inativo", "1 - Ativo" }));
+        cbAtivo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0 - Inativo", "1 - Ativo" }));
         cbAtivo.setSelectedIndex(-1);
         jPanel8.add(cbAtivo);
 
@@ -404,7 +392,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1205, Short.MAX_VALUE)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1213, Short.MAX_VALUE)
             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -553,14 +541,19 @@ public class frmCadCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtCpfKeyPressed
 
-    private void btAtualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btAtualizarMouseClicked
-        cliente.setCodigo(Integer.parseInt(txtCodCliente.getText()));
+    private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
+
         try {
-            vServCadCliente.update(cliente);
+            cliente.setCpf(txtCpf.getText());
+            if (vServCadCliente.update(cliente)){
+                JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            }else
+                JOptionPane.showMessageDialog(null, "Erro ao atualizar!");
         } catch (SQLException ex) {
             Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_btAtualizarMouseClicked
+
+    }//GEN-LAST:event_btAtualizarActionPerformed
    
     public void fecharTelaInicial() {
         frmPrincipal principal = new frmPrincipal();
@@ -682,7 +675,6 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtCidade.setText(null);
         txtEstado.setText(null);
         lbValidaCPF.setText(null);
-        cbAtivo.setSelectedIndex(-1);
     }
     /**
      * @param args the command line arguments
