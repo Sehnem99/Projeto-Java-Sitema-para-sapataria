@@ -75,41 +75,25 @@ public class ServicoCadCliente {
                 return false;
         }
         
-        public void update(Cliente cliente)throws SQLException{
+        public boolean update(Cliente cliente)throws SQLException{
             
-        String sql;
-            
-        sql = "UPDATE CLIENTES "
-            + "SET NOME_CLIENTE = ?,"
-            + " CONTATO = ?,"
-            + " CPF = ?,"
-            + " CEP = ?"
-            + " ATIVO = ?,"
-            + " BAIRRO = ?,"
-            + " CIDADE = ?,"
-            + " UF = ?,"
-            + " ATIVO = ?,"  
-            + " NUM = ?"
-            + " WHERE (COD_CLIENTE = ?)";
+        String sql = "UPDATE CLIENTES " +
+        "SET NOME_CLIENTE = ? " +
+        "WHERE CPF = ?";
         
-        PreparedStatement ps;
-            
-        ps = conexao.getConexao().prepareStatement(sql);
-        ps.setString(1, cliente.getNome());
-        ps.setString(2, cliente.getContato());
-        ps.setString(3, cliente.getCpf());
-        ps.setString(4, cliente.getData_nasc());
-        ps.setInt(5, cliente.getCep());
-        ps.setString(6, cliente.getLogradouro());
-        ps.setString(7, cliente.getBairro());
-        ps.setString(8, cliente.getCidade());
-        ps.setString(9, cliente.getUf());
-        ps.setInt(10, cliente.getAtivo());
-        ps.setInt(11, cliente.getCodigo());
-        ps.executeUpdate();
-        ps.close();
-        conexao.close();
+        try {
+            PreparedStatement ps;
+            ps = conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, cliente.getNome());
+            ps.setString(2,cliente.getCpf());
+            ps.execute();
+            ps.close();
+            return true; 
+            } catch (SQLException ex) {
+                return false;
+            }
         }
+
         
- 
+    
 }
