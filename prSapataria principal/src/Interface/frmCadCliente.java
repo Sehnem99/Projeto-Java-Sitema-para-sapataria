@@ -85,7 +85,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         lbAtivo = new javax.swing.JLabel();
-        cbAtivo = new javax.swing.JComboBox<String>();
+        cbAtivo = new javax.swing.JComboBox<>();
         jPanel14 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
@@ -282,7 +282,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         lbAtivo.setText("Ativo");
         jPanel8.add(lbAtivo);
 
-        cbAtivo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0 - Inativo", "1 - Ativo" }));
+        cbAtivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 - Inativo", "1 - Ativo" }));
         cbAtivo.setSelectedIndex(-1);
         jPanel8.add(cbAtivo);
 
@@ -520,6 +520,7 @@ public class frmCadCliente extends javax.swing.JFrame {
        cliente.setCpf(txtCpf.getText());
         try {
                 if (vServCadCliente.consultaCliente(cliente)){
+                txtCodCliente.setText(Integer.toString(cliente.getCodigo()));
                 txtNome.setText(cliente.getNome());
                 txtCpf.setText(cliente.getCpf());
                 txtDataNasc.setText(cliente.getData_nasc());
@@ -530,7 +531,7 @@ public class frmCadCliente extends javax.swing.JFrame {
                 txtBairro.setText(cliente.getBairro());
                 txtCidade.setText(cliente.getCidade());
                 txtEstado.setText(cliente.getUf());
-                cliente.setAtivo(cbAtivo.getSelectedIndex());
+                cbAtivo.setSelectedIndex(cliente.getAtivo());
                 }else {
                     JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
                     limpaTela();
@@ -544,7 +545,17 @@ public class frmCadCliente extends javax.swing.JFrame {
     private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
 
         try {
-            cliente.setCpf(txtCpf.getText());
+            cliente.setNome(txtNome.getText());
+            cliente.setCpf((txtCpf.getText()));
+            cliente.setData_nasc(txtDataNasc.getText());
+            cliente.setContato(txtContato.getText());
+            cliente.setCep(utilitario.strToInt(txtCep.getText(),1));
+            cliente.setLogradouro(txtLogradouro.getText());
+            cliente.setNum(txtNum.getText());
+            cliente.setBairro(txtBairro.getText());
+            cliente.setCidade(txtCidade.getText());
+            cliente.setUf(txtEstado.getText());
+            cliente.setAtivo(cbAtivo.getSelectedIndex());
             if (vServCadCliente.update(cliente)){
                 JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
             }else
