@@ -8,10 +8,16 @@ package Interface;
 import Classes.Cliente;
 import Classes.Sapato;
 import Classes.TipoSapato;
+import Utilitarios.Utilitarios;
 import db.ServicoCadCliente;
 import db.ServicoDAO;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,13 +35,24 @@ public class frmServico extends javax.swing.JFrame {
     private float vValorToal =0;
     List<TipoSapato> tipoSapatos;
     ServicoDAO servicoDAO = new ServicoDAO();
+    Utilitarios util = new Utilitarios();
     
     public frmServico() {
         initComponents();
+   
         for(TipoSapato tp:servicoDAO.readTipoSapato()){
              cbTipoSapato.addItem(tp);
-        }       
+        }
+        cbTipoSapato.setSelectedIndex(-1);
+        txtDataEntrada.setText(getDateTime());     
+        
     }
+    
+    private String getDateTime() {
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    Date date = new Date();
+    return dateFormat.format(date);
+}
 
  
     @SuppressWarnings("unchecked")
@@ -558,7 +575,7 @@ public class frmServico extends javax.swing.JFrame {
         
         jLabel13.setVisible(true);
         txtValoTotalServico.setVisible(true);
-        vValorToal += txtValorSapato.getAlignmentX();
+        vValorToal += Float.parseFloat(txtValorSapato.getText());
         txtValoTotalServico.setText(String.valueOf(vValorToal));
         
         TipoSapato tipoSapato = (TipoSapato) cbTipoSapato.getSelectedItem();
@@ -567,7 +584,7 @@ public class frmServico extends javax.swing.JFrame {
         sapato.setConserto(txtConserto.getText());
         sapato.setCor(cbCorSapato.getItemAt(cbCorSapato.getSelectedIndex()));
         sapato.setMarca(txtMarca.getText());
-        sapato.setNumSapato(Integer.getInteger(txtMarca.getText()));
+        sapato.setNumSapato(util.strToInt(txtNumSapato.getText(), WIDTH) );
         sapato.setValor(Float.parseFloat(txtValorSapato.getText()));
         
         

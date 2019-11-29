@@ -29,8 +29,7 @@ public class ServicoDAO {
     
     public boolean insertSapato(Sapato p) {
         
-        String sql = "insert into clientes(COD_SAPATO, COD_CLIENTE, COD_TIPO_SAPATO, NUMERO, MARCA, COR, CONSERTO, VALOR)" +
-            "values (0,?,?,?,?,?,?,?)";
+        String sql = "insert into sapato values (0,?,?,?,?,?,?)";
         
         try {
                 PreparedStatement ps;
