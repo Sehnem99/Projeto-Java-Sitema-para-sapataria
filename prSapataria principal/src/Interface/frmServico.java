@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Interface;
 
 import Classes.Cliente;
@@ -15,14 +11,12 @@ import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -58,6 +52,7 @@ public class frmServico extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         pnPrincipal = new javax.swing.JPanel();
         pnSuperior = new javax.swing.JPanel();
@@ -102,7 +97,7 @@ public class frmServico extends javax.swing.JFrame {
         txtValorSapato = new javax.swing.JTextField();
         abaConsulta = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblSapatos = new javax.swing.JTable();
         pnInferior = new javax.swing.JPanel();
         btnVoltar = new javax.swing.JButton();
         btCadServico = new javax.swing.JButton();
@@ -117,6 +112,7 @@ public class frmServico extends javax.swing.JFrame {
         });
 
         pnPrincipal.setBackground(new java.awt.Color(204, 204, 204));
+        pnPrincipal.setLayout(new java.awt.GridBagLayout());
 
         pnSuperior.setBackground(new java.awt.Color(153, 153, 153));
         pnSuperior.setPreferredSize(new java.awt.Dimension(863, 54));
@@ -137,6 +133,14 @@ public class frmServico extends javax.swing.JFrame {
             pnSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 936;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        pnPrincipal.add(pnSuperior, gridBagConstraints);
 
         pnCpf.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -159,6 +163,16 @@ public class frmServico extends javax.swing.JFrame {
         });
         pnCpf.add(txtCpf);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 1259;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(14, 0, 0, 0);
+        pnPrincipal.add(pnCpf, gridBagConstraints);
+
         pnNome.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -170,6 +184,16 @@ public class frmServico extends javax.swing.JFrame {
         txtNomeCliente.setName(""); // NOI18N
         txtNomeCliente.setPreferredSize(new java.awt.Dimension(350, 30));
         pnNome.add(txtNomeCliente);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 1244;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 0, 0);
+        pnPrincipal.add(pnNome, gridBagConstraints);
 
         pnData.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -197,12 +221,23 @@ public class frmServico extends javax.swing.JFrame {
         txtDataSaida.setPreferredSize(new java.awt.Dimension(108, 30));
         pnData.add(txtDataSaida);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 1093;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(3, 0, 0, 0);
+        pnPrincipal.add(pnData, gridBagConstraints);
+
         jTabbedPane1.setBackground(new java.awt.Color(204, 204, 204));
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
 
         abaCadastro.setBackground(new java.awt.Color(204, 204, 204));
         abaCadastro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        abaCadastro.setLayout(new java.awt.GridBagLayout());
 
         pnDadosProduto.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -225,6 +260,8 @@ public class frmServico extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        abaCadastro.add(pnDadosProduto, new java.awt.GridBagConstraints());
+
         pnCodigo.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -235,6 +272,11 @@ public class frmServico extends javax.swing.JFrame {
         txtCodSapato.setPreferredSize(new java.awt.Dimension(357, 30));
         pnCodigo.add(txtCodSapato);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        abaCadastro.add(pnCodigo, gridBagConstraints);
+
         pnTipoCalcado.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -244,6 +286,11 @@ public class frmServico extends javax.swing.JFrame {
         cbTipoSapato.setToolTipText("");
         cbTipoSapato.setPreferredSize(new java.awt.Dimension(290, 30));
         pnTipoCalcado.add(cbTipoSapato);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        abaCadastro.add(pnTipoCalcado, gridBagConstraints);
 
         pnNumeroCor.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -263,6 +310,11 @@ public class frmServico extends javax.swing.JFrame {
         cbCorSapato.setPreferredSize(new java.awt.Dimension(160, 30));
         pnNumeroCor.add(cbCorSapato);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        abaCadastro.add(pnNumeroCor, gridBagConstraints);
+
         pnMarca.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -271,6 +323,11 @@ public class frmServico extends javax.swing.JFrame {
 
         txtMarca.setPreferredSize(new java.awt.Dimension(363, 30));
         pnMarca.add(txtMarca);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 4;
+        abaCadastro.add(pnMarca, gridBagConstraints);
 
         pnMarca1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -288,6 +345,11 @@ public class frmServico extends javax.swing.JFrame {
 
         pnMarca1.add(jScrollPane1);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        abaCadastro.add(pnMarca1, gridBagConstraints);
+
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -301,6 +363,11 @@ public class frmServico extends javax.swing.JFrame {
         });
         jPanel1.add(txtAdcProduto);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        abaCadastro.add(jPanel1, gridBagConstraints);
+
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
@@ -310,54 +377,19 @@ public class frmServico extends javax.swing.JFrame {
         txtValorSapato.setPreferredSize(new java.awt.Dimension(280, 30));
         jPanel2.add(txtValorSapato);
 
-        javax.swing.GroupLayout abaCadastroLayout = new javax.swing.GroupLayout(abaCadastro);
-        abaCadastro.setLayout(abaCadastroLayout);
-        abaCadastroLayout.setHorizontalGroup(
-            abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(abaCadastroLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(pnDadosProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnTipoCalcado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnNumeroCor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnMarca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pnCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE))
-                    .addContainerGap())
-                .addComponent(pnMarca1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        abaCadastroLayout.setVerticalGroup(
-            abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaCadastroLayout.createSequentialGroup()
-                .addGap(0, 384, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(abaCadastroLayout.createSequentialGroup()
-                    .addGap(23, 23, 23)
-                    .addComponent(pnDadosProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(18, 18, 18)
-                    .addComponent(pnCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(pnTipoCalcado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(pnNumeroCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(pnMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(pnMarca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        abaCadastro.add(jPanel2, gridBagConstraints);
 
         jTabbedPane1.addTab("Cadastro", abaCadastro);
 
         abaConsulta.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTable2.setAutoCreateRowSorter(true);
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblSapatos.setAutoCreateRowSorter(true);
+        tblSapatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -393,26 +425,31 @@ public class frmServico extends javax.swing.JFrame {
                 "Código", "Tipo Calçado", "Número", "Cor", "Marca", "Conserto(s)", "Valor do Conserto"
             }
         ));
-        jTable2.setToolTipText("");
-        jTable2.setGridColor(new java.awt.Color(0, 0, 0));
-        jTable2.setSelectionForeground(new java.awt.Color(153, 153, 153));
-        jTable2.setUpdateSelectionOnSort(false);
-        jScrollPane3.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setHeaderValue("Código");
-            jTable2.getColumnModel().getColumn(1).setHeaderValue("Tipo Calçado");
-            jTable2.getColumnModel().getColumn(2).setHeaderValue("Número");
-            jTable2.getColumnModel().getColumn(3).setHeaderValue("Cor");
-            jTable2.getColumnModel().getColumn(4).setHeaderValue("Marca");
-            jTable2.getColumnModel().getColumn(5).setHeaderValue("Conserto(s)");
-            jTable2.getColumnModel().getColumn(6).setHeaderValue("Valor do Conserto");
+        tblSapatos.setToolTipText("");
+        tblSapatos.setGridColor(new java.awt.Color(0, 0, 0));
+        tblSapatos.setSelectionForeground(new java.awt.Color(153, 153, 153));
+        tblSapatos.setUpdateSelectionOnSort(false);
+        tblSapatos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSapatosMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tblSapatos);
+        if (tblSapatos.getColumnModel().getColumnCount() > 0) {
+            tblSapatos.getColumnModel().getColumn(0).setHeaderValue("Código");
+            tblSapatos.getColumnModel().getColumn(1).setHeaderValue("Tipo Calçado");
+            tblSapatos.getColumnModel().getColumn(2).setHeaderValue("Número");
+            tblSapatos.getColumnModel().getColumn(3).setHeaderValue("Cor");
+            tblSapatos.getColumnModel().getColumn(4).setHeaderValue("Marca");
+            tblSapatos.getColumnModel().getColumn(5).setHeaderValue("Conserto(s)");
+            tblSapatos.getColumnModel().getColumn(6).setHeaderValue("Valor do Conserto");
         }
 
         javax.swing.GroupLayout abaConsultaLayout = new javax.swing.GroupLayout(abaConsulta);
         abaConsulta.setLayout(abaConsultaLayout);
         abaConsultaLayout.setHorizontalGroup(
             abaConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 859, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1289, Short.MAX_VALUE)
         );
         abaConsultaLayout.setVerticalGroup(
             abaConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,6 +457,16 @@ public class frmServico extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Consulta", abaConsulta);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 819;
+        gridBagConstraints.ipady = 284;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(0, 10, 0, 0);
+        pnPrincipal.add(jTabbedPane1, gridBagConstraints);
 
         pnInferior.setBackground(new java.awt.Color(153, 153, 153));
         pnInferior.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -432,6 +479,11 @@ public class frmServico extends javax.swing.JFrame {
         btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVoltarMouseClicked(evt);
+            }
+        });
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -465,51 +517,36 @@ public class frmServico extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.ipadx = 914;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(28, 0, 0, 0);
+        pnPrincipal.add(pnInferior, gridBagConstraints);
+
         txtValoTotalServico.setEditable(false);
         txtValoTotalServico.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridheight = 2;
+        gridBagConstraints.ipadx = 103;
+        gridBagConstraints.ipady = 7;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(20, 4, 0, 0);
+        pnPrincipal.add(txtValoTotalServico, gridBagConstraints);
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel13.setText("Valor Total: R$");
-
-        javax.swing.GroupLayout pnPrincipalLayout = new javax.swing.GroupLayout(pnPrincipal);
-        pnPrincipal.setLayout(pnPrincipalLayout);
-        pnPrincipalLayout.setHorizontalGroup(
-            pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
-            .addComponent(pnCpf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnInferior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1)
-                    .addGroup(pnPrincipalLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtValoTotalServico, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        pnPrincipalLayout.setVerticalGroup(
-            pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnPrincipalLayout.createSequentialGroup()
-                .addComponent(pnSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60)
-                .addComponent(pnCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtValoTotalServico, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(pnInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.ipady = 10;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(18, 1076, 0, 0);
+        pnPrincipal.add(jLabel13, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -545,9 +582,9 @@ public class frmServico extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void txtAdcProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdcProdutoActionPerformed
+    
         
-        
-       /* if(cbTipoSapato.getSelectedIndex() == -1){
+        if(cbTipoSapato.getSelectedIndex() == -1){
             JOptionPane.showMessageDialog(null, "Selecione o tipo do calsado");
             cbTipoSapato.requestFocus();
             return;
@@ -571,7 +608,7 @@ public class frmServico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Entre com algum valor do serviço");
             txtValorSapato.requestFocus();
             return;
-        }*/
+        }
         
         jLabel13.setVisible(true);
         txtValoTotalServico.setVisible(true);
@@ -590,11 +627,40 @@ public class frmServico extends javax.swing.JFrame {
         
         if(servicoDAO.insertSapato(sapato)){
             JOptionPane.showMessageDialog(null, "Sapato inserido com sucessso!");
+            limpaTela();
         }else{
             JOptionPane.showMessageDialog(null, "Houve um erro inesperado no cadastro!");
         }
+        
     }//GEN-LAST:event_txtAdcProdutoActionPerformed
 
+    private void limpaTela(){
+        txtCodSapato.setText(null);
+        txtConserto.setText(null);
+        txtNumSapato.setText(null);
+        txtMarca.setText(null);
+        txtValorSapato.setText(null);
+        cbCorSapato.setSelectedIndex(-1);
+        cbTipoSapato.setSelectedIndex(-1);
+    }
+    
+    public void readJTable() {
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblSapatos.getModel();
+        modelo.setNumRows(0);
+        for(Sapato tp:servicoDAO.readSapato()){
+             modelo.addRow(new Object[]{
+                tp.getCodSapato(),
+                tp.getCodTipoSapato(),
+                tp.getNumSapato(),
+                tp.getCor(),
+                tp.getMarca(),
+                tp.getConserto(),
+                tp.getValor()
+            });
+        }
+    }
+    
     private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
         cliente.setCpf(txtCpf.getText());
@@ -602,6 +668,7 @@ public class frmServico extends javax.swing.JFrame {
                 if (vServCadCliente.consultaCliente(cliente)){
                 txtNomeCliente.setText(cliente.getNome());
                 sapato.setCodCliente(cliente.getCodigo());
+                readJTable();
                 }else {
                     JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
                   
@@ -621,6 +688,14 @@ public class frmServico extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_btCadServicoActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVoltarActionPerformed
+
+    private void tblSapatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSapatosMouseClicked
+        JOptionPane.showMessageDialog(null, "Achooooos");
+    }//GEN-LAST:event_tblSapatosMouseClicked
     
     public void fecharTelaServico() {
         frmServico servico = new frmServico();
@@ -687,7 +762,6 @@ public class frmServico extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lbCpf;
     private javax.swing.JPanel pnCodigo;
     private javax.swing.JPanel pnCpf;
@@ -701,6 +775,7 @@ public class frmServico extends javax.swing.JFrame {
     private javax.swing.JPanel pnPrincipal;
     private javax.swing.JPanel pnSuperior;
     private javax.swing.JPanel pnTipoCalcado;
+    private javax.swing.JTable tblSapatos;
     private javax.swing.JButton txtAdcProduto;
     private javax.swing.JTextField txtCodSapato;
     private javax.swing.JTextArea txtConserto;

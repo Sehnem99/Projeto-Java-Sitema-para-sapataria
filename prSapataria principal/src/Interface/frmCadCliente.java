@@ -370,6 +370,11 @@ public class frmCadCliente extends javax.swing.JFrame {
                 btnVoltarMouseClicked(evt);
             }
         });
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -565,6 +570,10 @@ public class frmCadCliente extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btAtualizarActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+
+    }//GEN-LAST:event_btnVoltarActionPerformed
    
     public void fecharTelaInicial() {
         frmPrincipal principal = new frmPrincipal();

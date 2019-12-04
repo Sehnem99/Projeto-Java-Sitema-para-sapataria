@@ -54,11 +54,13 @@ CREATE TABLE IF NOT EXISTS `SHOEMAKER`.`SAPATO` (
   PRIMARY KEY (`COD_SAPATO`),
   INDEX `fk_CALCADOS_CLIENTES_idx` (`COD_CLIENTE` ASC),
   INDEX `fk_SAPATO_TIPOS_SAPATO1_idx` (`COD_TIPO_SAPATO` ASC),
+  
   CONSTRAINT `fk_CALCADOS_CLIENTES`
     FOREIGN KEY (`COD_CLIENTE`)
-    REFERENCES `mydb`.`CLIENTES` (`COD_CLIENTE`)
+    REFERENCES `SHOEMAKER`.`CLIENTES` (`COD_CLIENTE`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
+    
   CONSTRAINT `fk_SAPATO_TIPOS_SAPATO1`
     FOREIGN KEY (`COD_TIPO_SAPATO`)
     REFERENCES `SHOEMAKER`.`TIPOS_SAPATO` (`COD_TIPO_SAPATO`)
@@ -159,14 +161,3 @@ VALUES (1, 'Alpargata'),
 (17,'Tênis Masculino');
 
 
-
-
-select * from clientes;
-select * from tipos_sapato;
-select * from sapato;
-
-insert into sapato 
-values (0,1,3,40,'Azul','asd','asd',100.1);
-
-insert into sapato 
-values (0,?,?,?,?,?,?,?);

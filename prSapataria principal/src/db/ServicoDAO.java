@@ -29,7 +29,7 @@ public class ServicoDAO {
     
     public boolean insertSapato(Sapato p) {
         
-        String sql = "insert into sapato values (0,?,?,?,?,?,?)";
+        String sql = "insert into sapato values (0,?,?,?,?,?,?,?);";
         
         try {
                 PreparedStatement ps;
@@ -61,7 +61,7 @@ public class ServicoDAO {
         List<TipoSapato> tipoSapatos = new ArrayList<>();
         String sql = "select * from tipos_sapato";
         try {
-            stmt = conexao.getConexao().prepareStatement(sql);;
+            stmt = conexao.getConexao().prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -81,6 +81,41 @@ public class ServicoDAO {
 
         return tipoSapatos;
     }
+    
+    public List<Sapato> readSapato() {
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        List<Sapato> sapatos = new ArrayList<>();
+        String sql = "select * from sapato";
+        try {
+            stmt = conexao.getConexao().prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Sapato sapato = new Sapato();
+                
+                sapato.setCodSapato(rs.getInt("COD_SAPATO"));
+                sapato.setCodCliente(rs.getInt("COD_CLIENTE"));
+                sapato.setCodTipoSapato(rs.getInt("COD_TIPO_SAPATO"));
+                sapato.setNumSapato(rs.getInt("NUMERO"));
+                sapato.setMarca(rs.getString("MARCA"));
+                sapato.setCor(rs.getString("COR"));
+                sapato.setConserto(rs.getString("CONSERTO"));
+                sapato.setValor(rs.getFloat("VALOR"));
+                sapatos.add(sapato);
+            }
+            return sapatos;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+           conexao.close();
+        }
+        return sapatos;
+    }
+    
     
     public void update(Sapato p) {
 
