@@ -26,6 +26,7 @@ public class frmServico extends javax.swing.JFrame {
     private ServicoCadCliente vServCadCliente = new ServicoCadCliente();
     private Cliente cliente = new Cliente();
     private Sapato sapato = new Sapato();
+    private TipoSapato tpSapato = new TipoSapato();
     private float vValorToal =0;
     List<TipoSapato> tipoSapatos;
     ServicoDAO servicoDAO = new ServicoDAO();
@@ -384,7 +385,7 @@ public class frmServico extends javax.swing.JFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         abaCadastro.add(jPanel2, gridBagConstraints);
 
-        jTabbedPane1.addTab("Cadastro", abaCadastro);
+        jTabbedPane1.addTab("Cadastro", null, abaCadastro, "");
 
         abaConsulta.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -630,8 +631,7 @@ public class frmServico extends javax.swing.JFrame {
             limpaTela();
         }else{
             JOptionPane.showMessageDialog(null, "Houve um erro inesperado no cadastro!");
-        }
-        
+        }  
     }//GEN-LAST:event_txtAdcProdutoActionPerformed
 
     private void limpaTela(){
@@ -648,10 +648,10 @@ public class frmServico extends javax.swing.JFrame {
         
         DefaultTableModel modelo = (DefaultTableModel) tblSapatos.getModel();
         modelo.setNumRows(0);
-        for(Sapato tp:servicoDAO.readSapato()){
+        for(Sapato tp:servicoDAO.readSapato(sapato.getCodCliente())){
              modelo.addRow(new Object[]{
                 tp.getCodSapato(),
-                tp.getCodTipoSapato(),
+                tp.getTipoSapato(),
                 tp.getNumSapato(),
                 tp.getCor(),
                 tp.getMarca(),
@@ -660,6 +660,8 @@ public class frmServico extends javax.swing.JFrame {
             });
         }
     }
+    
+    
     
     private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){

@@ -82,30 +82,35 @@ public class ServicoDAO {
         return tipoSapatos;
     }
     
-    public List<Sapato> readSapato() {
+    public List<Sapato> readSapato(Integer codcliente) {
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
+
         List<Sapato> sapatos = new ArrayList<>();
-        String sql = "select * from sapato";
+        String sql = "select a.COD_SAPATO, b.NOME_TIPO_SAPATO, a.NUMERO, a.COR, a.MARCA, a.CONSERTO, a.VALOR "
+                     + "from sapato a, tipos_sapato b "
+                       + "where a.COD_TIPO_SAPATO = b.COD_TIPO_SAPATO "
+                         + "and a.COD_CLIENTE = ?";
         try {
             stmt = conexao.getConexao().prepareStatement(sql);
+            stmt.setInt(1, codcliente);
             rs = stmt.executeQuery();
+           
 
             while (rs.next()) {
 
-                Sapato sapato = new Sapato();
+                Sapato sapato1 = new Sapato();
                 
-                sapato.setCodSapato(rs.getInt("COD_SAPATO"));
-                sapato.setCodCliente(rs.getInt("COD_CLIENTE"));
-                sapato.setCodTipoSapato(rs.getInt("COD_TIPO_SAPATO"));
-                sapato.setNumSapato(rs.getInt("NUMERO"));
-                sapato.setMarca(rs.getString("MARCA"));
-                sapato.setCor(rs.getString("COR"));
-                sapato.setConserto(rs.getString("CONSERTO"));
-                sapato.setValor(rs.getFloat("VALOR"));
-                sapatos.add(sapato);
+                sapato1.setCodSapato(rs.getInt("COD_SAPATO"));
+                sapato1.setTipoSapato(rs.getString("NOME_TIPO_SAPATO"));
+                sapato1.setNumSapato(rs.getInt("NUMERO"));
+                sapato1.setMarca(rs.getString("MARCA"));
+                sapato1.setCor(rs.getString("COR"));
+                sapato1.setConserto(rs.getString("CONSERTO"));
+                sapato1.setValor(rs.getFloat("VALOR"));
+                sapatos.add(sapato1);
             }
             return sapatos;
         } catch (SQLException ex) {

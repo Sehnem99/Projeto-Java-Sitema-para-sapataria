@@ -6,21 +6,32 @@ public class Sapato {
     private Integer codSapato;
     private Integer codCliente;
     private Integer codTipoSapato;
+    private String tipoSapato;
     private Integer numSapato;       
     private String cor;       
     private String marca;
     private String conserto;
-    private Float valor;        
+    private Float valor;
+    
 
-    public Sapato(Integer codigo,Integer codCliente ,Integer TipoSapato, Integer NumSapato, String Cor, String Marca, String Conserto, Float Valor) {
+    public Sapato(Integer codigo,Integer codCliente ,Integer codTipoSapato, String tipoSapato, Integer NumSapato, String Cor, String Marca, String Conserto, Float Valor) {
         this.codSapato = codigo;
         this.codCliente = codCliente;
-        this.codTipoSapato = TipoSapato;
+        this.codTipoSapato = codTipoSapato;
+        this.tipoSapato = tipoSapato;
         this.numSapato = NumSapato;
         this.cor = Cor;
         this.marca = Marca;
         this.conserto = Conserto;
         this.valor = Valor;
+    }
+
+    public String getTipoSapato() {
+        return tipoSapato;
+    }
+
+    public void setTipoSapato(String tipoSapato) {
+        this.tipoSapato = tipoSapato;
     }
 
     public Sapato() {
@@ -92,5 +103,5 @@ public class Sapato {
     public void setValor(Float valor) {
         this.valor = valor;
     }
-            
+    
 }
