@@ -1,13 +1,8 @@
 
 package Utilitarios;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import javax.swing.JOptionPane;
 
 
 public class Utilitarios {
@@ -22,6 +17,14 @@ public class Utilitarios {
         catch (NumberFormatException e) {  // Se houver erro na conversão, retorna o valor padrão
              return padrao;
          }
+    }
+    
+    public String formatValorReais(String valor){
+    
+        DecimalFormat decimal = new DecimalFormat("###,###,###,##0.00");
+        decimal.format(valor);
+        
+        return valor;        
     }
     
     

@@ -6,24 +6,38 @@ public class Sapato {
     private Integer codSapato;
     private Integer codCliente;
     private Integer codTipoSapato;
+    private Integer codCorSapato; 
     private String tipoSapato;
+    private String corSapato;
     private Integer numSapato;       
-    private String cor;       
     private String marca;
     private String conserto;
     private Float valor;
+    private String valorFormat;
     
 
-    public Sapato(Integer codigo,Integer codCliente ,Integer codTipoSapato, String tipoSapato, Integer NumSapato, String Cor, String Marca, String Conserto, Float Valor) {
+    public Sapato(Integer codigo,Integer codCliente ,Integer codTipoSapato,
+                  String tipoSapato, String corSapato, Integer NumSapato, Integer codCorSapato,
+                  String Marca, String Conserto, Float Valor,String valorFormat) {
         this.codSapato = codigo;
         this.codCliente = codCliente;
         this.codTipoSapato = codTipoSapato;
         this.tipoSapato = tipoSapato;
+        this.corSapato = corSapato;
         this.numSapato = NumSapato;
-        this.cor = Cor;
+        this.codCorSapato = codCorSapato;
         this.marca = Marca;
         this.conserto = Conserto;
         this.valor = Valor;
+        this.valorFormat = valorFormat;
+    }
+
+    public String getValorFormat() {
+        return valorFormat;
+    }
+
+    public void setValorFormat(String valorFormat) {
+        this.valorFormat = valorFormat;
     }
 
     public String getTipoSapato() {
@@ -37,6 +51,16 @@ public class Sapato {
     public Sapato() {
         this.codSapato = 0;
         this.codCliente = 0;
+        this.codTipoSapato = 0;
+        this.codCorSapato = 0;
+    }
+
+    public String getCorSapato() {
+        return corSapato;
+    }
+
+    public void setCorSapato(String corSapato) {
+        this.corSapato = corSapato;
     }
     
     
@@ -56,8 +80,8 @@ public class Sapato {
         return numSapato;
     }
 
-    public String getCor() {
-        return cor;
+    public Integer getCodCorSapato() {
+        return codCorSapato;
     }
 
     public String getMarca() {
@@ -88,8 +112,8 @@ public class Sapato {
         this.numSapato = numSapato;
     }
 
-    public void setCor(String cor) {
-        this.cor = cor;
+    public void setCodCorSapato(Integer codCorSapato) {
+        this.codCorSapato = codCorSapato;
     }
 
     public void setMarca(String marca) {
