@@ -37,28 +37,32 @@ public class frmCarteira extends javax.swing.JFrame {
         pnSuperior = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         pnData = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         pnTabela = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         abaLucros = new javax.swing.JPanel();
         abaCustos = new javax.swing.JPanel();
-        pnInferior = new javax.swing.JPanel();
-        btnVoltar = new javax.swing.JButton();
         pnSaldos = new javax.swing.JPanel();
         pnSaldoInicial = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        pnSaldoInicialTexto = new javax.swing.JPanel();
-        lbSaldoInicial = new javax.swing.JLabel();
-        pnSaldoDespesas = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        pnSaldoDespesasTexto = new javax.swing.JPanel();
-        lbSaldoDespesas = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         pnSaldoPrevisto = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        pnSaldoDespesas = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        pnSaldoInicialTexto = new javax.swing.JPanel();
+        lbSaldoInicial = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         pnSaldoPrevistoTexto = new javax.swing.JPanel();
         lbSaldoPrevisto = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        pnSaldoDespesasTexto = new javax.swing.JPanel();
+        lbSaldoDespesas = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
@@ -86,7 +90,7 @@ public class frmCarteira extends javax.swing.JFrame {
         pnSuperior.setLayout(pnSuperiorLayout);
         pnSuperiorLayout.setHorizontalGroup(
             pnSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1332, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnSuperiorLayout.setVerticalGroup(
             pnSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,10 +100,36 @@ public class frmCarteira extends javax.swing.JFrame {
         );
 
         pnData.setBackground(new java.awt.Color(204, 204, 204));
+        pnData.setPreferredSize(new java.awt.Dimension(288, 60));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jPanel7.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel7.setPreferredSize(new java.awt.Dimension(1072, 35));
+
         jLabel2.setText("jLabel2");
-        pnData.add(jLabel2);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1068, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 31, Short.MAX_VALUE)
+            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel7Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+
+        pnData.add(jPanel7);
 
         pnTabela.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -111,7 +141,7 @@ public class frmCarteira extends javax.swing.JFrame {
         );
         abaLucrosLayout.setVerticalGroup(
             abaLucrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGap(0, 401, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Lucros", abaLucros);
@@ -124,103 +154,40 @@ public class frmCarteira extends javax.swing.JFrame {
         );
         abaCustosLayout.setVerticalGroup(
             abaCustosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGap(0, 401, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Custos", abaCustos);
 
         pnTabela.add(jTabbedPane1);
 
-        pnInferior.setBackground(new java.awt.Color(153, 153, 153));
-        pnInferior.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        btnVoltar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnVoltar.setText("VOLTAR PARA TELA INICIAL");
-        btnVoltar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btnVoltar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVoltarMouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout pnInferiorLayout = new javax.swing.GroupLayout(pnInferior);
-        pnInferior.setLayout(pnInferiorLayout);
-        pnInferiorLayout.setHorizontalGroup(
-            pnInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnInferiorLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVoltar)
-                .addContainerGap())
-        );
-        pnInferiorLayout.setVerticalGroup(
-            pnInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnInferiorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         pnSaldos.setBackground(new java.awt.Color(204, 204, 204));
 
         pnSaldoInicial.setBackground(new java.awt.Color(204, 204, 204));
         pnSaldoInicial.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnSaldoInicial.setPreferredSize(new java.awt.Dimension(278, 41));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
         jLabel7.setText("Saldo Inicial: ");
         pnSaldoInicial.add(jLabel7);
 
-        pnSaldoInicialTexto.setBackground(new java.awt.Color(204, 204, 204));
-        pnSaldoInicialTexto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        lbSaldoInicial.setFont(new java.awt.Font("Tahoma", 0, 38)); // NOI18N
-        lbSaldoInicial.setForeground(new java.awt.Color(51, 153, 0));
-        lbSaldoInicial.setText("R$365,45");
-        pnSaldoInicialTexto.add(lbSaldoInicial);
-
-        pnSaldoDespesas.setBackground(new java.awt.Color(204, 204, 204));
-        pnSaldoDespesas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
-        jLabel8.setText("Despesas: ");
-        pnSaldoDespesas.add(jLabel8);
-
-        pnSaldoDespesasTexto.setBackground(new java.awt.Color(204, 204, 204));
-        pnSaldoDespesasTexto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        lbSaldoDespesas.setFont(new java.awt.Font("Tahoma", 0, 38)); // NOI18N
-        lbSaldoDespesas.setForeground(new java.awt.Color(255, 51, 51));
-        lbSaldoDespesas.setText("R$185,60");
-        pnSaldoDespesasTexto.add(lbSaldoDespesas);
-
-        javax.swing.GroupLayout pnSaldosLayout = new javax.swing.GroupLayout(pnSaldos);
-        pnSaldos.setLayout(pnSaldosLayout);
-        pnSaldosLayout.setHorizontalGroup(
-            pnSaldosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSaldosLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(pnSaldosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnSaldoInicialTexto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnSaldoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(pnSaldosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnSaldoDespesasTexto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnSaldoDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
-        );
-        pnSaldosLayout.setVerticalGroup(
-            pnSaldosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnSaldosLayout.createSequentialGroup()
-                .addComponent(pnSaldoInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnSaldoInicialTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(pnSaldosLayout.createSequentialGroup()
-                .addComponent(pnSaldoDespesas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnSaldoDespesasTexto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
+        pnSaldos.add(pnSaldoInicial);
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setPreferredSize(new java.awt.Dimension(110, 41));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 41, Short.MAX_VALUE)
+        );
+
+        pnSaldos.add(jPanel1);
 
         pnSaldoPrevisto.setBackground(new java.awt.Color(204, 204, 204));
         pnSaldoPrevisto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -230,9 +197,62 @@ public class frmCarteira extends javax.swing.JFrame {
         jLabel6.setText("Saldo Previsto: ");
         pnSaldoPrevisto.add(jLabel6);
 
-        jPanel1.add(pnSaldoPrevisto);
+        pnSaldos.add(pnSaldoPrevisto);
+
+        jPanel3.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel3.setPreferredSize(new java.awt.Dimension(110, 41));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 41, Short.MAX_VALUE)
+        );
+
+        pnSaldos.add(jPanel3);
+
+        pnSaldoDespesas.setBackground(new java.awt.Color(204, 204, 204));
+        pnSaldoDespesas.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnSaldoDespesas.setPreferredSize(new java.awt.Dimension(278, 41));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 22)); // NOI18N
+        jLabel8.setText("Despesas: ");
+        pnSaldoDespesas.add(jLabel8);
+
+        pnSaldos.add(pnSaldoDespesas);
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
+
+        pnSaldoInicialTexto.setBackground(new java.awt.Color(204, 204, 204));
+        pnSaldoInicialTexto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnSaldoInicialTexto.setPreferredSize(new java.awt.Dimension(278, 60));
+
+        lbSaldoInicial.setFont(new java.awt.Font("Tahoma", 0, 38)); // NOI18N
+        lbSaldoInicial.setForeground(new java.awt.Color(51, 153, 0));
+        lbSaldoInicial.setText("R$365,45");
+        pnSaldoInicialTexto.add(lbSaldoInicial);
+
+        jPanel2.add(pnSaldoInicialTexto);
+
+        jPanel4.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel4.setPreferredSize(new java.awt.Dimension(110, 41));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 41, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel4);
 
         pnSaldoPrevistoTexto.setBackground(new java.awt.Color(204, 204, 204));
         pnSaldoPrevistoTexto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -245,34 +265,73 @@ public class frmCarteira extends javax.swing.JFrame {
 
         jPanel2.add(pnSaldoPrevistoTexto);
 
+        jPanel5.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel5.setPreferredSize(new java.awt.Dimension(110, 41));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 110, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 41, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel5);
+
+        pnSaldoDespesasTexto.setBackground(new java.awt.Color(204, 204, 204));
+        pnSaldoDespesasTexto.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnSaldoDespesasTexto.setPreferredSize(new java.awt.Dimension(278, 60));
+
+        lbSaldoDespesas.setFont(new java.awt.Font("Tahoma", 0, 38)); // NOI18N
+        lbSaldoDespesas.setForeground(new java.awt.Color(255, 51, 51));
+        lbSaldoDespesas.setText("R$185,60");
+        pnSaldoDespesasTexto.add(lbSaldoDespesas);
+
+        jPanel2.add(pnSaldoDespesasTexto);
+
+        jPanel6.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnVoltar.setText("VOLTAR PARA TELA INICIAL");
+        btnVoltar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnVoltar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVoltarMouseClicked(evt);
+            }
+        });
+        jPanel6.add(btnVoltar);
+
         javax.swing.GroupLayout pnPrincipalLayout = new javax.swing.GroupLayout(pnPrincipal);
         pnPrincipal.setLayout(pnPrincipalLayout);
         pnPrincipalLayout.setHorizontalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnInferior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnTabela, javax.swing.GroupLayout.DEFAULT_SIZE, 1336, Short.MAX_VALUE)
-            .addComponent(pnSaldos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnSaldos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnPrincipalLayout.setVerticalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnPrincipalLayout.createSequentialGroup()
                 .addComponent(pnSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(pnData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(pnData, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnSaldos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnSaldos, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
-                .addComponent(pnTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(pnTabela, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(386, 386, 386))
         );
 
         pnSuperior.getAccessibleContext().setAccessibleName("");
@@ -285,7 +344,7 @@ public class frmCarteira extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 717, Short.MAX_VALUE)
         );
 
         pack();
@@ -365,12 +424,16 @@ public class frmCarteira extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbSaldoDespesas;
     private javax.swing.JLabel lbSaldoInicial;
     private javax.swing.JLabel lbSaldoPrevisto;
     private javax.swing.JPanel pnData;
-    private javax.swing.JPanel pnInferior;
     private javax.swing.JPanel pnPrincipal;
     private javax.swing.JPanel pnSaldoDespesas;
     private javax.swing.JPanel pnSaldoDespesasTexto;

@@ -587,22 +587,22 @@ public class frmServico extends javax.swing.JFrame {
 
     private void txtAdcProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdcProdutoActionPerformed
         if(txtDataEntrada.getText().equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(null, "Entre com a data de entrata.");
+            JOptionPane.showMessageDialog(null, "Entre com a data de entrada.");
             txtDataEntrada.requestFocus();  
         }
         
         if(cbTipoSapato.getSelectedIndex() == -1){
-            JOptionPane.showMessageDialog(null, "Selecione o tipo do calsado");
+            JOptionPane.showMessageDialog(null, "Selecione o tipo do calçado");
             cbTipoSapato.requestFocus();
             return;
         }
         if(txtNumSapato.getText().equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(null, "Entre com algum numero para o calsado");
+            JOptionPane.showMessageDialog(null, "Entre com algum numero para o calçado");
             txtNumSapato.requestFocus();
             return; 
         }
         if(cbCorSapato.getSelectedIndex() == -1){
-            JOptionPane.showMessageDialog(null, "Selecione a cor do calsado");
+            JOptionPane.showMessageDialog(null, "Selecione a cor do calçado");
             cbCorSapato.requestFocus();
             return;
         }
@@ -631,12 +631,12 @@ public class frmServico extends javax.swing.JFrame {
         
         
         if(servicoDAO.insertSapato(sapato)){
-            JOptionPane.showMessageDialog(null, "Sapato inserido com sucessso!");
+            JOptionPane.showMessageDialog(null, "Sapato Inserido Com Sucessso!");
             limpaTela();
             readJTable();
             
         }else{
-            JOptionPane.showMessageDialog(null, "Houve um erro inesperado no cadastro!");
+            JOptionPane.showMessageDialog(null, "Houve um Erro Inesperado No Cadastro!");
         }  
     }//GEN-LAST:event_txtAdcProdutoActionPerformed
 
@@ -719,21 +719,21 @@ public class frmServico extends javax.swing.JFrame {
         servicoDAO.updateSapato(sapato);
         
         if(servicoDAO.updateSapato(sapato)){
-            JOptionPane.showMessageDialog(null, "Sapato Atualizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Sapato Atualizado Com Sucesso!");
             limpaTela();
             readJTable();
         }else{
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar");
+            JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
         }  
     }//GEN-LAST:event_txtAltProdutoActionPerformed
 
     private void txtExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExcluirProdutoActionPerformed
         if(servicoDAO.deleteSapato(sapato)){
-            JOptionPane.showMessageDialog(null, "Sapato Excluido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Sapato Excluido Com Sucesso!");
             limpaTela();
             readJTable();
         }else{
-            JOptionPane.showMessageDialog(null, "Erro ao Excluido Sapato");
+            JOptionPane.showMessageDialog(null, "Erro ao Excluir Sapato");
         }  
     }//GEN-LAST:event_txtExcluirProdutoActionPerformed
     
