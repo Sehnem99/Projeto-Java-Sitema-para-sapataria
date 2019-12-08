@@ -11,7 +11,9 @@ package db;
 import Classes.CorSapato;
 import Classes.Sapato;
 import Classes.TipoSapato;
+import Classes.Venda;
 import Utilitarios.Utilitarios;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,9 +40,9 @@ public class ServicoDAO {
                 ps = conexao.getConexao().prepareStatement(sql);
                 ps.setInt(1, p.getCodCliente());
                 ps.setInt(2, p.getCodTipoSapato());
-                ps.setInt(3, p.getNumSapato());
-                ps.setString(4, p.getMarca());
-                ps.setString(5, p.getCodCorSapato());
+                ps.setInt(3, p.getCodCorSapato());
+                ps.setInt(4, p.getNumSapato());
+                ps.setString(5, p.getMarca());
                 ps.setString(6, p.getConserto());
                 ps.setFloat(7, p.getValor());
                 //usar sempre pra inserir ou modificar dado na tabela
@@ -53,10 +55,35 @@ public class ServicoDAO {
             }
 
     }
+    public void insertVenda(Venda v) {
+        
+        String sql = "insert into vendas values (0,?,?,?,?,?,?);";
+        
+        try {
+                PreparedStatement ps;
+                ps = conexao.getConexao().prepareStatement(sql);
+                ps.setInt(1, v.getCodSapato());
+                ps.setDate(2, (Date) v.getData_entrada());
+                ps.setDate(3, (Date) v.getData_saida());
+                ps.setFloat(4, v.getValorPrevisto());
+                ps.setFloat(5, v.getValorFinal());
+                ps.setDate(6, (Date) v.getData_saida());
+                //usar sempre pra inserir ou modificar dado na tabela
+                ps.execute();
+                ps.close();
+                conexao.close();
 
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+
+    }
+    
+    
+    //carrega tipos do sapato em list 
     public List<TipoSapato> readTipoSapato() {
 
-        
+       
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -83,7 +110,7 @@ public class ServicoDAO {
 
         return tipoSapatos;
     }
-    
+    //carrega cores do sapato em list 
     public List<CorSapato> readCorSapato() {
 
         
@@ -91,7 +118,7 @@ public class ServicoDAO {
         ResultSet rs = null;
 
         List<CorSapato> corSapatos = new ArrayList<>();
-        String sql = "select * from cor";
+        String sql = "select * from cor_sapato";
         try {
             stmt = conexao.getConexao().prepareStatement(sql);
             rs = stmt.executeQuery();
@@ -121,9 +148,9 @@ public class ServicoDAO {
 
 
         List<Sapato> sapatos = new ArrayList<>();
-        String sql = "select a.COD_SAPATO, b.NOME_TIPO_SAPATO,c.NOME_COR_SAPATO, a.NUMERO, a.COR, a.MARCA, a.CONSERTO, a.VALOR "
+        String sql = "select a.COD_SAPATO, b.NOME_TIPO_SAPATO, c.NOME_COR_SAPATO, a.NUMERO, a.MARCA, a.CONSERTO, a.VALOR "
                      + "from sapato a, tipos_sapato b, cor_sapato c "
-                       + "where a.COD_TIPO_SAPATO = b.COD_TIPO_SAPATO"
+                       + "where a.COD_TIPO_SAPATO = b.COD_TIPO_SAPATO "
                          + "and a.COD_COR_SAPATO = c.COD_COR_SAPATO  "
                          + "and a.COD_CLIENTE = ?";
         try {
@@ -155,70 +182,64 @@ public class ServicoDAO {
     }
     
     
-    public void update(Sapato p) {
+    public boolean updateSapato(Sapato p) {
 
-        ServicoConexao con = (ServicoConexao) conexao.getConexao();
-        
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.getConexao().prepareStatement(
-                    "UPDATE sapato SET "
-                   + "COD_TIPO_SAPATO = ? ,"
-                   + "NUMERO = ?,"
-                   + "MARCA = ? "
-                   + "COR = ? "
-                   + "CONSERTO = ? "
-                   + "VALOR = ? "            
-                   + "WHERE COD_SAPATO = ?");
-            stmt.setInt(1, p.getCodTipoSapato());    
-            stmt.setInt(2, p.getNumSapato());
-            stmt.setString(3, p.getMarca());
-            stmt.setInt(4, p.getCodCorSapato());
-            stmt.setString(5, p.getConserto());
-            stmt.setFloat(6, p.getValor());
-            stmt.setInt(7, p.getCodSapato());
+            String sql ="UPDATE sapato SET "
+                        + "COD_CLIENTE = ? ,"
+                        + "COD_TIPO_SAPATO = ? ,"
+                        + "COD_COR_SAPATO = ? ,"     
+                        + "NUMERO = ? ,"
+                        + "MARCA = ? ,"
+                        + "CONSERTO = ? ,"
+                        + "VALOR = ? "            
+                   + "WHERE COD_SAPATO = ?"; 
+            stmt = conexao.getConexao().prepareStatement(sql);
+            stmt.setInt(1, p.getCodCliente()); 
+            stmt.setInt(2, p.getCodTipoSapato());    
+            stmt.setInt(3, p.getCodCorSapato());
+            stmt.setInt(4, p.getNumSapato());
+            stmt.setString(5, p.getMarca());
+            stmt.setString(6, p.getConserto());
+            stmt.setFloat(7, p.getValor());
+            stmt.setInt(8, p.getCodSapato());
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+            return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + ex);
+            return false;
         } finally {
             conexao.close();
         }
-
     }
-    public void delete(Sapato p) {
+    
+    public boolean deleteSapato(Sapato p) {
 
-        ServicoConexao con = (ServicoConexao) conexao.getConexao();
-        
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.getConexao().prepareStatement("DELETE sapato produto WHERE COD_SAPATO = ?");
+            String sql = "DELETE from sapato WHERE COD_SAPATO = ?";
+            stmt = conexao.getConexao().prepareStatement(sql);
             stmt.setInt(1, p.getCodSapato());
 
             stmt.executeUpdate();
-
-            JOptionPane.showMessageDialog(null, "Excluido com sucesso!");
+            return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir: " + ex);
+            return false;
         } finally {
             conexao.getConexao();
         }  
 
     }
     public void buscaSapato(Sapato p) {
-         ServicoConexao con = (ServicoConexao) conexao.getConexao();
         
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.getConexao().prepareStatement(
-                    "Select * from sapato"
-                    + "where cod_sapato =  ");
+            String sql = "Select * from sapato where cod_sapato = ?";
+            stmt = conexao.getConexao().prepareStatement(sql);
             stmt.setInt(1, p.getCodSapato());
-
             ResultSet rs = stmt.executeQuery();
             if(rs.next()){
                   p.setCodSapato(rs.getInt("COD_SAPATO"));
@@ -226,9 +247,8 @@ public class ServicoDAO {
                   p.setCodCorSapato(rs.getInt("COD_COR_SAPATO"));
                   p.setNumSapato(rs.getInt("NUMERO"));
                   p.setMarca(rs.getString("MARCA"));
-                  p.
-                  
-                
+                  p.setConserto(rs.getString("CONSERTO"));
+                  p.setValor(rs.getFloat("VALOR"));
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao buscar sapato: " + ex);

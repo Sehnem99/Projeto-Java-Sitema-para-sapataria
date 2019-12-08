@@ -5,6 +5,7 @@ import Classes.Cliente;
 import Classes.CorSapato;
 import Classes.Sapato;
 import Classes.TipoSapato;
+import Classes.Venda;
 import Utilitarios.Utilitarios;
 import db.ServicoCadCliente;
 import db.ServicoDAO;
@@ -20,16 +21,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author suporte
- */
+
 public class frmServico extends javax.swing.JFrame {
     private ServicoCadCliente vServCadCliente = new ServicoCadCliente();
     private Cliente cliente = new Cliente();
     private Sapato sapato = new Sapato();
     private TipoSapato tpSapato = new TipoSapato();
     private CorSapato corSapato = new CorSapato();
+    private Venda venda = new Venda();
     private float vValorToal =0;
     List<TipoSapato> tipoSapatos;
     ServicoDAO servicoDAO = new ServicoDAO();
@@ -45,6 +44,7 @@ public class frmServico extends javax.swing.JFrame {
             cbCorSapato.addItem(cp);
         }
         cbTipoSapato.setSelectedIndex(-1);
+        cbCorSapato.setSelectedIndex(-1);
         txtDataEntrada.setText(getDateTime());     
         
     }
@@ -264,7 +264,6 @@ public class frmServico extends javax.swing.JFrame {
         jLabel8.setText("Cor: ");
         pnNumeroCor.add(jLabel8);
 
-        cbCorSapato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Amarelo", "Azul", "Bege", "Branco", "Cinza", "Laranja", "Marrom", "Preto", "Rosa", "Roxo", "Verde", "Vermelho" }));
         cbCorSapato.setSelectedIndex(-1);
         cbCorSapato.setPreferredSize(new java.awt.Dimension(160, 30));
         pnNumeroCor.add(cbCorSapato);
@@ -326,6 +325,11 @@ public class frmServico extends javax.swing.JFrame {
         txtExcluirProduto.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtExcluirProduto.setText("Excluir Produto");
         txtExcluirProduto.setPreferredSize(new java.awt.Dimension(230, 40));
+        txtExcluirProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtExcluirProdutoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -440,7 +444,7 @@ public class frmServico extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Tipo Calçado", "Número", "Cor", "Marca", "Conserto(s)", "Valor do Conserto"
+                "Código", "Tipo Calçado", "Marca", "Cor", "Tamanho", "Conserto(s)", "Valor do Conserto"
             }
         ) {
             Class[] types = new Class [] {
@@ -582,7 +586,10 @@ public class frmServico extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void txtAdcProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdcProdutoActionPerformed
-    
+        if(txtDataEntrada.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com a data de entrata.");
+            txtDataEntrada.requestFocus();  
+        }
         
         if(cbTipoSapato.getSelectedIndex() == -1){
             JOptionPane.showMessageDialog(null, "Selecione o tipo do calsado");
@@ -610,14 +617,16 @@ public class frmServico extends javax.swing.JFrame {
             return;
         }
         
+        
         TipoSapato tipoSapato = (TipoSapato) cbTipoSapato.getSelectedItem();
-        CorSapato corSapato = (CorSapato) cbCorSapato.getSelectedItem();
+        
+        CorSapato cor_Sapato = (CorSapato) cbCorSapato.getSelectedItem();
         
         sapato.setCodTipoSapato(tipoSapato.getCodTipoSapato());
+        sapato.setCodCorSapato(cor_Sapato.getCodCorSapato());
         sapato.setConserto(txtConserto.getText());
-        sapato.setCodCorSapato(corSapato.getCodCorSapato());
         sapato.setMarca(txtMarca.getText());
-        sapato.setNumSapato(util.strToInt(txtNumSapato.getText(), WIDTH) );
+        sapato.setNumSapato(Integer.parseInt(txtNumSapato.getText()));
         sapato.setValor(Float.parseFloat(txtValorSapato.getText()));
         
         
@@ -625,6 +634,7 @@ public class frmServico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Sapato inserido com sucessso!");
             limpaTela();
             readJTable();
+            
         }else{
             JOptionPane.showMessageDialog(null, "Houve um erro inesperado no cadastro!");
         }  
@@ -641,24 +651,22 @@ public class frmServico extends javax.swing.JFrame {
     }
     
     public void readJTable() {
-        DecimalFormat decimal = new DecimalFormat("###,###,###,##0.00");
         DefaultTableModel modelo = (DefaultTableModel) tblSapatos.getModel();
         modelo.setNumRows(0);
+        
         for(Sapato tp:servicoDAO.readSapato(sapato.getCodCliente())){
              modelo.addRow(new Object[]{
                 tp.getCodSapato(),
                 tp.getTipoSapato(),
-                tp.getNumSapato(),
-                tp.getCodCorSapato(),
                 tp.getMarca(),
+                tp.getCorSapato(),
+                tp.getNumSapato(),
                 tp.getConserto(),
-                tp.getValor()
+                tp.getValorFormat()
             });
         }
     }
-    
-    
-    
+        
     private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER){
         cliente.setCpf(txtCpf.getText());
@@ -682,16 +690,52 @@ public class frmServico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void tblSapatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSapatosMouseClicked
-        JOptionPane.showMessageDialog(null, "Achooooos");
+        sapato.setCodSapato(
+               Integer.parseInt(String.valueOf(tblSapatos.getModel().getValueAt(tblSapatos.getSelectedRow(),0))));
+        servicoDAO.buscaSapato(sapato);
+        txtCodSapato.setText(String.valueOf(sapato.getCodSapato()));
+   
+        cbTipoSapato.setSelectedItem(sapato.getCodTipoSapato());
+        cbCorSapato.setSelectedItem(sapato.getCodCorSapato());
         
-        
-        
-        
+        txtNumSapato.setText(String.valueOf(sapato.getNumSapato()));
+        txtMarca.setText(sapato.getMarca());
+        txtConserto.setText(sapato.getConserto());
+        txtValorSapato.setText(String.valueOf(sapato.getValor()));     
     }//GEN-LAST:event_tblSapatosMouseClicked
 
     private void txtAltProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAltProdutoActionPerformed
-        // TODO add your handling code here:
+        TipoSapato tipoSapato = (TipoSapato) cbTipoSapato.getSelectedItem();
+        
+        CorSapato cor_Sapato = (CorSapato) cbCorSapato.getSelectedItem();
+        
+        sapato.setCodTipoSapato(tipoSapato.getCodTipoSapato());
+        sapato.setCodCorSapato(cor_Sapato.getCodCorSapato());
+        sapato.setConserto(txtConserto.getText());
+        sapato.setMarca(txtMarca.getText());
+        sapato.setNumSapato(Integer.parseInt(txtNumSapato.getText()));
+        sapato.setValor(Float.parseFloat(txtValorSapato.getText()));        
+        
+        servicoDAO.updateSapato(sapato);
+        
+        if(servicoDAO.updateSapato(sapato)){
+            JOptionPane.showMessageDialog(null, "Sapato Atualizado com sucesso!");
+            limpaTela();
+            readJTable();
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar");
+        }  
     }//GEN-LAST:event_txtAltProdutoActionPerformed
+
+    private void txtExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExcluirProdutoActionPerformed
+        if(servicoDAO.deleteSapato(sapato)){
+            JOptionPane.showMessageDialog(null, "Sapato Excluido com sucesso!");
+            limpaTela();
+            readJTable();
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao Excluido Sapato");
+        }  
+    }//GEN-LAST:event_txtExcluirProdutoActionPerformed
     
     public void fecharTelaServico() {
         frmServico servico = new frmServico();
