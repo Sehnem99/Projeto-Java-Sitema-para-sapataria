@@ -28,18 +28,18 @@ public class Utilitarios {
         return valor;        
     }
     
-    public Date dataFormatBanco(Date data){
-        Date dataFormat;
-        String dia, mes, ano, datamySql, dataString;
-        dataString = DateTimeDV.
-        dia = dataString.substring(0, 2);
-        mes = dataString.substring(3, 5);
-        ano = dataString.substring(6);
-        
-        datamySql = ano+"-"+mes+"-"+dia;
-        dataFormat = java.sql.Date.valueOf(dataString);
-        
-        return dataFormat;
+    public String dataFormatBanco(String dataString){
+        String dia, mes, ano, datamySql;
+        if("  /  /    ".equals(dataString)){
+            
+            datamySql = "";
+        }else{
+            dia = dataString.substring(0, 2);
+            mes = dataString.substring(3, 5);
+            ano = dataString.substring(6);
+            datamySql = ano+"-"+mes+"-"+dia;
+        } 
+        return datamySql;
     }
     
     

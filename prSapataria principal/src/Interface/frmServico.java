@@ -412,45 +412,45 @@ public class frmServico extends javax.swing.JFrame {
         tblSapatos.setAutoCreateRowSorter(true);
         tblSapatos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Código", "Tipo Calçado", "Marca", "Cor", "Tamanho", "Conserto(s)", "Valor do Conserto"
+                "Código", "Tipo Calçado", "Marca", "Cor", "Tamanho", "Conserto(s)", "Data Entrada", "Data Saida", "Valor do Conserto"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -630,22 +630,33 @@ public class frmServico extends javax.swing.JFrame {
         
         sapato.setCodTipoSapato(tipoSapato.getCodTipoSapato());
         sapato.setCodCorSapato(cor_Sapato.getCodCorSapato());
-        sapato.setDataEntrada(java.sql.Date.valueOf(txtDataEntrada.getText()));
-        sapato.setDataSaida(java.sql.Date.valueOf(txtDataSaida.getText()));
+        sapato.setDataEntrada(txtDataEntrada.getText());
+        sapato.setDataSaida(txtDataSaida.getText());
         sapato.setConserto(txtConserto.getText());
         sapato.setMarca(txtMarca.getText());
         sapato.setNumSapato(Integer.parseInt(txtNumSapato.getText()));
         sapato.setValor(Float.parseFloat(txtValorSapato.getText()));
         
-        
-        if(servicoDAO.insertSapato(sapato)){
-            JOptionPane.showMessageDialog(null, "Sapato Inserido Com Sucessso!");
-            limpaTela();
-            readJTable();
-            
+        if(txtDataSaida.getText().equalsIgnoreCase("  /  /    ")){
+           if(servicoDAO.insertSapatoSemDataFim(sapato)){
+             JOptionPane.showMessageDialog(null, "Sapato Inserido Com Sucessso!");
+             limpaTela();
+             readJTable();
+           
+           }else{
+             JOptionPane.showMessageDialog(null, "Houve um Erro Inesperado No Cadastro!");
+           }   
         }else{
-            JOptionPane.showMessageDialog(null, "Houve um Erro Inesperado No Cadastro!");
-        }  
+          if(servicoDAO.insertSapato(sapato)){
+             JOptionPane.showMessageDialog(null, "Sapato Inserido Com Sucessso!");
+             limpaTela();
+             readJTable();
+           
+           }else{
+             JOptionPane.showMessageDialog(null, "Houve um Erro Inesperado No Cadastro!");
+           }     
+        }
+        
     }//GEN-LAST:event_txtAdcProdutoActionPerformed
 
     private void limpaTela(){
@@ -656,6 +667,8 @@ public class frmServico extends javax.swing.JFrame {
         txtValorSapato.setText(null);
         cbCorSapato.setSelectedIndex(-1);
         cbTipoSapato.setSelectedIndex(-1);
+        txtDataEntrada.setText(getDateTime()); 
+        txtDataSaida.setText(null);
     }
     
     public void readJTable() {
@@ -670,6 +683,8 @@ public class frmServico extends javax.swing.JFrame {
                 tp.getCorSapato(),
                 tp.getNumSapato(),
                 tp.getConserto(),
+                tp.getDataEntrada(),
+                tp.getDataSaida(),
                 tp.getValor()
             });
         }
@@ -708,6 +723,8 @@ public class frmServico extends javax.swing.JFrame {
         txtNumSapato.setText(String.valueOf(sapato.getNumSapato()));
         txtMarca.setText(sapato.getMarca());
         txtConserto.setText(sapato.getConserto());
+        txtDataEntrada.setText(sapato.getDataEntrada());
+        txtDataSaida.setText(sapato.getDataSaida());
         txtValorSapato.setText(String.valueOf(sapato.getValor()));     
     }//GEN-LAST:event_tblSapatosMouseClicked
 
@@ -718,20 +735,30 @@ public class frmServico extends javax.swing.JFrame {
         
         sapato.setCodTipoSapato(tipoSapato.getCodTipoSapato());
         sapato.setCodCorSapato(cor_Sapato.getCodCorSapato());
+        sapato.setDataEntrada(txtDataEntrada.getText());
+        sapato.setDataSaida(txtDataSaida.getText());
         sapato.setConserto(txtConserto.getText());
         sapato.setMarca(txtMarca.getText());
         sapato.setNumSapato(Integer.parseInt(txtNumSapato.getText()));
         sapato.setValor(Float.parseFloat(txtValorSapato.getText()));        
         
-        servicoDAO.updateSapato(sapato);
-        
-        if(servicoDAO.updateSapato(sapato)){
-            JOptionPane.showMessageDialog(null, "Sapato Atualizado Com Sucesso!");
-            limpaTela();
-            readJTable();
+        if(txtDataSaida.getText().equalsIgnoreCase("  /  /    ")){
+           if(servicoDAO.updateSapatoSemDataFim(sapato)){
+             JOptionPane.showMessageDialog(null, "Sapato Atualizado Com Sucesso!");
+             limpaTela();
+             readJTable();
+           }else{
+             JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
+           }   
         }else{
-            JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
-        }  
+          if(servicoDAO.updateSapato(sapato)){
+             JOptionPane.showMessageDialog(null, "Sapato Atualizado Com Sucesso!");
+             limpaTela();
+             readJTable();
+          }else{
+             JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
+          }   
+        }
     }//GEN-LAST:event_txtAltProdutoActionPerformed
 
     private void txtExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExcluirProdutoActionPerformed

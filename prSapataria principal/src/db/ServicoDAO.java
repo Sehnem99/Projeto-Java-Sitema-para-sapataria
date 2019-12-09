@@ -44,9 +44,35 @@ public class ServicoDAO {
                 ps.setInt(4, p.getNumSapato());
                 ps.setString(5, p.getMarca());
                 ps.setString(6, p.getConserto());
-                ps.setDate(7, p.getDataEntrada());
-                ps.setDate(8, p.getDataSaida());
+                ps.setDate(7, Date.valueOf(utilit.dataFormatBanco(p.getDataEntrada())));
+                ps.setDate(8, Date.valueOf(utilit.dataFormatBanco(p.getDataEntrada())));
                 ps.setFloat(9, p.getValor());
+                //usar sempre pra inserir ou modificar dado na tabela
+                ps.execute();
+                ps.close();
+                conexao.close();
+                return true;
+            } catch (SQLException e) {
+                return false;
+            }
+    }
+    public boolean insertSapatoSemDataFim(Sapato p) {
+        
+        String sql = "insert into sapato "
+        +"(COD_SAPATO,COD_CLIENTE,COD_TIPO_SAPATO,COD_COR_SAPATO,NUMERO,MARCA,CONSERTO,DATA_ENTRADA,VALOR)\n" +
+                     "values  (0,?,?,?,?,?,?,?,?);";
+        
+        try {
+                PreparedStatement ps;
+                ps = conexao.getConexao().prepareStatement(sql);
+                ps.setInt(1, p.getCodCliente());
+                ps.setInt(2, p.getCodTipoSapato());
+                ps.setInt(3, p.getCodCorSapato());
+                ps.setInt(4, p.getNumSapato());
+                ps.setString(5, p.getMarca());
+                ps.setString(6, p.getConserto());
+                ps.setDate(7, Date.valueOf(utilit.dataFormatBanco(p.getDataEntrada())));
+                ps.setFloat(8, p.getValor());
                 //usar sempre pra inserir ou modificar dado na tabela
                 ps.execute();
                 ps.close();
@@ -57,6 +83,7 @@ public class ServicoDAO {
             }
 
     }
+    
     public void insertVenda(Venda v) {
         
         String sql = "insert into vendas values (0,?,?,?,?,?,?);";
@@ -150,7 +177,8 @@ public class ServicoDAO {
 
 
         List<Sapato> sapatos = new ArrayList<>();
-        String sql = "select a.COD_SAPATO, b.NOME_TIPO_SAPATO, c.NOME_COR_SAPATO, a.NUMERO, a.MARCA, a.CONSERTO, a.VALOR "
+        String sql = "select a.COD_SAPATO, b.NOME_TIPO_SAPATO, c.NOME_COR_SAPATO, a.NUMERO, a.MARCA,"
+                          +" a.DATA_ENTRADA,a.DATA_SAIDA, a.CONSERTO, a.VALOR "
                      + "from sapato a, tipos_sapato b, cor_sapato c "
                        + "where a.COD_TIPO_SAPATO = b.COD_TIPO_SAPATO "
                          + "and a.COD_COR_SAPATO = c.COD_COR_SAPATO  "
@@ -171,6 +199,8 @@ public class ServicoDAO {
                 sapato1.setNumSapato(rs.getInt("NUMERO"));
                 sapato1.setMarca(rs.getString("MARCA"));
                 sapato1.setConserto(rs.getString("CONSERTO"));
+                sapato1.setDataEntrada(String.valueOf(rs.getDate("DATA_ENTRADA")));
+                sapato1.setDataSaida(String.valueOf(rs.getDate("DATA_SAIDA")));
                 sapato1.setValor(rs.getFloat("VALOR"));
                 sapatos.add(sapato1);
             }
@@ -187,7 +217,7 @@ public class ServicoDAO {
     public boolean updateSapato(Sapato p) {
 
         PreparedStatement stmt = null;
-
+        
         try {
             String sql ="UPDATE sapato SET "
                         + "COD_CLIENTE = ? ,"
@@ -196,6 +226,8 @@ public class ServicoDAO {
                         + "NUMERO = ? ,"
                         + "MARCA = ? ,"
                         + "CONSERTO = ? ,"
+                        + "DATA_ENTRADA = ?,"
+                        + "DATA_SAIDA = ?,"
                         + "VALOR = ? "            
                    + "WHERE COD_SAPATO = ?"; 
             stmt = conexao.getConexao().prepareStatement(sql);
@@ -205,8 +237,44 @@ public class ServicoDAO {
             stmt.setInt(4, p.getNumSapato());
             stmt.setString(5, p.getMarca());
             stmt.setString(6, p.getConserto());
-            stmt.setFloat(7, p.getValor());
-            stmt.setInt(8, p.getCodSapato());
+            stmt.setDate(7, Date.valueOf(utilit.dataFormatBanco(p.getDataEntrada())));
+            stmt.setDate(8, Date.valueOf(utilit.dataFormatBanco(p.getDataSaida())));
+            stmt.setFloat(9, p.getValor());
+            stmt.setInt(10, p.getCodSapato());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        } finally {
+            conexao.close();
+        }
+    }
+    
+    public boolean updateSapatoSemDataFim(Sapato p) {
+
+        PreparedStatement stmt = null;
+        
+        try {
+            String sql ="UPDATE sapato SET "
+                        + "COD_CLIENTE = ? ,"
+                        + "COD_TIPO_SAPATO = ? ,"
+                        + "COD_COR_SAPATO = ? ,"     
+                        + "NUMERO = ? ,"
+                        + "MARCA = ? ,"
+                        + "CONSERTO = ? ,"
+                        + "DATA_ENTRADA = ?"
+                        + "VALOR = ? "            
+                   + "WHERE COD_SAPATO = ?"; 
+            stmt = conexao.getConexao().prepareStatement(sql);
+            stmt.setInt(1, p.getCodCliente()); 
+            stmt.setInt(2, p.getCodTipoSapato());    
+            stmt.setInt(3, p.getCodCorSapato());
+            stmt.setInt(4, p.getNumSapato());
+            stmt.setString(5, p.getMarca());
+            stmt.setString(6, p.getConserto());
+            stmt.setDate(7, Date.valueOf(utilit.dataFormatBanco(p.getDataEntrada())));
+            stmt.setFloat(8, p.getValor());
+            stmt.setInt(9, p.getCodSapato());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
