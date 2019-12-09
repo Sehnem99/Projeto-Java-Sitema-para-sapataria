@@ -14,11 +14,14 @@ public class Sapato {
     private String conserto;
     private Float valor;
     private String valorFormat;
+    private java.util.Date dataEntrada;
+    private java.util.Date dataSaida;
     
 
     public Sapato(Integer codigo,Integer codCliente ,Integer codTipoSapato,
-                  String tipoSapato, String corSapato, Integer NumSapato, Integer codCorSapato,
-                  String Marca, String Conserto, Float Valor,String valorFormat) {
+                  String tipoSapato, String corSapato, Integer NumSapato, 
+                  Integer codCorSapato, String Marca, String Conserto,
+                  Float Valor,String valorFormat,java.util.Date dataEntrada, java.util.Date dataSaida) {
         this.codSapato = codigo;
         this.codCliente = codCliente;
         this.codTipoSapato = codTipoSapato;
@@ -30,6 +33,8 @@ public class Sapato {
         this.conserto = Conserto;
         this.valor = Valor;
         this.valorFormat = valorFormat;
+        this.dataEntrada = dataEntrada;
+        this.dataSaida = dataSaida;
     }
 
     public String getValorFormat() {
@@ -55,6 +60,23 @@ public class Sapato {
         this.codCorSapato = 0;
     }
 
+    public java.util.Date getDataEntrada() {
+        return dataEntrada;
+    }
+
+    public void setDataEntrada(java.util.Date dataEntrada) {
+        this.dataEntrada = dataEntrada;
+    }
+
+    public java.util.Date getDataSaida() {
+        return dataSaida;
+    }
+
+    public void setDataSaida(java.util.Date dataSaida) {
+        this.dataSaida = dataSaida;
+    }
+
+    
     public String getCorSapato() {
         return corSapato;
     }
@@ -62,7 +84,6 @@ public class Sapato {
     public void setCorSapato(String corSapato) {
         this.corSapato = corSapato;
     }
-    
     
     public Integer getCodCliente() {
         return codCliente;

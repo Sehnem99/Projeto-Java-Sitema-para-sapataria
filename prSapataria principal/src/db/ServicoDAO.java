@@ -33,7 +33,7 @@ public class ServicoDAO {
     
     public boolean insertSapato(Sapato p) {
         
-        String sql = "insert into sapato values (0,?,?,?,?,?,?,?);";
+        String sql = "insert into sapato values (0,?,?,?,?,?,?,?,?,?);";
         
         try {
                 PreparedStatement ps;
@@ -44,7 +44,9 @@ public class ServicoDAO {
                 ps.setInt(4, p.getNumSapato());
                 ps.setString(5, p.getMarca());
                 ps.setString(6, p.getConserto());
-                ps.setFloat(7, p.getValor());
+                ps.setDate(7, p.getDataEntrada());
+                ps.setDate(8, p.getDataSaida());
+                ps.setFloat(9, p.getValor());
                 //usar sempre pra inserir ou modificar dado na tabela
                 ps.execute();
                 ps.close();

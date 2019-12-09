@@ -3,12 +3,13 @@ package Utilitarios;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class Utilitarios {
     
     
-    SimpleDateFormat vDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat vDateFormat = new SimpleDateFormat("yyyy-MM-dd");
      
     public static int strToInt(String valor, int padrao){
         try {
@@ -25,6 +26,20 @@ public class Utilitarios {
         decimal.format(valor);
         
         return valor;        
+    }
+    
+    public Date dataFormatBanco(Date data){
+        Date dataFormat;
+        String dia, mes, ano, datamySql, dataString;
+        dataString = DateTimeDV.
+        dia = dataString.substring(0, 2);
+        mes = dataString.substring(3, 5);
+        ano = dataString.substring(6);
+        
+        datamySql = ano+"-"+mes+"-"+dia;
+        dataFormat = java.sql.Date.valueOf(dataString);
+        
+        return dataFormat;
     }
     
     

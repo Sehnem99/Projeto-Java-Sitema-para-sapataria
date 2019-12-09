@@ -53,7 +53,7 @@ public class frmServico extends javax.swing.JFrame {
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     Date date = new Date();
     return dateFormat.format(date);
-}
+    }
 
  
     @SuppressWarnings("unchecked")
@@ -264,7 +264,6 @@ public class frmServico extends javax.swing.JFrame {
         jLabel8.setText("Cor: ");
         pnNumeroCor.add(jLabel8);
 
-        cbCorSapato.setSelectedIndex(-1);
         cbCorSapato.setPreferredSize(new java.awt.Dimension(160, 30));
         pnNumeroCor.add(cbCorSapato);
 
@@ -450,9 +449,16 @@ public class frmServico extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tblSapatos.setToolTipText("");
@@ -624,6 +630,8 @@ public class frmServico extends javax.swing.JFrame {
         
         sapato.setCodTipoSapato(tipoSapato.getCodTipoSapato());
         sapato.setCodCorSapato(cor_Sapato.getCodCorSapato());
+        sapato.setDataEntrada(java.sql.Date.valueOf(txtDataEntrada.getText()));
+        sapato.setDataSaida(java.sql.Date.valueOf(txtDataSaida.getText()));
         sapato.setConserto(txtConserto.getText());
         sapato.setMarca(txtMarca.getText());
         sapato.setNumSapato(Integer.parseInt(txtNumSapato.getText()));
@@ -662,7 +670,7 @@ public class frmServico extends javax.swing.JFrame {
                 tp.getCorSapato(),
                 tp.getNumSapato(),
                 tp.getConserto(),
-                tp.getValorFormat()
+                tp.getValor()
             });
         }
     }
@@ -691,13 +699,12 @@ public class frmServico extends javax.swing.JFrame {
 
     private void tblSapatosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSapatosMouseClicked
         sapato.setCodSapato(
-               Integer.parseInt(String.valueOf(tblSapatos.getModel().getValueAt(tblSapatos.getSelectedRow(),0))));
+        Integer.parseInt(String.valueOf(tblSapatos.getModel().getValueAt(tblSapatos.getSelectedRow(),0))));
         servicoDAO.buscaSapato(sapato);
-        txtCodSapato.setText(String.valueOf(sapato.getCodSapato()));
-   
-        cbTipoSapato.setSelectedItem(sapato.getCodTipoSapato());
-        cbCorSapato.setSelectedItem(sapato.getCodCorSapato());
         
+        txtCodSapato.setText(String.valueOf(sapato.getCodSapato()));
+        cbTipoSapatoselectedIndex(sapato.getCodTipoSapato());
+        cbCorSapatoselectedIndex(sapato.getCodCorSapato());
         txtNumSapato.setText(String.valueOf(sapato.getNumSapato()));
         txtMarca.setText(sapato.getMarca());
         txtConserto.setText(sapato.getConserto());
@@ -736,6 +743,72 @@ public class frmServico extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Erro ao Excluir Sapato");
         }  
     }//GEN-LAST:event_txtExcluirProdutoActionPerformed
+    
+    public void cbTipoSapatoselectedIndex(Integer codTipoSapato){
+        switch (codTipoSapato) {
+             case 1:cbTipoSapato.setSelectedIndex(0);
+                    break;
+             case 2:cbTipoSapato.setSelectedIndex(1);
+                    break;
+             case 3:cbTipoSapato.setSelectedIndex(2);
+                    break;
+             case 4:cbTipoSapato.setSelectedIndex(3);
+                    break;
+             case 5:cbTipoSapato.setSelectedIndex(4);
+                    break;
+             case 6:cbTipoSapato.setSelectedIndex(5);
+                    break;
+             case 7:cbTipoSapato.setSelectedIndex(6);
+                    break;
+             case 8:cbTipoSapato.setSelectedIndex(7);
+                    break;
+             case 9:cbTipoSapato.setSelectedIndex(8);
+                    break;
+             case 10:cbTipoSapato.setSelectedIndex(9);
+                    break;
+             case 11:cbTipoSapato.setSelectedIndex(10);
+                    break;
+             case 12:cbTipoSapato.setSelectedIndex(11);
+                    break;
+             case 13:cbTipoSapato.setSelectedIndex(12);
+                    break;
+             case 14:cbTipoSapato.setSelectedIndex(13);
+                    break;
+             case 15:cbTipoSapato.setSelectedIndex(14);
+                    break;
+             case 16:cbTipoSapato.setSelectedIndex(15);
+                    break;
+             case 17:cbTipoSapato.setSelectedIndex(16);
+        }
+    }
+    
+    public void cbCorSapatoselectedIndex(Integer codCorSapato){
+        switch (codCorSapato) {
+             case 1:cbCorSapato.setSelectedIndex(0);
+                    break;
+             case 2:cbCorSapato.setSelectedIndex(1);
+                    break;
+             case 3:cbCorSapato.setSelectedIndex(2);
+                    break;
+             case 4:cbCorSapato.setSelectedIndex(3);
+                    break;
+             case 5:cbCorSapato.setSelectedIndex(4);
+                    break;
+             case 6:cbCorSapato.setSelectedIndex(5);
+                    break;
+             case 7:cbCorSapato.setSelectedIndex(6);
+                    break;
+             case 8:cbCorSapato.setSelectedIndex(7);
+                    break;
+             case 9:cbCorSapato.setSelectedIndex(8);
+                    break;
+             case 10:cbCorSapato.setSelectedIndex(9);
+                    break;
+             case 11:cbCorSapato.setSelectedIndex(10);
+                    break;
+        }      
+        
+    }
     
     public void fecharTelaServico() {
         frmServico servico = new frmServico();
