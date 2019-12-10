@@ -65,8 +65,8 @@ public class frmCarteira extends javax.swing.JFrame {
         btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Fluxo de Caixa");
         setBackground(new java.awt.Color(204, 204, 204));
+        setFocusableWindowState(false);
         setType(java.awt.Window.Type.UTILITY);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -295,11 +295,10 @@ public class frmCarteira extends javax.swing.JFrame {
         jPanel6.setBackground(new java.awt.Color(153, 153, 153));
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnVoltar.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnVoltar.setText("VOLTAR PARA TELA INICIAL");
         btnVoltar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         btnVoltar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnVoltar.setPreferredSize(new java.awt.Dimension(233, 30));
         btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnVoltarMouseClicked(evt);
@@ -357,19 +356,20 @@ public class frmCarteira extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
-
-        int opcao = JOptionPane.showConfirmDialog(null, "Deseja Realmente Fechar Esta Tela?", "Atenção", JOptionPane.YES_NO_OPTION);
+        int opcao = JOptionPane.showConfirmDialog(null, "Deseja Voltar Para a Tela Inicial?", "Atenção", JOptionPane.YES_NO_OPTION);
 
             if (opcao == JOptionPane.YES_OPTION) {
                 fecharTelaCarteira();
+                this.dispose();
             } else if (opcao == JOptionPane.NO_OPTION) {
                 this.setExtendedState(MAXIMIZED_BOTH);
             }
     }//GEN-LAST:event_btnVoltarMouseClicked
     
     public void fecharTelaCarteira() {
-        //frmCarteira telaCarteira = new frmCarteira();     
-        this.dispose();
+        frmCarteira carteira = new frmCarteira();
+        
+        carteira.dispose();
     }
  
     private String getDateTime() {
@@ -407,7 +407,6 @@ public class frmCarteira extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
             public void run() {
                 new frmCarteira().setVisible(true);
             }
