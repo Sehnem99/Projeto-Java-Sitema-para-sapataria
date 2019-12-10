@@ -42,6 +42,19 @@ public class Utilitarios {
         return datamySql;
     }
     
+    public String dataFormat(String dataString){
+        String dia, mes, ano, datamySql;
+        if(dataString.equalsIgnoreCase(null)){
+            datamySql = "";
+        }else{ 
+            dia = dataString.substring(8, 2);
+            mes = dataString.substring(5, 2);
+            ano = dataString.substring(0, 4);
+            datamySql = dia+"/"+mes+"/"+ano;
+        } 
+        return datamySql;
+    }
+    
     
     
      

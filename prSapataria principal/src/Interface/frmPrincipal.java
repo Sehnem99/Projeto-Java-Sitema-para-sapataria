@@ -155,7 +155,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel5.setPreferredSize(new java.awt.Dimension(700, 30));
+        jPanel5.setPreferredSize(new java.awt.Dimension(800, 30));
 
         lbData.setBackground(new java.awt.Color(204, 204, 204));
         lbData.setText("lbData");

@@ -17,6 +17,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,6 +32,8 @@ import javax.swing.JOptionPane;
 public class ServicoDAO {
     private ServicoConexao conexao = new ServicoConexao();
     private Utilitarios utilit = new Utilitarios();
+    SimpleDateFormat vDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    DecimalFormat decimal = new DecimalFormat("R$ ###,###,###,##0.00");
     
     public boolean insertSapato(Sapato p) {
         
@@ -175,10 +179,10 @@ public class ServicoDAO {
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
-
+         
         List<Sapato> sapatos = new ArrayList<>();
         String sql = "select a.COD_SAPATO, b.NOME_TIPO_SAPATO, c.NOME_COR_SAPATO, a.NUMERO, a.MARCA,"
-                          +" a.DATA_ENTRADA,a.DATA_SAIDA, a.CONSERTO, a.VALOR "
+                          +" a.DATA_ENTRADA, a.CONSERTO, a.VALOR "
                      + "from sapato a, tipos_sapato b, cor_sapato c "
                        + "where a.COD_TIPO_SAPATO = b.COD_TIPO_SAPATO "
                          + "and a.COD_COR_SAPATO = c.COD_COR_SAPATO  "
@@ -199,9 +203,58 @@ public class ServicoDAO {
                 sapato1.setNumSapato(rs.getInt("NUMERO"));
                 sapato1.setMarca(rs.getString("MARCA"));
                 sapato1.setConserto(rs.getString("CONSERTO"));
-                sapato1.setDataEntrada(String.valueOf(rs.getDate("DATA_ENTRADA")));
-                sapato1.setDataSaida(String.valueOf(rs.getDate("DATA_SAIDA")));
-                sapato1.setValor(rs.getFloat("VALOR"));
+                sapato1.setDataEntrada(String.valueOf(vDateFormat.format(rs.getDate("DATA_ENTRADA"))));
+                sapato1.setValorFormat(decimal.format(rs.getFloat("VALOR")));
+                sapatos.add(sapato1);
+            }
+            return sapatos;
+        } catch (SQLException ex) {
+            Logger.getLogger(ServicoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+           conexao.close();
+        }
+        return sapatos;
+    }
+    
+     public List<Sapato> readSevPendentes() {
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+         
+        List<Sapato> sapatos = new ArrayList<>();
+        String sql = 
+          "select d.COD_CLIENTE, d.NOME_CLIENTE, b.NOME_TIPO_SAPATO, c.NOME_COR_SAPATO, a.NUMERO, "
+               +"a.MARCA, a.DATA_ENTRADA,a.DATA_SAIDA, a.CONSERTO, a.VALOR "
+          + "from sapato a, tipos_sapato b, cor_sapato c, clientes d  "
+                       + "where a.COD_TIPO_SAPATO = b.COD_TIPO_SAPATO "
+                         + "and a.COD_CLIENTE = d.COD_CLIENTE "
+		         + "and d.COD_CLIENTE in (Select cod_cliente from clientes where ATIVO = 1) "
+                         + "and a.DATA_SAIDA is null";
+        try {
+            stmt = conexao.getConexao().prepareStatement(sql);
+            rs = stmt.executeQuery();
+           
+
+            while (rs.next()) {
+
+                Sapato sapato1 = new Sapato();
+                
+                sapato1.setCodCliente(rs.getInt("COD_CLIENTE"));
+                sapato1.setNomeCliente(rs.getString("NOME_CLIENTE"));
+                sapato1.setTipoSapato(rs.getString("NOME_TIPO_SAPATO"));
+                sapato1.setCorSapato(rs.getString("NOME_COR_SAPATO"));
+                sapato1.setNumSapato(rs.getInt("NUMERO"));
+                sapato1.setMarca(rs.getString("MARCA"));
+                sapato1.setConserto(rs.getString("CONSERTO"));
+                sapato1.setDataEntrada(String.valueOf(vDateFormat.format(rs.getDate("DATA_ENTRADA"))));
+                if(rs.getDate("DATA_SAIDA") == null){
+                  String aux = " ";
+                  sapato1.setDataSaida(aux);
+                }else{
+                  sapato1.setDataSaida(String.valueOf(vDateFormat.format(rs.getDate("DATA_SAIDA"))));  
+                }
+                sapato1.setValorFormat(decimal.format(rs.getFloat("VALOR")));
                 sapatos.add(sapato1);
             }
             return sapatos;
@@ -317,6 +370,13 @@ public class ServicoDAO {
                   p.setCodCorSapato(rs.getInt("COD_COR_SAPATO"));
                   p.setNumSapato(rs.getInt("NUMERO"));
                   p.setMarca(rs.getString("MARCA"));
+                  p.setDataEntrada(String.valueOf(vDateFormat.format(rs.getDate("DATA_ENTRADA"))));
+                  if(rs.getDate("DATA_SAIDA") == null){
+                    String aux = " ";
+                    p.setDataSaida(aux);
+                  }else{
+                    p.setDataSaida(String.valueOf(vDateFormat.format(rs.getDate("DATA_SAIDA"))));  
+                  }
                   p.setConserto(rs.getString("CONSERTO"));
                   p.setValor(rs.getFloat("VALOR"));
             }

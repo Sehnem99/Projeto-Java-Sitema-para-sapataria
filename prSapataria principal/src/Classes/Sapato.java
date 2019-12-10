@@ -5,6 +5,7 @@ package Classes;
 public class Sapato {
     private Integer codSapato;
     private Integer codCliente;
+    private String nomeCliente;
     private Integer codTipoSapato;
     private Integer codCorSapato; 
     private String tipoSapato;
@@ -146,6 +147,14 @@ public class Sapato {
 
     public void setValor(Float valor) {
         this.valor = valor;
+    }
+    
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
     }
     
 }
