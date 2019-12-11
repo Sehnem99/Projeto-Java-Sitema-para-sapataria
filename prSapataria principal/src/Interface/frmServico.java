@@ -28,7 +28,7 @@ public class frmServico extends javax.swing.JFrame {
     private TipoSapato tpSapato = new TipoSapato();
     private CorSapato corSapato = new CorSapato();
     private Venda venda = new Venda();
-    private float vValorToal =0;
+    private float vValorToal = 0;
     List<TipoSapato> tipoSapatos;
     ServicoDAO servicoDAO = new ServicoDAO();
     Utilitarios util = new Utilitarios();
@@ -134,6 +134,9 @@ public class frmServico extends javax.swing.JFrame {
         txtCodCliente = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro / Consulta de Serviços");
+        setPreferredSize(new java.awt.Dimension(1213, 711));
+        setType(java.awt.Window.Type.UTILITY);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -141,9 +144,12 @@ public class frmServico extends javax.swing.JFrame {
         });
 
         pnPrincipal.setBackground(new java.awt.Color(204, 204, 204));
+        pnPrincipal.setPreferredSize(new java.awt.Dimension(1213, 711));
+        pnPrincipal.setRequestFocusEnabled(false);
 
         pnSuperior.setBackground(new java.awt.Color(153, 153, 153));
-        pnSuperior.setPreferredSize(new java.awt.Dimension(863, 54));
+        pnSuperior.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        pnSuperior.setPreferredSize(new java.awt.Dimension(587, 54));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,16 +161,16 @@ public class frmServico extends javax.swing.JFrame {
         pnSuperior.setLayout(pnSuperiorLayout);
         pnSuperiorLayout.setHorizontalGroup(
             pnSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnSuperiorLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(198, 198, 198))
+            .addGroup(pnSuperiorLayout.createSequentialGroup()
+                .addGap(550, 550, 550)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnSuperiorLayout.setVerticalGroup(
             pnSuperiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnSuperiorLayout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 3, Short.MAX_VALUE))
+                .addGap(5, 5, 5)
+                .addComponent(jLabel2))
         );
 
         pnCpf.setBackground(new java.awt.Color(204, 204, 204));
@@ -282,11 +288,11 @@ public class frmServico extends javax.swing.JFrame {
         abaSevFazer.setLayout(abaSevFazerLayout);
         abaSevFazerLayout.setHorizontalGroup(
             abaSevFazerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1886, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1484, Short.MAX_VALUE)
         );
         abaSevFazerLayout.setVerticalGroup(
             abaSevFazerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("A Fazer", abaSevFazer);
@@ -307,19 +313,7 @@ public class frmServico extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Dados do(s) Produto(s):");
-
-        javax.swing.GroupLayout pnDadosProdutoLayout = new javax.swing.GroupLayout(pnDadosProduto);
-        pnDadosProduto.setLayout(pnDadosProdutoLayout);
-        pnDadosProdutoLayout.setHorizontalGroup(
-            pnDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pnDadosProdutoLayout.setVerticalGroup(
-            pnDadosProdutoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnDadosProdutoLayout.createSequentialGroup()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        pnDadosProduto.add(jLabel5);
 
         pnCodigo.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -408,53 +402,33 @@ public class frmServico extends javax.swing.JFrame {
 
         txtAltProduto.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtAltProduto.setText("Alterar Produto");
-        txtAltProduto.setPreferredSize(new java.awt.Dimension(230, 40));
+        txtAltProduto.setPreferredSize(new java.awt.Dimension(160, 30));
         txtAltProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAltProdutoActionPerformed(evt);
             }
         });
+        jPanel3.add(txtAltProduto);
 
         txtAdcProduto.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtAdcProduto.setText("Adicionar Produto");
-        txtAdcProduto.setPreferredSize(new java.awt.Dimension(230, 40));
+        txtAdcProduto.setPreferredSize(new java.awt.Dimension(160, 30));
         txtAdcProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAdcProdutoActionPerformed(evt);
             }
         });
+        jPanel3.add(txtAdcProduto);
 
         txtExcluirProduto.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
         txtExcluirProduto.setText("Excluir Produto");
-        txtExcluirProduto.setPreferredSize(new java.awt.Dimension(230, 40));
+        txtExcluirProduto.setPreferredSize(new java.awt.Dimension(160, 30));
         txtExcluirProduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtExcluirProdutoActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
-                .addComponent(txtAdcProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtAltProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtExcluirProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(0, 16, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAdcProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAltProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtExcluirProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        jPanel3.add(txtExcluirProduto);
 
         pnData.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -487,44 +461,28 @@ public class frmServico extends javax.swing.JFrame {
         abaCadastroLayout.setHorizontalGroup(
             abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaCadastroLayout.createSequentialGroup()
-                .addGroup(abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(abaCadastroLayout.createSequentialGroup()
-                        .addGap(731, 731, 731)
-                        .addGroup(abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(abaCadastroLayout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(pnDadosProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(pnCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pnData, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(abaCadastroLayout.createSequentialGroup()
-                        .addGap(556, 556, 556)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(abaCadastroLayout.createSequentialGroup()
-                        .addGap(731, 731, 731)
-                        .addGroup(abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnTipoCalcado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(abaCadastroLayout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(pnMarca, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pnNumeroCor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(pnMarca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(568, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, abaCadastroLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 704, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(580, 580, 580))
+                .addGroup(abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1480, Short.MAX_VALUE)
+                    .addComponent(pnMarca1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnMarca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnNumeroCor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnTipoCalcado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnData, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnCodigo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnDadosProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         abaCadastroLayout.setVerticalGroup(
             abaCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(abaCadastroLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addContainerGap()
                 .addComponent(pnDadosProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnData, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnTipoCalcado, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnNumeroCor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -534,9 +492,9 @@ public class frmServico extends javax.swing.JFrame {
                 .addComponent(pnMarca1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro", null, abaCadastro, "");
@@ -614,11 +572,11 @@ public class frmServico extends javax.swing.JFrame {
         abaConsulta.setLayout(abaConsultaLayout);
         abaConsultaLayout.setHorizontalGroup(
             abaConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1886, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1484, Short.MAX_VALUE)
         );
         abaConsultaLayout.setVerticalGroup(
             abaConsultaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Consulta", abaConsulta);
@@ -641,23 +599,7 @@ public class frmServico extends javax.swing.JFrame {
                 btnVoltarActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout pnInferiorLayout = new javax.swing.GroupLayout(pnInferior);
-        pnInferior.setLayout(pnInferiorLayout);
-        pnInferiorLayout.setHorizontalGroup(
-            pnInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnInferiorLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        pnInferiorLayout.setVerticalGroup(
-            pnInferiorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnInferiorLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        pnInferior.add(btnVoltar);
 
         pnCpf1.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -675,49 +617,44 @@ public class frmServico extends javax.swing.JFrame {
         pnPrincipalLayout.setHorizontalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPrincipalLayout.createSequentialGroup()
-                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnSuperior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1895, Short.MAX_VALUE)
-                    .addGroup(pnPrincipalLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pnCpf1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnInferior, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(pnCpf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(pnNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnCpf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 1488, Short.MAX_VALUE)
+                        .addComponent(pnCpf1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1)
+                    .addComponent(pnInferior, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnSuperior, javax.swing.GroupLayout.DEFAULT_SIZE, 1493, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnPrincipalLayout.setVerticalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnPrincipalLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(pnSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(pnCpf1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnSuperior, 46, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnCpf1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnNome, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 517, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pnSuperior.getAccessibleContext().setAccessibleParent(pnSuperior);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(768, Short.MAX_VALUE))
+            .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1493, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 751, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -728,7 +665,6 @@ public class frmServico extends javax.swing.JFrame {
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja Realmente Fechar Esta Tela?", "Atenção", JOptionPane.YES_NO_OPTION);
 
         if (opcao == JOptionPane.YES_OPTION) {
-            fecharTelaServico();
             this.dispose();
         } else if (opcao == JOptionPane.NO_OPTION) {
             this.setExtendedState(MAXIMIZED_BOTH);
@@ -736,85 +672,8 @@ public class frmServico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        this.setExtendedState(MAXIMIZED_BOTH);
-        
+        this.setExtendedState(MAXIMIZED_BOTH);        
     }//GEN-LAST:event_formWindowOpened
-
-    private void txtAdcProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdcProdutoActionPerformed
-        if(txtDataEntrada.getText().equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(null, "Entre com a data de entrada.");
-            txtDataEntrada.requestFocus();  
-        }
-        
-        if(cbTipoSapato.getSelectedIndex() == -1){
-            JOptionPane.showMessageDialog(null, "Selecione o tipo do calçado");
-            cbTipoSapato.requestFocus();
-            return;
-        }
-        if(txtNumSapato.getText().equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(null, "Entre com algum numero para o calçado");
-            txtNumSapato.requestFocus();
-            return; 
-        }
-        if(cbCorSapato.getSelectedIndex() == -1){
-            JOptionPane.showMessageDialog(null, "Selecione a cor do calçado");
-            cbCorSapato.requestFocus();
-            return;
-        }
-        if(txtConserto.getText().equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(null, "Entre com algum serviço");
-            txtConserto.requestFocus();
-            return;
-        }
-        if(txtValorSapato.getText().equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(null, "Entre com algum valor do serviço");
-            txtValorSapato.requestFocus();
-            return;
-        }
-        
-        
-        TipoSapato tipoSapato = (TipoSapato) cbTipoSapato.getSelectedItem();
-        
-        CorSapato cor_Sapato = (CorSapato) cbCorSapato.getSelectedItem();
-        
-        sapato.setCodTipoSapato(tipoSapato.getCodTipoSapato());
-        sapato.setCodCorSapato(cor_Sapato.getCodCorSapato());
-        sapato.setDataEntrada(txtDataEntrada.getText());
-        sapato.setDataSaida(txtDataSaida.getText());
-        sapato.setConserto(txtConserto.getText());
-        sapato.setMarca(txtMarca.getText());
-        sapato.setNumSapato(Integer.parseInt(txtNumSapato.getText()));
-        sapato.setValor(Float.parseFloat(txtValorSapato.getText()));
-                
-       
-        venda.setData_pagamento(txtDataPag.getText());
-        venda.setValorFinal(sapato.getValor());        
-        
-        if(txtDataSaida.getText().equalsIgnoreCase("  /  /    ")){
-           if(servicoDAO.insertSapatoSemDataFim(sapato)){
-             servicoDAO.buscaUltimoCodSapato(venda);  
-             JOptionPane.showMessageDialog(null, "Sapato Inserido Com Sucessso!");
-           }else{
-             JOptionPane.showMessageDialog(null, "Houve um Erro Inesperado No Cadastro!");
-           }   
-        }else{
-          if(servicoDAO.insertSapato(sapato)){
-              servicoDAO.buscaUltimoCodSapato(venda); 
-             JOptionPane.showMessageDialog(null, "Sapato Inserido Com Sucessso!");
-           }else{
-             JOptionPane.showMessageDialog(null, "Houve um Erro Inesperado No Cadastro!");
-           }     
-        }
-        if(txtDataPag.getText().equalsIgnoreCase("  /  /    ")){
-          servicoDAO.insertVendaSemData(venda);      
-        }else{
-          servicoDAO.insertVendaComData(venda);     
-        }
-        
-        limpaTelaCadSapato();
-        carregaSapatosCliente();
-        carregaSevAFazer();        
-    }//GEN-LAST:event_txtAdcProdutoActionPerformed
 
     private void limpaTelaCadSapato(){
         txtCodSapato.setText(null);
@@ -885,50 +744,6 @@ public class frmServico extends javax.swing.JFrame {
         txtValorSapato.setText(String.valueOf(sapato.getValor()));     
     }//GEN-LAST:event_tblSapatosMouseClicked
 
-    private void txtAltProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAltProdutoActionPerformed
-        TipoSapato tipoSapato = (TipoSapato) cbTipoSapato.getSelectedItem();
-        
-        CorSapato cor_Sapato = (CorSapato) cbCorSapato.getSelectedItem();
-        
-        sapato.setCodTipoSapato(tipoSapato.getCodTipoSapato());
-        sapato.setCodCorSapato(cor_Sapato.getCodCorSapato());
-        sapato.setDataEntrada(txtDataEntrada.getText());
-        sapato.setDataSaida(txtDataSaida.getText());
-        sapato.setConserto(txtConserto.getText());
-        sapato.setMarca(txtMarca.getText());
-        sapato.setNumSapato(Integer.parseInt(txtNumSapato.getText()));
-        sapato.setValor(Float.parseFloat(txtValorSapato.getText()));        
-        
-        if(txtDataSaida.getText().equalsIgnoreCase("  /  /    ")){
-           if(servicoDAO.updateSapatoSemDataFim(sapato)){
-             JOptionPane.showMessageDialog(null, "Sapato Atualizado Com Sucesso!");
-           }else{
-             JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
-           }   
-        }else{
-          if(servicoDAO.updateSapato(sapato)){
-             JOptionPane.showMessageDialog(null, "Sapato Atualizado Com Sucesso!");
-          }else{
-             JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
-          }
-        }
-        limpaTelaCadSapato();
-        carregaSapatosCliente();
-        carregaSevAFazer();
-    }//GEN-LAST:event_txtAltProdutoActionPerformed
-
-    private void txtExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExcluirProdutoActionPerformed
-        if(servicoDAO.deleteSapato(sapato)){
-            JOptionPane.showMessageDialog(null, "Sapato Excluido Com Sucesso!");
-            
-        }else{
-            JOptionPane.showMessageDialog(null, "Erro ao Excluir Sapato");
-        }
-        limpaTelaCadSapato();
-        carregaSapatosCliente();
-        carregaSevAFazer();
-    }//GEN-LAST:event_txtExcluirProdutoActionPerformed
-
     private void tblSevFazerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSevFazerMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tblSevFazerMouseClicked
@@ -940,6 +755,124 @@ public class frmServico extends javax.swing.JFrame {
     private void abaCadastroComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_abaCadastroComponentShown
         txtDataEntrada.setText(getDateTime());
     }//GEN-LAST:event_abaCadastroComponentShown
+
+    private void txtExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExcluirProdutoActionPerformed
+        if(servicoDAO.deleteSapato(sapato)){
+            JOptionPane.showMessageDialog(null, "Sapato Excluido Com Sucesso!");
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao Excluir Sapato");
+        }
+        limpaTelaCadSapato();
+        carregaSapatosCliente();
+        carregaSevAFazer();
+    }//GEN-LAST:event_txtExcluirProdutoActionPerformed
+
+    private void txtAdcProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAdcProdutoActionPerformed
+        if(txtDataEntrada.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com a data de entrada.");
+            txtDataEntrada.requestFocus();
+        }
+
+        if(cbTipoSapato.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "Selecione o tipo do calçado");
+            cbTipoSapato.requestFocus();
+            return;
+        }
+        if(txtNumSapato.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com algum numero para o calçado");
+            txtNumSapato.requestFocus();
+            return;
+        }
+        if(cbCorSapato.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "Selecione a cor do calçado");
+            cbCorSapato.requestFocus();
+            return;
+        }
+        if(txtConserto.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com algum serviço");
+            txtConserto.requestFocus();
+            return;
+        }
+        if(txtValorSapato.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Entre com algum valor do serviço");
+            txtValorSapato.requestFocus();
+            return;
+        }
+
+        TipoSapato tipoSapato = (TipoSapato) cbTipoSapato.getSelectedItem();
+
+        CorSapato cor_Sapato = (CorSapato) cbCorSapato.getSelectedItem();
+
+        sapato.setCodTipoSapato(tipoSapato.getCodTipoSapato());
+        sapato.setCodCorSapato(cor_Sapato.getCodCorSapato());
+        sapato.setDataEntrada(txtDataEntrada.getText());
+        sapato.setDataSaida(txtDataSaida.getText());
+        sapato.setConserto(txtConserto.getText());
+        sapato.setMarca(txtMarca.getText());
+        sapato.setNumSapato(Integer.parseInt(txtNumSapato.getText()));
+        sapato.setValor(Float.parseFloat(txtValorSapato.getText()));
+
+        venda.setData_pagamento(txtDataPag.getText());
+        venda.setValorFinal(sapato.getValor());
+
+        if(txtDataSaida.getText().equalsIgnoreCase("  /  /    ")){
+            if(servicoDAO.insertSapatoSemDataFim(sapato)){
+                servicoDAO.buscaUltimoCodSapato(venda);
+                JOptionPane.showMessageDialog(null, "Sapato Inserido Com Sucessso!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Houve um Erro Inesperado No Cadastro!");
+            }
+        }else{
+            if(servicoDAO.insertSapato(sapato)){
+                servicoDAO.buscaUltimoCodSapato(venda);
+                JOptionPane.showMessageDialog(null, "Sapato Inserido Com Sucessso!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Houve um Erro Inesperado No Cadastro!");
+            }
+        }
+        if(txtDataPag.getText().equalsIgnoreCase("  /  /    ")){
+            servicoDAO.insertVendaSemData(venda);
+        }else{
+            servicoDAO.insertVendaComData(venda);
+        }
+
+        limpaTelaCadSapato();
+        carregaSapatosCliente();
+        carregaSevAFazer();
+    }//GEN-LAST:event_txtAdcProdutoActionPerformed
+
+    private void txtAltProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAltProdutoActionPerformed
+        TipoSapato tipoSapato = (TipoSapato) cbTipoSapato.getSelectedItem();
+
+        CorSapato cor_Sapato = (CorSapato) cbCorSapato.getSelectedItem();
+
+        sapato.setCodTipoSapato(tipoSapato.getCodTipoSapato());
+        sapato.setCodCorSapato(cor_Sapato.getCodCorSapato());
+        sapato.setDataEntrada(txtDataEntrada.getText());
+        sapato.setDataSaida(txtDataSaida.getText());
+        sapato.setConserto(txtConserto.getText());
+        sapato.setMarca(txtMarca.getText());
+        sapato.setNumSapato(Integer.parseInt(txtNumSapato.getText()));
+        sapato.setValor(Float.parseFloat(txtValorSapato.getText()));
+
+        if(txtDataSaida.getText().equalsIgnoreCase("  /  /    ")){
+            if(servicoDAO.updateSapatoSemDataFim(sapato)){
+                JOptionPane.showMessageDialog(null, "Sapato Atualizado Com Sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
+            }
+        }else{
+            if(servicoDAO.updateSapato(sapato)){
+                JOptionPane.showMessageDialog(null, "Sapato Atualizado Com Sucesso!");
+            }else{
+                JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
+            }
+        }
+        limpaTelaCadSapato();
+        carregaSapatosCliente();
+        carregaSevAFazer();
+    }//GEN-LAST:event_txtAltProdutoActionPerformed
     
     public void cbTipoSapatoselectedIndex(Integer codTipoSapato){
         switch (codTipoSapato) {
@@ -1005,12 +938,6 @@ public class frmServico extends javax.swing.JFrame {
                     break;
         }      
         
-    }
-    
-    public void fecharTelaServico() {
-        frmServico servico = new frmServico();
-        
-        servico.dispose();
     }
     
     /**
