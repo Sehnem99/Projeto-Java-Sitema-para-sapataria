@@ -66,7 +66,6 @@ public class frmCarteira extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 204, 204));
-        setFocusableWindowState(false);
         setType(java.awt.Window.Type.UTILITY);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -359,18 +358,11 @@ public class frmCarteira extends javax.swing.JFrame {
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja Voltar Para a Tela Inicial?", "Atenção", JOptionPane.YES_NO_OPTION);
 
             if (opcao == JOptionPane.YES_OPTION) {
-                fecharTelaCarteira();
                 this.dispose();
             } else if (opcao == JOptionPane.NO_OPTION) {
                 this.setExtendedState(MAXIMIZED_BOTH);
             }
     }//GEN-LAST:event_btnVoltarMouseClicked
-    
-    public void fecharTelaCarteira() {
-        frmCarteira carteira = new frmCarteira();
-        
-        carteira.dispose();
-    }
  
     private String getDateTime() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

@@ -10,8 +10,6 @@ import Classes.Cliente;
 import Utilitarios.Utilitarios;
 import db.ServicoCadCliente;
 import db.ServicoConexao;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
@@ -24,6 +22,7 @@ import java.util.InputMismatchException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import Utilitarios.ValidaCPF;
 
 /**
  *
@@ -52,17 +51,17 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtCodCliente = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         lbCpf = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JTextField();
         lbValidaCPF = new javax.swing.JLabel();
-        txtCpf = new javax.swing.JFormattedTextField();
         jPanel3 = new javax.swing.JPanel();
         lbNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         lbDataNasc = new javax.swing.JLabel();
-        txtDataNasc = new javax.swing.JTextField();
+        txtDataNasc = new javax.swing.JFormattedTextField();
         jPanel5 = new javax.swing.JPanel();
         lbContato = new javax.swing.JLabel();
-        txtContato = new javax.swing.JTextField();
+        txtContato = new javax.swing.JFormattedTextField();
         jPanel6 = new javax.swing.JPanel();
         lbCep = new javax.swing.JLabel();
         txtCep = new javax.swing.JTextField();
@@ -120,20 +119,15 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         lbCpf.setText("CPF: ");
         jPanel2.add(lbCpf);
-        jPanel2.add(lbValidaCPF);
 
-        try {
-            txtCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtCpf.setPreferredSize(new java.awt.Dimension(380, 30));
+        txtCpf.setPreferredSize(new java.awt.Dimension(390, 30));
         txtCpf.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCpfKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCpfKeyReleased(evt);
             }
         });
         jPanel2.add(txtCpf);
+        jPanel2.add(lbValidaCPF);
 
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -142,7 +136,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         txtNome.setMaximumSize(new java.awt.Dimension(10000, 30));
         txtNome.setMinimumSize(new java.awt.Dimension(300, 30));
-        txtNome.setPreferredSize(new java.awt.Dimension(300, 30));
+        txtNome.setPreferredSize(new java.awt.Dimension(318, 30));
         jPanel3.add(txtNome);
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 204));
@@ -150,7 +144,12 @@ public class frmCadCliente extends javax.swing.JFrame {
         lbDataNasc.setText("Data Nascimento:");
         jPanel4.add(lbDataNasc);
 
-        txtDataNasc.setPreferredSize(new java.awt.Dimension(150, 30));
+        try {
+            txtDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtDataNasc.setPreferredSize(new java.awt.Dimension(140, 30));
         jPanel4.add(txtDataNasc);
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
@@ -158,7 +157,12 @@ public class frmCadCliente extends javax.swing.JFrame {
         lbContato.setText("Contato:");
         jPanel5.add(lbContato);
 
-        txtContato.setPreferredSize(new java.awt.Dimension(265, 30));
+        try {
+            txtContato.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) #####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtContato.setPreferredSize(new java.awt.Dimension(191, 30));
         jPanel5.add(txtContato);
 
         jPanel6.setBackground(new java.awt.Color(204, 204, 204));
@@ -166,9 +170,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         lbCep.setText("CEP: ");
         jPanel6.add(lbCep);
 
-        txtCep.setMaximumSize(new java.awt.Dimension(5000, 30));
-        txtCep.setMinimumSize(new java.awt.Dimension(180, 30));
-        txtCep.setPreferredSize(new java.awt.Dimension(200, 30));
+        txtCep.setPreferredSize(new java.awt.Dimension(202, 30));
         txtCep.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtCepKeyReleased(evt);
@@ -184,7 +186,7 @@ public class frmCadCliente extends javax.swing.JFrame {
         txtLogradouro.setMaximumSize(new java.awt.Dimension(10000, 30));
         txtLogradouro.setMinimumSize(new java.awt.Dimension(300, 30));
         txtLogradouro.setName(""); // NOI18N
-        txtLogradouro.setPreferredSize(new java.awt.Dimension(250, 30));
+        txtLogradouro.setPreferredSize(new java.awt.Dimension(262, 30));
         jPanel7.add(txtLogradouro);
 
         lbNumero.setText("Nº: ");
@@ -192,7 +194,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         txtNum.setMaximumSize(new java.awt.Dimension(5000, 30));
         txtNum.setMinimumSize(new java.awt.Dimension(52, 30));
-        txtNum.setPreferredSize(new java.awt.Dimension(52, 30));
+        txtNum.setPreferredSize(new java.awt.Dimension(60, 30));
         jPanel7.add(txtNum);
 
         jPanel12.setBackground(new java.awt.Color(204, 204, 204));
@@ -202,7 +204,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         txtBairro.setMaximumSize(new java.awt.Dimension(10000, 30));
         txtBairro.setMinimumSize(new java.awt.Dimension(300, 30));
-        txtBairro.setPreferredSize(new java.awt.Dimension(180, 30));
+        txtBairro.setPreferredSize(new java.awt.Dimension(191, 30));
         jPanel12.add(txtBairro);
 
         jPanel9.setBackground(new java.awt.Color(204, 204, 204));
@@ -212,7 +214,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         txtCidade.setMaximumSize(new java.awt.Dimension(10000, 30));
         txtCidade.setMinimumSize(new java.awt.Dimension(300, 30));
-        txtCidade.setPreferredSize(new java.awt.Dimension(265, 30));
+        txtCidade.setPreferredSize(new java.awt.Dimension(274, 30));
         jPanel9.add(txtCidade);
 
         lbEstado.setText("UF: ");
@@ -220,7 +222,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         txtEstado.setMaximumSize(new java.awt.Dimension(5000, 30));
         txtEstado.setMinimumSize(new java.awt.Dimension(58, 30));
-        txtEstado.setPreferredSize(new java.awt.Dimension(50, 30));
+        txtEstado.setPreferredSize(new java.awt.Dimension(60, 30));
         jPanel9.add(txtEstado);
 
         jPanel10.setBackground(new java.awt.Color(204, 204, 204));
@@ -230,51 +232,32 @@ public class frmCadCliente extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Inserir");
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton1.setPreferredSize(new java.awt.Dimension(150, 30));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        jPanel10.add(jButton1);
+        jButton1.getAccessibleContext().setAccessibleName("btnInserir");
 
         btAtualizar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btAtualizar.setText("Atualizar");
         btAtualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btAtualizar.setPreferredSize(new java.awt.Dimension(150, 30));
         btAtualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btAtualizarActionPerformed(evt);
             }
         });
+        jPanel10.add(btAtualizar);
+        btAtualizar.getAccessibleContext().setAccessibleName("btnAtualizar");
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton3.setText("Excluir");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                .addContainerGap(451, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btAtualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(432, 432, 432))
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btAtualizar)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20))
-        );
-
-        jButton1.getAccessibleContext().setAccessibleName("btnInserir");
-        btAtualizar.getAccessibleContext().setAccessibleName("btnAtualizar");
+        jButton3.setPreferredSize(new java.awt.Dimension(150, 30));
+        jPanel10.add(jButton3);
         jButton3.getAccessibleContext().setAccessibleName("btnExcluir");
 
         jPanel8.setBackground(new java.awt.Color(204, 204, 204));
@@ -284,6 +267,7 @@ public class frmCadCliente extends javax.swing.JFrame {
 
         cbAtivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0 - Inativo", "1 - Ativo" }));
         cbAtivo.setSelectedIndex(-1);
+        cbAtivo.setPreferredSize(new java.awt.Dimension(150, 30));
         jPanel8.add(cbAtivo);
 
         jPanel14.setBackground(new java.awt.Color(153, 153, 153));
@@ -310,6 +294,22 @@ public class frmCadCliente extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jPanel13.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel13.setPreferredSize(new java.awt.Dimension(400, 73));
+
+        btnVoltar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnVoltar.setText("VOLTAR PARA TELA INICIAL");
+        btnVoltar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        btnVoltar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnVoltar.setPreferredSize(new java.awt.Dimension(203, 25));
+        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnVoltarMouseClicked(evt);
+            }
+        });
+        jPanel13.add(btnVoltar);
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -326,6 +326,7 @@ public class frmCadCliente extends javax.swing.JFrame {
             .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1213, Short.MAX_VALUE)
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,45 +352,10 @@ public class frmCadCliente extends javax.swing.JFrame {
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(28, 28, 28)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
-        );
-
-        jPanel13.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel13.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel13.setPreferredSize(new java.awt.Dimension(400, 73));
-
-        btnVoltar.setFont(new java.awt.Font("Verdana", 0, 14)); // NOI18N
-        btnVoltar.setText("VOLTAR PARA TELA INICIAL");
-        btnVoltar.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btnVoltar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        btnVoltar.setPreferredSize(new java.awt.Dimension(233, 30));
-        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVoltarMouseClicked(evt);
-            }
-        });
-        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
-        jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel13Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -397,15 +363,11 @@ public class frmCadCliente extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1213, Short.MAX_VALUE)
             .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -422,7 +384,6 @@ public class frmCadCliente extends javax.swing.JFrame {
         int opcao = JOptionPane.showConfirmDialog(null, "Deseja Realmente Fechar Esta Tela?", "Atenção", JOptionPane.YES_NO_OPTION);
 
             if (opcao == JOptionPane.YES_OPTION) {
-               fecharTelaInicial();
                this.dispose();
             } else if (opcao == JOptionPane.NO_OPTION) {
                this.setExtendedState(MAXIMIZED_BOTH);
@@ -430,13 +391,6 @@ public class frmCadCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVoltarMouseClicked
     
     
-    private void txtCepKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepKeyReleased
-        txtLogradouro.setText("Aguarde...");
-        if (txtCep.getText().length() == 8){
-            buscarCep(txtCep.getText());
-        }
-    }//GEN-LAST:event_txtCepKeyReleased
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        
        /* if (txtNome.getText().equalsIgnoreCase("")){
@@ -510,42 +464,15 @@ public class frmCadCliente extends javax.swing.JFrame {
             
             try {
             if (vServCadCliente.insert(cliente)) {
-                JOptionPane.showMessageDialog(null, "Cliente inserido com sucessso!");
+                JOptionPane.showMessageDialog(null, "Cliente Inserido Com Sucessso!");
                 limpaTela();
             }else
-                JOptionPane.showMessageDialog(null, "Houve um erro inesperado no cadastro!");
+                JOptionPane.showMessageDialog(null, "Houve um Erro Inesperado no Cadastro!");
 
         } catch (SQLException ex) {
             Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void txtCpfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
-       cliente.setCpf(txtCpf.getText());
-        try {
-                if (vServCadCliente.consultaCliente(cliente)){
-                txtCodCliente.setText(Integer.toString(cliente.getCodigo()));
-                txtNome.setText(cliente.getNome());
-                txtCpf.setText(cliente.getCpf());
-                txtDataNasc.setText(cliente.getData_nasc());
-                txtContato.setText(cliente.getContato());
-                txtCep.setText(Integer.toString(cliente.getCep()));
-                txtLogradouro.setText(cliente.getLogradouro());
-                txtNum.setText(cliente.getNum());
-                txtBairro.setText(cliente.getBairro());
-                txtCidade.setText(cliente.getCidade());
-                txtEstado.setText(cliente.getUf());
-                cbAtivo.setSelectedIndex(cliente.getAtivo());
-                }else {
-                    JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
-                    limpaTela();
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(frmCadCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }//GEN-LAST:event_txtCpfKeyPressed
 
     private void btAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAtualizarActionPerformed
 
@@ -571,15 +498,23 @@ public class frmCadCliente extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btAtualizarActionPerformed
 
-    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+    private void txtCepKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCepKeyReleased
+        txtLogradouro.setText("Aguarde...");
+        if (txtCep.getText().length() == 8){
+            buscarCep(txtCep.getText());
+        }
+    }//GEN-LAST:event_txtCepKeyReleased
 
-    }//GEN-LAST:event_btnVoltarActionPerformed
-   
-    public void fecharTelaInicial() {
-        frmPrincipal principal = new frmPrincipal();
-        
-        principal.dispose();
-    }
+    private void txtCpfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCpfKeyReleased
+        if (ValidaCPF.isCPF(txtCpf.getText()) == true) {
+            lbValidaCPF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/button.png")));
+            txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
+        }
+        else {
+            lbValidaCPF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Delete.png")));
+            txtCpf.setText(ValidaCPF.imprimeCPF(txtCpf.getText()));
+        }
+    }//GEN-LAST:event_txtCpfKeyReleased
     
     public void buscarCep(String cep) 
     {
@@ -626,62 +561,6 @@ public class frmCadCliente extends javax.swing.JFrame {
             throw new RuntimeException(e);
         }
     }
-    
-    public static boolean isCPF(String CPF) {
-        // considera-se erro CPF's formados por uma sequencia de numeros iguais
-        if (CPF.equals("000.000.000-00") ||
-            CPF.equals("111.111.111-11") ||
-            CPF.equals("222.222.222-22") || CPF.equals("333.333.333-33") ||
-            CPF.equals("444.444.444-44") || CPF.equals("555.555.555-55") ||
-            CPF.equals("666.666.666-66") || CPF.equals("777.777.777-77") ||
-            CPF.equals("888.888.888-88") || CPF.equals("999.999.999-99") ||
-            (CPF.length() != 11))
-            return(false);
-          
-        char dig10, dig11;
-        int sm, i, r, num, peso;
-          
-        // "try" - protege o codigo para eventuais erros de conversao de tipo (int)
-        try {
-        // Calculo do 1o. Digito Verificador
-            sm = 0;
-            peso = 10;
-            for (i=0; i<9; i++) {              
-        // converte o i-esimo caractere do CPF em um numero:
-        // por exemplo, transforma o caractere '0' no inteiro 0         
-        // (48 eh a posicao de '0' na tabela ASCII)         
-            num = (int)(CPF.charAt(i) - 48); 
-            sm = sm + (num * peso);
-            peso = peso - 1;
-            }
-          
-            r = 11 - (sm % 11);
-            if ((r == 10) || (r == 11))
-                dig10 = '0';
-            else dig10 = (char)(r + 48); // converte no respectivo caractere numerico
-          
-        // Calculo do 2o. Digito Verificador
-            sm = 0;
-            peso = 11;
-            for(i=0; i<10; i++) {
-            num = (int)(CPF.charAt(i) - 48);
-            sm = sm + (num * peso);
-            peso = peso - 1;
-            }
-          
-            r = 11 - (sm % 11);
-            if ((r == 10) || (r == 11))
-                 dig11 = '0';
-            else dig11 = (char)(r + 48);
-          
-        // Verifica se os digitos calculados conferem com os digitos informados.
-            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10)))
-                 return(true);
-            else return(false);
-                } catch (InputMismatchException erro) {
-                return(false);
-            }
-        }
 
     private void limpaTela(){
         txtCpf.setText(null);
@@ -774,9 +653,9 @@ public class frmCadCliente extends javax.swing.JFrame {
     private javax.swing.JTextField txtCep;
     private javax.swing.JTextField txtCidade;
     private javax.swing.JTextField txtCodCliente;
-    private javax.swing.JTextField txtContato;
-    private javax.swing.JFormattedTextField txtCpf;
-    private javax.swing.JTextField txtDataNasc;
+    private javax.swing.JFormattedTextField txtContato;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JFormattedTextField txtDataNasc;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtLogradouro;
     private javax.swing.JTextField txtNome;

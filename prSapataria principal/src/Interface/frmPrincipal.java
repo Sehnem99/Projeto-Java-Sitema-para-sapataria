@@ -155,7 +155,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(204, 204, 204));
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel5.setPreferredSize(new java.awt.Dimension(700, 30));
+        jPanel5.setPreferredSize(new java.awt.Dimension(800, 30));
 
         lbData.setBackground(new java.awt.Color(204, 204, 204));
         lbData.setText("lbData");
@@ -173,7 +173,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         pnPrincipalLayout.setHorizontalGroup(
             pnPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(pnMenus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         pnPrincipalLayout.setVerticalGroup(
@@ -231,9 +231,9 @@ public class frmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
     
     private String getDateTime() {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
+        DateFormat formato = new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss");
         Date date = new Date();
-        return dateFormat.format(date);
+        return formato.format(date);
     }
         
     /**
@@ -266,7 +266,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmPrincipal().setVisible(true);
+                new frmPrincipal().setVisible(true);         
             }
         });
     }
