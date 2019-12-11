@@ -104,6 +104,8 @@ CREATE TABLE IF NOT EXISTS `SHOEMAKER`.`VENDAS` (
 ENGINE = InnoDB;
 
 
+
+
 -- -----------------------------------------------------
 -- Table `mydb`.`TIPOS_ACESSO`
 -- -----------------------------------------------------
@@ -154,6 +156,14 @@ CREATE TABLE IF NOT EXISTS `SHOEMAKER`.`ALTERACOES` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `SHOEMAKER`.`DESPESA` (
+  `COD_DESPESA` INT NOT NULL,
+  `DESCRICAO_DESPESA` VARCHAR(45) NOT NULL,
+  `VALOR` DECIMAL(10,2) NOT NULL,
+  `DATA_CADASTRO` datetime NULL,
+  PRIMARY KEY ( `COD_DESPESA`)
+)ENGINE = InnoDB;
 
 INSERT INTO tipos_sapato
 VALUES (1, 'Alpargata'),
