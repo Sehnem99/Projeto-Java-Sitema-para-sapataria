@@ -35,6 +35,65 @@ public class ServicoDAO {
     SimpleDateFormat vDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     DecimalFormat decimal = new DecimalFormat("R$ ###,###,###,##0.00");
     
+    public void buscaUltimoCodSapato(Venda v){
+        String sql = "select max( cod_sapato ) as a from sapato;";
+        
+        try {
+                PreparedStatement stmt = null;
+
+                stmt = conexao.getConexao().prepareStatement(sql);
+                ResultSet rs = stmt.executeQuery();
+                 if(rs.next()){
+                    v.setCodSapato(rs.getInt("a"));  
+                 }
+               
+                stmt.close();
+                conexao.close();
+        } catch (SQLException e) {
+          JOptionPane.showMessageDialog(null, e);
+        }
+        
+    }
+    
+        public boolean insertVendaComData(Venda v) {
+        
+        String sql = "insert into vendas values (0,?,?,?)";
+        
+        try {
+                PreparedStatement ps;
+                ps = conexao.getConexao().prepareStatement(sql);
+                ps.setInt(1, v.getCodSapato());
+                ps.setFloat(2, v.getValorFinal());
+                ps.setDate(3,Date.valueOf(utilit.dataFormatBanco(v.getData_pagamento())));
+                //usar sempre pra inserir ou modificar dado na tabela
+                ps.execute();
+                ps.close();
+                conexao.close();
+                return true;
+            } catch (SQLException e) {
+                return false;
+            }
+    }
+    
+    public boolean insertVendaSemData(Venda v) {
+        
+        String sql = "insert into vendas (COD_VENDA, COD_SAPATO, VALOR_FINAL) values (0,?,?)";
+        
+        try {
+                PreparedStatement ps;
+                ps = conexao.getConexao().prepareStatement(sql);
+                ps.setInt(1, v.getCodSapato());
+                ps.setFloat(2, v.getValorFinal());
+                //usar sempre pra inserir ou modificar dado na tabela
+                ps.execute();
+                ps.close();
+                conexao.close();
+                return true;
+            } catch (SQLException e) {
+                return false;
+            }
+    }
+    
     public boolean insertSapato(Sapato p) {
         
         String sql = "insert into sapato values (0,?,?,?,?,?,?,?,?,?);";
@@ -86,36 +145,10 @@ public class ServicoDAO {
                 return false;
             }
 
-    }
-    
-    public void insertVenda(Venda v) {
-        
-        String sql = "insert into vendas values (0,?,?,?,?,?,?);";
-        
-        try {
-                PreparedStatement ps;
-                ps = conexao.getConexao().prepareStatement(sql);
-                ps.setInt(1, v.getCodSapato());
-                ps.setDate(2, (Date) v.getData_entrada());
-                ps.setDate(3, (Date) v.getData_saida());
-                ps.setFloat(4, v.getValorPrevisto());
-                ps.setFloat(5, v.getValorFinal());
-                ps.setDate(6, (Date) v.getData_saida());
-                //usar sempre pra inserir ou modificar dado na tabela
-                ps.execute();
-                ps.close();
-                conexao.close();
-
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, e);
-            }
-
-    }
-    
+    }   
     
     //carrega tipos do sapato em list 
     public List<TipoSapato> readTipoSapato() {
-
        
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -224,13 +257,14 @@ public class ServicoDAO {
          
         List<Sapato> sapatos = new ArrayList<>();
         String sql = 
-          "select d.COD_CLIENTE, d.NOME_CLIENTE, b.NOME_TIPO_SAPATO, c.NOME_COR_SAPATO, a.NUMERO, "
+          "select d.COD_CLIENTE, d.NOME_CLIENTE,a.COD_SAPATO, b.NOME_TIPO_SAPATO, c.NOME_COR_SAPATO, a.NUMERO, "
                +"a.MARCA, a.DATA_ENTRADA,a.DATA_SAIDA, a.CONSERTO, a.VALOR "
           + "from sapato a, tipos_sapato b, cor_sapato c, clientes d  "
                        + "where a.COD_TIPO_SAPATO = b.COD_TIPO_SAPATO "
                          + "and a.COD_CLIENTE = d.COD_CLIENTE "
 		         + "and d.COD_CLIENTE in (Select cod_cliente from clientes where ATIVO = 1) "
-                         + "and a.DATA_SAIDA is null";
+                         + "and a.DATA_SAIDA is null "
+         + "group by COD_CLIENTE,COD_SAPATO";
         try {
             stmt = conexao.getConexao().prepareStatement(sql);
             rs = stmt.executeQuery();

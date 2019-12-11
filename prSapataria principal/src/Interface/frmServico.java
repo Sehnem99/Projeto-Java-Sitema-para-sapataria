@@ -12,7 +12,6 @@ import db.ServicoDAO;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -45,7 +44,10 @@ public class frmServico extends javax.swing.JFrame {
         }
         cbTipoSapato.setSelectedIndex(-1);
         cbCorSapato.setSelectedIndex(-1);  
-        
+        carregaSevAFazer();
+    }
+    
+    public void carregaSevAFazer(){
         DefaultTableModel modelo = (DefaultTableModel) tblSevFazer.getModel();
         modelo.setNumRows(0);        
         for(Sapato tp:servicoDAO.readSevPendentes()){
@@ -60,8 +62,7 @@ public class frmServico extends javax.swing.JFrame {
                 tp.getDataEntrada(),
                 tp.getValorFormat()
             });
-        }
-        
+        }        
     }
     
     private String getDateTime() {
@@ -202,6 +203,15 @@ public class frmServico extends javax.swing.JFrame {
         jTabbedPane1.setBackground(new java.awt.Color(204, 204, 204));
         jTabbedPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
+        jTabbedPane1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jTabbedPane1AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         abaSevFazer.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -285,6 +295,11 @@ public class frmServico extends javax.swing.JFrame {
         abaCadastro.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         abaCadastro.setMaximumSize(new java.awt.Dimension(31000, 3100));
         abaCadastro.setPreferredSize(new java.awt.Dimension(1100, 678));
+        abaCadastro.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                abaCadastroComponentShown(evt);
+            }
+        });
 
         pnDadosProduto.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -770,30 +785,38 @@ public class frmServico extends javax.swing.JFrame {
         sapato.setMarca(txtMarca.getText());
         sapato.setNumSapato(Integer.parseInt(txtNumSapato.getText()));
         sapato.setValor(Float.parseFloat(txtValorSapato.getText()));
+                
+       
+        venda.setData_pagamento(txtDataPag.getText());
+        venda.setValorFinal(sapato.getValor());        
         
         if(txtDataSaida.getText().equalsIgnoreCase("  /  /    ")){
            if(servicoDAO.insertSapatoSemDataFim(sapato)){
+             servicoDAO.buscaUltimoCodSapato(venda);  
              JOptionPane.showMessageDialog(null, "Sapato Inserido Com Sucessso!");
-             limpaTela();
-             readJTable();
-           
            }else{
              JOptionPane.showMessageDialog(null, "Houve um Erro Inesperado No Cadastro!");
            }   
         }else{
           if(servicoDAO.insertSapato(sapato)){
+              servicoDAO.buscaUltimoCodSapato(venda); 
              JOptionPane.showMessageDialog(null, "Sapato Inserido Com Sucessso!");
-             limpaTela();
-             readJTable();
-           
            }else{
              JOptionPane.showMessageDialog(null, "Houve um Erro Inesperado No Cadastro!");
            }     
         }
+        if(txtDataPag.getText().equalsIgnoreCase("  /  /    ")){
+          servicoDAO.insertVendaSemData(venda);      
+        }else{
+          servicoDAO.insertVendaComData(venda);     
+        }
         
+        limpaTelaCadSapato();
+        carregaSapatosCliente();
+        carregaSevAFazer();        
     }//GEN-LAST:event_txtAdcProdutoActionPerformed
 
-    private void limpaTela(){
+    private void limpaTelaCadSapato(){
         txtCodSapato.setText(null);
         txtConserto.setText(null);
         txtNumSapato.setText(null);
@@ -805,12 +828,9 @@ public class frmServico extends javax.swing.JFrame {
         txtDataSaida.setText(null);
     }
     
-    public void readJTable() {
+    public void carregaSapatosCliente() {
         DefaultTableModel modelo = (DefaultTableModel) tblSapatos.getModel();
-        modelo.setNumRows(0);
-        
-        
-        
+        modelo.setNumRows(0);        
         for(Sapato tp:servicoDAO.readSapato(sapato.getCodCliente())){
              modelo.addRow(new Object[]{
                 tp.getCodSapato(),
@@ -834,7 +854,7 @@ public class frmServico extends javax.swing.JFrame {
                 txtNomeCliente.setText(cliente.getNome());
                 txtCodCliente.setText(String.valueOf(cliente.getCodigo()));
                 sapato.setCodCliente(cliente.getCodigo());
-                readJTable();
+                carregaSapatosCliente();
                 }else {
                     JOptionPane.showMessageDialog(null, "Cliente não encontrado!");
                   
@@ -882,35 +902,44 @@ public class frmServico extends javax.swing.JFrame {
         if(txtDataSaida.getText().equalsIgnoreCase("  /  /    ")){
            if(servicoDAO.updateSapatoSemDataFim(sapato)){
              JOptionPane.showMessageDialog(null, "Sapato Atualizado Com Sucesso!");
-             limpaTela();
-             readJTable();
            }else{
              JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
            }   
         }else{
           if(servicoDAO.updateSapato(sapato)){
              JOptionPane.showMessageDialog(null, "Sapato Atualizado Com Sucesso!");
-             limpaTela();
-             readJTable();
           }else{
              JOptionPane.showMessageDialog(null, "Erro ao Atualizar");
-          }   
+          }
         }
+        limpaTelaCadSapato();
+        carregaSapatosCliente();
+        carregaSevAFazer();
     }//GEN-LAST:event_txtAltProdutoActionPerformed
 
     private void txtExcluirProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExcluirProdutoActionPerformed
         if(servicoDAO.deleteSapato(sapato)){
             JOptionPane.showMessageDialog(null, "Sapato Excluido Com Sucesso!");
-            limpaTela();
-            readJTable();
+            
         }else{
             JOptionPane.showMessageDialog(null, "Erro ao Excluir Sapato");
-        }  
+        }
+        limpaTelaCadSapato();
+        carregaSapatosCliente();
+        carregaSevAFazer();
     }//GEN-LAST:event_txtExcluirProdutoActionPerformed
 
     private void tblSevFazerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSevFazerMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_tblSevFazerMouseClicked
+
+    private void jTabbedPane1AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jTabbedPane1AncestorAdded
+        
+    }//GEN-LAST:event_jTabbedPane1AncestorAdded
+
+    private void abaCadastroComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_abaCadastroComponentShown
+        txtDataEntrada.setText(getDateTime());
+    }//GEN-LAST:event_abaCadastroComponentShown
     
     public void cbTipoSapatoselectedIndex(Integer codTipoSapato){
         switch (codTipoSapato) {
