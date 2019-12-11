@@ -75,6 +75,20 @@ public class ServicoCadCliente {
                 return false;
         }
         
+        public boolean exclusaoliente(Cliente cliente) throws SQLException{
+            String sql;
+            
+            sql = "delete * FROM CLIENTES WHERE CPF = ?";
+            PreparedStatement ps;
+            
+            ps = conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, cliente.getCpf());
+            
+            ResultSet rs = ps.executeQuery();
+                return true;
+        }
+        
+        
         public boolean update(Cliente cliente)throws SQLException{
             
         String sql = "UPDATE CLIENTES " +
