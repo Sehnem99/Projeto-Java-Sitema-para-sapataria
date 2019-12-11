@@ -8,13 +8,17 @@ public class Carteira {
     private Float valorDespesa;
     private String valorTotalDespesa;
     private String descDespesa;
+    private String dataAtual;
+    
 
-    public Carteira(String valorInicial, String valorSaldo, Float valorDespesa, String valorTotalDespesa, String descDespesa) {
+    public Carteira(String valorInicial, String valorSaldo, Float valorDespesa,
+            String valorTotalDespesa, String descDespesa,String dataAtual) {
         this.valorInicial = valorInicial;
         this.valorSaldo = valorSaldo;
         this.valorDespesa = valorDespesa;
         this.valorTotalDespesa = valorTotalDespesa;
         this.descDespesa = descDespesa;
+        this.dataAtual = dataAtual;
     }
     
     public Carteira(){
@@ -23,7 +27,15 @@ public class Carteira {
     public String getValorInicial() {
         return valorInicial;
     }
+    
+    public String getDataAtual() {
+        return dataAtual;
+    }
 
+    public void setDataAtual(String dataAtual) {
+        this.dataAtual = dataAtual;
+    }
+    
     public void setValorInicial(String valorInicial) {
         this.valorInicial = valorInicial;
     }

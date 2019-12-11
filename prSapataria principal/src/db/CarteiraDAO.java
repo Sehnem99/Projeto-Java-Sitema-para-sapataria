@@ -2,17 +2,22 @@
 package db;
 
 import Classes.Carteira;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
-import java.util.Date;
+import Utilitarios.Utilitarios;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 
 
 public class CarteiraDAO {
     private ServicoConexao conexao = new ServicoConexao();
     DecimalFormat decimal = new DecimalFormat("R$ ###,###,###,##0.00");
+    Utilitarios utilit = new Utilitarios();
+    SimpleDateFormat vDateFormat = new SimpleDateFormat("dd/MM/yyyy");
     
      public boolean insertDespesa(Carteira p) {
         
@@ -23,8 +28,7 @@ public class CarteiraDAO {
                 ps = conexao.getConexao().prepareStatement(sql);
                 ps.setString(1, p.getDescDespesa());
                 ps.setFloat(2, p.getValorDespesa());
-                Date d = new Date();
-                ps.setDate(3, d.getTime());
+                ps.setDate(3, Date.valueOf(utilit.dataFormatBanco(p.getDataAtual())));
                 //usar sempre pra inserir ou modificar dado na tabela
                 ps.execute();
                 ps.close();
@@ -36,27 +40,58 @@ public class CarteiraDAO {
 
     }   
     
-    public String buscaSaldoInicial(Carteira c){
-        String valorInicial=null;
+    public void buscaValorInicial(Carteira p) {
         
-        String sql = "select max( cod_sapato ) as a from sapato;";
-        
-        try {
-                PreparedStatement stmt = null;
+        PreparedStatement stmt = null;
 
-                stmt = conexao.getConexao().prepareStatement(sql);
-                ResultSet rs = stmt.executeQuery();
-                 if(rs.next()){
-                    c.set(decimal.format(rs.getFloat("a")));  
-                 }
-               
-                stmt.close();
-                conexao.close();
-        } catch (SQLException e) {
-          JOptionPane.showMessageDialog(null, e);
-        }
-        
-        
-        return 
+        try {
+            String sql = "select sum(a.valor)a from sapato as a";
+            stmt = conexao.getConexao().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                  p.setValorInicial(decimal.format(rs.getFloat("a")));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar sapato: " + ex);
+        } finally {
+            conexao.getConexao();
+        }    
     }
+    
+    public void buscaValorDespesa(Carteira p) {
+        
+        PreparedStatement stmt = null;
+
+        try {
+            String sql = "select sum(a.valor)a from despesa as a";
+            stmt = conexao.getConexao().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                  p.setValorTotalDespesa(decimal.format(rs.getFloat("a")));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar sapato: " + ex);
+        } finally {
+            conexao.getConexao();
+        }    
+    }
+    
+   public void buscaSaldoPrevisto(Carteira p){
+       PreparedStatement stmt = null;
+
+        try {
+            String sql = "SELECT (\n" +
+"(SELECT SUM(VALOR) FROM SAPATO) - (SELECT SUM(VALOR) FROM DESPESA)) AS TESTE";
+            stmt = conexao.getConexao().prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if(rs.next()){
+                  p.setValorSaldo(decimal.format(rs.getFloat("TESTE")));
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao buscar sapato: " + ex);
+        } finally {
+            conexao.getConexao();
+        }   
+   }
+    
 }
